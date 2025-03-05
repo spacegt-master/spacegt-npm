@@ -25,6 +25,9 @@ import { useLoginStore } from '@/stores/login';
 import Login from './login.vue';
 import SignUp from './sign-up.vue';
 import ForgotPassword from './forgot-password.vue';
+import { onMounted } from 'vue';
+import axios from '@/axios/accounts-service'
+import { config } from '@/axios/accounts-service'
 
 const loginStore = useLoginStore()
 
@@ -32,8 +35,15 @@ const props = defineProps({
   logo: {
     type: String,
     default: '/logo.png'
+  },
+  proxy: {
+    type: String,
   }
 })
+
+if (props.proxy) {
+  config.baseURL = props.proxy
+}
 </script>
 
 <style lang="scss" scoped></style>

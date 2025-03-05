@@ -32,6 +32,7 @@ export const useLoginStore = defineStore(
           ctx.store.form.username = "";
           ctx.store.form.password = "";
         }
+        ctx.store.showPassword = false;
       },
     },
   }
