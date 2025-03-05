@@ -59,6 +59,17 @@ export default defineConfig({
       name: "spacegt",
       fileName: "spacegt",
     },
-
+    rollupOptions: {
+      external: [
+        "@mdi/font",
+        "axios",
+        "core-js",
+        "pinia",
+        "pinia-plugin-persistedstate",
+        "roboto-fontface",
+        "vue",
+        "vuetify",
+      ],
+    },
   },
 });

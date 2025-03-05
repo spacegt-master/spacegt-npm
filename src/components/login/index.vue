@@ -7,7 +7,7 @@
           <v-sheet class="flex-1-1 px-4" color="background" max-width="500">
             <v-img class="mx-auto mb-4" max-width="60" :src="logo" />
 
-            <Login v-if="loginStore.tab == 'login'"></Login>
+            <Login v-if="loginStore.tab == 'login'" @login="$emit('login', $event)"></Login>
 
             <SignUp v-if="loginStore.tab == 'sign-up'"></SignUp>
 
