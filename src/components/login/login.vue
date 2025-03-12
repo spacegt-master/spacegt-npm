@@ -2,7 +2,8 @@
   <div>
     <div class="text-h5 text-center mb-8 font-weight-medium">Log into your account</div>
 
-    <v-text-field v-model="loginStore.form.username" color="primary" label="Username" variant="outlined" />
+    <v-text-field v-model="loginStore.form.username" color="primary" label="Username" variant="outlined"
+      @keyup.enter="login" />
 
     <v-text-field v-model="loginStore.form.password" color="primary" label="Password" variant="outlined"
       :type="loginStore.showPassword ? 'text' : 'password'"
