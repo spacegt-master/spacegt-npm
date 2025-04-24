@@ -14,4 +14,16 @@ export const LoginApi = {
       },
     });
   },
+  uniqueVerification(username: string) {
+    return axios({
+      url: "/api/users/uniqueVerification",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: {
+        username,
+      },
+    });
+  },
 };

@@ -11,6 +11,9 @@ importers:
       '@mdi/font':
         specifier: 7.4.47
         version: 7.4.47
+      '@vueuse/core':
+        specifier: ^13.1.0
+        version: 13.1.0(vue@3.5.13(typescript@5.6.3))
       axios:
         specifier: ^1.8.1
         version: 1.8.1
@@ -26,6 +29,9 @@ importers:
       roboto-fontface:
         specifier: '*'
         version: 0.10.0
+      vee-validate:
+        specifier: ^4.15.0
+        version: 4.15.0(vue@3.5.13(typescript@5.6.3))
       vue:
         specifier: ^3.4.31
         version: 3.5.13(typescript@5.6.3)
@@ -519,6 +525,9 @@ packages:
   '@types/node@22.13.9':
     resolution: {integrity: sha512-acBjXdRJ3A6Pb3tqnw9HZmyR3Fiol3aGxRCK1x3d+6CDAMjl7I649wpSd+yNURCjbOUGu9tqtLKnTGxmK6CyGw==}
 
+  '@types/web-bluetooth@0.0.21':
+    resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+
   '@typescript-eslint/eslint-plugin@8.26.0':
     resolution: {integrity: sha512-cLr1J6pe56zjKYajK6SSSre6nl1Gj6xDp1TY0trpgPzjVbgDwd09v2Ws37LABxzkicmUjhEeg/fAUjPJJB1v5Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -662,6 +671,19 @@ packages:
     peerDependencies:
       vue: ^3.0.0
       vuetify: ^3.0.0
+
+  '@vueuse/core@13.1.0':
+    resolution: {integrity: sha512-PAauvdRXZvTWXtGLg8cPUFjiZEddTqmogdwYpnn60t08AA5a8Q4hZokBnpTOnVNqySlFlTcRYIC8OqreV4hv3Q==}
+    peerDependencies:
+      vue: ^3.5.0
+
+  '@vueuse/metadata@13.1.0':
+    resolution: {integrity: sha512-+TDd7/a78jale5YbHX9KHW3cEDav1lz1JptwDvep2zSG8XjCsVE+9mHIzjTOaPbHUAk5XiE4jXLz51/tS+aKQw==}
+
+  '@vueuse/shared@13.1.0':
+    resolution: {integrity: sha512-IVS/qRRjhPTZ6C2/AM3jieqXACGwFZwWTdw5sNTSKk2m/ZpkuuN+ri+WCVUP8TqaKwJYt/KuMwmXspMAw8E6ew==}
+    peerDependencies:
+      vue: ^3.5.0
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1709,6 +1731,10 @@ packages:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
 
+  type-fest@4.40.0:
+    resolution: {integrity: sha512-ABHZ2/tS2JkvH1PEjxFDTUWC8dB5OsIGZP4IFLhR293GqT5Y5qB1WwL2kMPYhQW9DVgVD8Hd7I8gjwPIf5GFkw==}
+    engines: {node: '>=16'}
+
   typescript-eslint@8.26.0:
     resolution: {integrity: sha512-PtVz9nAnuNJuAVeUFvwztjuUgSnJInODAUx47VDwWPXzd5vismPOtPtt83tzNXyOjVQbPRp786D6WFW/M2koIA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1806,6 +1832,11 @@ packages:
 
   varint@6.0.0:
     resolution: {integrity: sha512-cXEIW6cfr15lFv563k4GuVuW/fiwjknytD37jIOLSdSWuOI6WnO/oKwmP2FQTU2l01LP8/M5TSAJpzUaGe3uWg==}
+
+  vee-validate@4.15.0:
+    resolution: {integrity: sha512-PGJh1QCFwCBjbHu5aN6vB8macYVWrajbDvgo1Y/8fz9n/RVIkLmZCJDpUgu7+mUmCOPMxeyq7vXUOhbwAqdXcA==}
+    peerDependencies:
+      vue: ^3.4.26
 
   vite-plugin-vuetify@2.1.0:
     resolution: {integrity: sha512-4wEAQtZaigPpwbFcZbrKpYwutOsWwWdeXn22B9XHzDPQNxVsKT+K9lKcXZnI5JESO1Iaql48S9rOk8RZZEt+Mw==}
@@ -2295,6 +2326,8 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
+  '@types/web-bluetooth@0.0.21': {}
+
   '@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3)':
     dependencies:
       '@eslint-community/regexpp': 4.12.1
@@ -2512,6 +2545,19 @@ snapshots:
       upath: 2.0.1
       vue: 3.5.13(typescript@5.6.3)
       vuetify: 3.7.14(typescript@5.6.3)(vite-plugin-vuetify@2.1.0)(vue@3.5.13(typescript@5.6.3))
+
+  '@vueuse/core@13.1.0(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.21
+      '@vueuse/metadata': 13.1.0
+      '@vueuse/shared': 13.1.0(vue@3.5.13(typescript@5.6.3))
+      vue: 3.5.13(typescript@5.6.3)
+
+  '@vueuse/metadata@13.1.0': {}
+
+  '@vueuse/shared@13.1.0(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      vue: 3.5.13(typescript@5.6.3)
 
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
@@ -3509,6 +3555,8 @@ snapshots:
 
   type-fest@0.20.2: {}
 
+  type-fest@4.40.0: {}
+
   typescript-eslint@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3):
     dependencies:
       '@typescript-eslint/eslint-plugin': 8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.6.3)
@@ -3649,6 +3697,12 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   varint@6.0.0: {}
+
+  vee-validate@4.15.0(vue@3.5.13(typescript@5.6.3)):
+    dependencies:
+      '@vue/devtools-api': 7.7.2
+      type-fest: 4.40.0
+      vue: 3.5.13(typescript@5.6.3)
 
   vite-plugin-vuetify@2.1.0(vite@5.4.14(@types/node@22.13.9)(sass-embedded@1.85.1)(sass@1.77.8))(vue@3.5.13(typescript@5.6.3))(vuetify@3.7.14):
     dependencies:
