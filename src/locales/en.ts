@@ -116,6 +116,7 @@ export default {
   },
   signUp: {
     title: "Register your account",
+    back: "Back to login",
     steps: {
       account: {
         label: "Account",
@@ -137,6 +138,31 @@ export default {
       verification: {
         label: "Verification",
         title: "Verify the mailbox",
+        submit: "Submit",
+        sendCode: "Send Code",
+      },
+    },
+  },
+  forgotPassword: {
+    title: "Forgot Password",
+    back: "Back to login",
+    steps: {
+      email: {
+        label: "Email",
+        title: "Enter a email",
+      },
+      verification: {
+        label: "Verification",
+        title: "Verify Your Email",
+        subtitle:
+          "We sent a verification code to john..@gmail.com <br> Please check your email and paste the code below.",
+        sendCode: "Send Code",
+      },
+      changePassword: {
+        label: "Change Password",
+        title: "Change Password",
+        password: "Password",
+        confirmPassword: "Confirm Password",
         submit: "Submit",
       },
     },

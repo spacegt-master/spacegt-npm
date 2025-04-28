@@ -1,29 +1,40 @@
 <template>
   <div>
-    <div class="text-h5 text-center mb-8 font-weight-medium">Forgot Password</div>
+    <div class="text-h5 text-center mb-8 font-weight-medium">
+      {{ $vuetify.locale.t('$vuetify.forgotPassword.title') || $vuetify.locale.messages.en.forgotPassword.title }}
+    </div>
 
-    <v-stepper v-model="forgotPasswordStore.steps" :items="['Email', 'Verification', 'Change Password']"
-      max-width="100%">
+    <v-stepper v-model="forgotPasswordStore.steps" :items="[
+      $vuetify.locale.t('$vuetify.forgotPassword.steps.email.label') || $vuetify.locale.messages.en.forgotPassword.steps.email.label,
+      $vuetify.locale.t('$vuetify.forgotPassword.steps.verification.label') || $vuetify.locale.messages.en.forgotPassword.steps.verification.label,
+      $vuetify.locale.t('$vuetify.forgotPassword.steps.changePassword.label') || $vuetify.locale.messages.en.forgotPassword.steps.changePassword.label
+    ]" max-width="100%">
       <template v-slot:item.1>
-        <v-card class="text-center" title="Enter a email" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.forgotPassword.steps.email.title') || $vuetify.locale.messages.en.forgotPassword.steps.email.title">
           <template #text>
             <v-text-field v-model="forgotPasswordStore.form.email" color="primary" class="mt-4" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.email.label')" variant="outlined" type="email" />
+              variant="outlined" type="email"
+              :label="$vuetify.locale.t('$vuetify.forgotPassword.steps.email.label') || $vuetify.locale.messages.en.forgotPassword.steps.email.label" />
           </template>
         </v-card>
       </template>
 
       <template v-slot:item.2>
-        <v-card class="text-center" title="Verify Your Email" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.forgotPassword.steps.verification.title') || $vuetify.locale.messages.en.forgotPassword.steps.verification.title">
           <template #subtitle>
-            We sent a verification code to john..@gmail.com <br> Please check your email and paste the code below.
+            <div
+              v-html="$vuetify.locale.t('$vuetify.forgotPassword.steps.verification.subtitle') || $vuetify.locale.messages.en.forgotPassword.steps.verification.subtitle">
+            </div>
           </template>
           <template #text>
             <div class="d-flex flex-column">
               <v-otp-input v-model="forgotPasswordStore.form.verificationCode"></v-otp-input>
 
               <v-btn class="mt-4 " variant="plain" @click="forgotPasswordStore.sendCode()">
-                Send Code
+                {{ $vuetify.locale.t('$vuetify.forgotPassword.steps.verification.sendCode') ||
+                  $vuetify.locale.messages.en.forgotPassword.steps.verification.sendCode }}
               </v-btn>
             </div>
           </template>
@@ -31,18 +42,21 @@
       </template>
 
       <template v-slot:item.3>
-        <v-card class="text-center" title="Change Password" flat>
+        <v-card class="text-center"
+          :title="$vuetify.locale.t('$vuetify.forgotPassword.steps.changePassword.title') || $vuetify.locale.messages.en.forgotPassword.steps.changePassword.title"
+          flat>
           <template #text>
             <v-text-field v-model="forgotPasswordStore.form.password" color="primary" class="mt-4" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.label')" variant="outlined" type="password" />
+              variant="outlined" type="password"
+              :label="$vuetify.locale.t('$vuetify.forgotPassword.steps.changePassword.password') || $vuetify.locale.messages.en.forgotPassword.steps.changePassword.password" />
 
-            <v-text-field v-model="forgotPasswordStore.form.confirmPassword" color="primary" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.confirmPassword')" variant="outlined"
-              type="password" />
+            <v-text-field v-model="forgotPasswordStore.form.confirmPassword" color="primary" required variant="outlined"
+              type="password"
+              :label="$vuetify.locale.t('$vuetify.forgotPassword.steps.changePassword.confirmPassword') || $vuetify.locale.messages.en.forgotPassword.steps.changePassword.confirmPassword" />
 
-            <v-btn class="mt-4 " color="success" rounded="lg" size="large"
-              :text="$vuetify.locale.t('$vuetify.signUp.steps.verification.submit')"
-              :disabled="!passwordVerification" @click="forgotPasswordStore.submit()" />
+            <v-btn class="mt-4 " color="success" rounded="lg" size="large" :disabled="!passwordVerification"
+              :text="$vuetify.locale.t('$vuetify.forgotPassword.steps.changePassword.submit') || $vuetify.locale.messages.en.forgotPassword.steps.changePassword.submit"
+              @click="forgotPasswordStore.submit()" />
           </template>
         </v-card>
 
@@ -55,7 +69,9 @@
     </v-stepper>
 
     <v-btn class="text-none w-100 mt-4" prepend-icon="mdi-arrow-left" variant="plain"
-      @click="forgotPasswordStore.tab = 'login'">Back to login</v-btn>
+      @click="forgotPasswordStore.tab = 'login'">
+      {{ $vuetify.locale.t('$vuetify.forgotPassword.back') || $vuetify.locale.messages.en.forgotPassword.back }}
+    </v-btn>
   </div>
 </template>
 

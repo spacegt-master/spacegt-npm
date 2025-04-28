@@ -1,65 +1,77 @@
 <template>
   <div>
-    <div class="text-h5 text-center mb-8 font-weight-medium">{{ $vuetify.locale.t('$vuetify.signUp.title') }}</div>
+    <div class="text-h5 text-center mb-8 font-weight-medium">
+      {{ $vuetify.locale.t('$vuetify.signUp.title') || $vuetify.locale.messages.en.signUp.title }}
+    </div>
 
     <v-stepper v-model="signupStore.steps" :items="[
-      $vuetify.locale.t('$vuetify.signUp.steps.account.label'),
-      $vuetify.locale.t('$vuetify.signUp.steps.password.label'),
-      $vuetify.locale.t('$vuetify.signUp.steps.email.label'),
-      $vuetify.locale.t('$vuetify.signUp.steps.verification.label'),
+      $vuetify.locale.t('$vuetify.signUp.steps.account.label') || $vuetify.locale.messages.en.signUp.steps.account.label,
+      $vuetify.locale.t('$vuetify.signUp.steps.password.label') || $vuetify.locale.messages.en.signUp.steps.password.label,
+      $vuetify.locale.t('$vuetify.signUp.steps.email.label') || $vuetify.locale.messages.en.signUp.steps.email.label,
+      $vuetify.locale.t('$vuetify.signUp.steps.verification.label') || $vuetify.locale.messages.en.signUp.steps.verification.label,
     ]" max-width="100%">
       <template v-slot:item.1>
-        <v-card class="text-center" :title="$vuetify.locale.t('$vuetify.signUp.steps.account.title')" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.signUp.steps.account.title') || $vuetify.locale.messages.en.signUp.steps.account.title">
           <template #text>
-            <v-text-field v-model="signupStore.form.username" color="primary" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.account.username')" variant="outlined" class="mt-4" />
+            <v-text-field v-model="signupStore.form.username" color="primary" required variant="outlined" class="mt-4"
+              :label="$vuetify.locale.t('$vuetify.signUp.steps.account.username') || $vuetify.locale.messages.en.signUp.steps.account.username" />
 
-            <v-text-field v-model="signupStore.form.nickname" color="primary" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.account.nickname')" variant="outlined" class="mt-4" />
+            <v-text-field v-model="signupStore.form.nickname" color="primary" required variant="outlined" class="mt-4"
+              :label="$vuetify.locale.t('$vuetify.signUp.steps.account.nickname') || $vuetify.locale.messages.en.signUp.steps.account.nickname" />
           </template>
         </v-card>
       </template>
 
       <template v-slot:item.2>
-        <v-card class="text-center" :title="$vuetify.locale.t('$vuetify.signUp.steps.password.title')" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.signUp.steps.password.title') || $vuetify.locale.messages.en.signUp.steps.password.title">
           <template #subtitle>
-            <div v-html="$vuetify.locale.t('$vuetify.signUp.steps.password.subtitle')"> </div>
+            <div
+              v-html="$vuetify.locale.t('$vuetify.signUp.steps.password.subtitle') || $vuetify.locale.messages.en.signUp.steps.password.subtitle">
+            </div>
           </template>
           <template #text>
-            <v-text-field v-model="signupStore.form.password" color="primary" class="mt-4" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.label')" variant="outlined" type="password" />
+            <v-text-field v-model="signupStore.form.password" color="primary" class="mt-4" required variant="outlined"
+              type="password"
+              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.label') || $vuetify.locale.messages.en.signUp.steps.password.label" />
 
-            <v-text-field v-model="signupStore.form.confirmPassword" color="primary" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.confirmPassword')" variant="outlined"
-              type="password" />
+            <v-text-field v-model="signupStore.form.confirmPassword" color="primary" required variant="outlined"
+              type="password"
+              :label="$vuetify.locale.t('$vuetify.signUp.steps.password.confirmPassword') || $vuetify.locale.messages.en.signUp.steps.password.confirmPassword" />
           </template>
         </v-card>
       </template>
 
       <template v-slot:item.3>
-        <v-card class="text-center" :title="$vuetify.locale.t('$vuetify.signUp.steps.email.title')" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.signUp.steps.email.title') || $vuetify.locale.messages.en.signUp.steps.email.title">
 
           <template #text>
-            <v-text-field v-model="signupStore.form.email" color="primary" class="mt-4" required
-              :label="$vuetify.locale.t('$vuetify.signUp.steps.email.label')" variant="outlined" type="email" />
+            <v-text-field v-model="signupStore.form.email" color="primary" class="mt-4" required variant="outlined"
+              type="email"
+              :label="$vuetify.locale.t('$vuetify.signUp.steps.email.label') || $vuetify.locale.messages.en.signUp.steps.email.label" />
           </template>
         </v-card>
       </template>
 
 
       <template v-slot:item.4>
-        <v-card class="text-center" :title="$vuetify.locale.t('$vuetify.signUp.steps.verification.title')" flat>
+        <v-card class="text-center" flat
+          :title="$vuetify.locale.t('$vuetify.signUp.steps.verification.title') || $vuetify.locale.messages.en.signUp.steps.verification.title">
 
           <template #text>
             <div class="d-flex flex-column">
               <v-otp-input v-model="signupStore.form.verificationCode"></v-otp-input>
 
               <v-btn class="mt-4 " color="success" rounded="lg" size="large"
-                :text="$vuetify.locale.t('$vuetify.signUp.steps.verification.submit')"
-                :disabled="signupStore.form.verificationCode.length < 6" @click="signupStore.submit()" />
+                :disabled="signupStore.form.verificationCode.length < 6"
+                :text="$vuetify.locale.t('$vuetify.signUp.steps.verification.submit') || $vuetify.locale.messages.en.signUp.steps.verification.submit"
+                @click="signupStore.submit()" />
 
               <v-btn class="mt-4 " variant="plain" @click="signupStore.sendCode()">
-                Send Code
+                {{ $vuetify.locale.t('$vuetify.signUp.steps.verification.sendCode') ||
+                  $vuetify.locale.messages.en.signUp.steps.verification.sendCode }}
               </v-btn>
             </div>
           </template>
@@ -72,7 +84,11 @@
       </template>
     </v-stepper>
 
-    <v-btn class="text-none w-100 mt-4" prepend-icon="mdi-arrow-left" variant="plain" @click="signupStore.tab = 'login'">Back to login</v-btn>
+    <v-btn class="text-none w-100 mt-4" prepend-icon="mdi-arrow-left" variant="plain"
+      @click="signupStore.tab = 'login'">
+      {{ $vuetify.locale.t('$vuetify.signUp.back') ||
+        $vuetify.locale.messages.en.signUp.back }}
+    </v-btn>
   </div>
 </template>
 

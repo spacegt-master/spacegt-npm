@@ -91,8 +91,8 @@ export default {
     },
   },
   stepper: {
-    next: "Next",
-    prev: "Previous",
+    next: "下一步",
+    prev: "上一步",
   },
   rating: {
     ariaLabel: {
@@ -113,5 +113,58 @@ export default {
     donHaveAccount: "没有账号?",
     logIn: "登录",
     signUp: "注册",
+  },
+  signUp: {
+    title: "注册您的帐户",
+    back: "返回登录",
+    steps: {
+      account: {
+        label: "账号",
+        title: "输入用户名",
+        username: "用户名",
+        nickname: "昵称",
+      },
+      password: {
+        label: "密码",
+        title: "请设置高安全系数的密码",
+        subtitle:
+          "设置高安全系数的密码 <br>（使用字母、数字和符号的组合）",
+        confirmPassword: "确认密码",
+      },
+      email: {
+        label: "邮箱",
+        title: "添加辅助电子邮件地址",
+      },
+      verification: {
+        label: "验证",
+        title: "验证邮箱",
+        submit: "提交",
+        sendCode: "发送验证码",
+      },
+    },
+  },
+  forgotPassword: {
+    title: "忘记密码",
+    back: "返回登录",
+    steps: {
+      email: {
+        label: "邮箱",
+        title: "输入邮箱",
+      },
+      verification: {
+        label: "验证",
+        title: "验证邮箱",
+        subtitle:
+          "我们发送了一个验证码到邮箱 <br> 请检查您的电子邮件并粘贴下面的代码。",
+        sendCode: "发送验证码",
+      },
+      changePassword: {
+        label: "更改密码",
+        title: "更改密码",
+        password: "密码",
+        confirmPassword: "确认密码",
+        submit: "提交",
+      },
+    },
   },
 };
