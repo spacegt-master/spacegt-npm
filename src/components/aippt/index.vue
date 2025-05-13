@@ -1,12 +1,12 @@
 <template>
-    <v-dialog v-model="dialog" transition="dialog-bottom-transition" :fullscreen="fullscreen" width="1280px">
+    <v-dialog v-model="dialog" transition="dialog-bottom-transition" :fullscreen="fullscreen" width="1280px"
+        height="800px" max-height="90vh">
         <template v-slot:activator="{ props: activatorProps }">
             <v-btn prepend-icon="mdi-file-powerpoint-box-outline" size="small" text="AI PPT"
                 v-bind="activatorProps"></v-btn>
-
         </template>
 
-        <v-card>
+        <v-card width="100%">
             <v-toolbar>
                 <template #prepend>
                     <v-icon icon="mdi-file-powerpoint-box-outline" class="ml-2"></v-icon>
@@ -65,6 +65,22 @@ window.addEventListener(
                 dialog.value = false
             };
         }
+
+        if (event.data == "createOutline") {
+            const port = event.ports[0];
+
+            port.onmessage = (event) => {
+                emit('createOutline', event.data)
+            };
+        }
+
+        if (event.data == "createPPT") {
+            const port = event.ports[0];
+
+            port.onmessage = (event) => {
+                emit('createPPT', event.data)
+            };
+        }
     },
     false
 );
@@ -74,8 +90,6 @@ window.addEventListener(
 iframe {
     width: 100%;
     height: 100%;
-    min-height: calc(50vh + 200px);
-    max-height: 90vh;
     border: 0;
     display: block;
 }
