@@ -2,13 +2,14 @@
   "name": "spacegt",
   "private": false,
   "type": "module",
-  "version": "0.1.15",
+  "version": "0.1.18",
   "author": "spacegt",
   "license": "TIM",
   "description": "spacegt plugins",
   "keywords": [
     "spacegt",
-    "login"
+    "login",
+    "aippt"
   ],
   "main": "dist/spacegt.umd.cjs",
   "module": "./dist/spacegt.js",

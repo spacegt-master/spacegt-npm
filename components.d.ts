@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Aippt: typeof import('./src/components/aippt/index.vue')['default']
     ForgotPassword: typeof import('./src/components/login/forgot-password.vue')['default']
     Login: typeof import('./src/components/login/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
