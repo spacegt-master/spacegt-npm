@@ -4,7 +4,7 @@
           @createPPT="handleCreatePPT"></aippt> -->
   <v-app-bar>
     <myaccount :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
-      proxy="https://myaccount.spacegt.com" @logout="handleLogout">
+      proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">
     </myaccount>
   </v-app-bar>
 </template>
@@ -27,5 +27,13 @@ const handleCreatePPT = (data: any) => {
 
 const handleLogout = () => {
   console.log("is logouted")
+}
+
+const handleLogin = () => {
+  console.log("to login")
+}
+
+const handleSettings = () => {
+  console.log("to settings")
 }
 </script>

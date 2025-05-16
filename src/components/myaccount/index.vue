@@ -24,43 +24,31 @@
             </v-card>
         </v-menu>
     </v-btn>
-    <v-btn v-else class="me-2" append-icon="mdi-login" text="Login" :to="login"> </v-btn>
+    <v-btn v-else class="me-2" append-icon="mdi-login" text="Login" @click="toLogin"> </v-btn>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
 
 const props = defineProps({
     account: Object,
     proxy: String,
-    settings: {
-        type: String,
-        default() {
-            return "/account/settings"
-        }
-    },
-    login: {
-        type: String,
-        default() {
-            return "/login"
-        }
-    }
 })
 
-const emit = defineEmits(['logout'])
-
-const router = useRouter()
+const emit = defineEmits(['logout', 'settings', 'login'])
 
 const logout = () => {
     emit('logout')
+}
+
+const toLogin = () => {
+    emit('login')
 }
 
 const toSettings = () => {
     if (props.proxy) {
         window.open(props.proxy)
     } else {
-        router.push(props.settings)
+        emit('settings')
     }
 }
 </script>
