@@ -35,7 +35,7 @@
 <script setup>
 import { shallowRef } from 'vue'
 
-const emit = defineEmits(['exportImages'])
+const emit = defineEmits(['exportImages', 'createOutline', 'createPPT'])
 
 const dialog = shallowRef(false)
 const fullscreen = shallowRef(false)

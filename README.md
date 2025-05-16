@@ -83,6 +83,24 @@ const handleExportImages = (data: any) => {
 </script>
 ```
 
+### myaccount component
+
+```bash
+<template>
+  <v-app-bar>
+    <spacegt-myaccount :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
+      proxy="https://myaccount.spacegt.com" @logout="handleLogout">
+    </spacegt-myaccount>
+  </v-app-bar>
+</template>
+
+<script lang="ts" setup>
+const handleLogout = () => {
+  console.log("is logouted")
+}
+</script>
+```
+
 ## 📑 License
 [MIT](http://opensource.org/licenses/MIT)
 
