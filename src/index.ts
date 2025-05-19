@@ -9,6 +9,8 @@ import myaccount from "@/components/myaccount/index.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
 
+import { useAuthorizationStore } from "@/stores/authorization";
+
 import en from "@/locales/en";
 import zhHans from "@/locales/zhHans";
 
@@ -23,5 +25,13 @@ const install = (app: App) => {
 export default {
   install,
   locales: { en, zhHans },
-  stores: { useAccountsStore },
+  stores: { useAccountsStore, useAuthorizationStore },
 };
+
+declare module "vue" {
+  export interface GlobalComponents {
+    login: typeof login;
+    aippt: typeof aippt;
+    myaccount: typeof myaccount;
+  }
+}

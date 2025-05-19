@@ -54,10 +54,11 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: "dist",
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       name: "spacegt",
-      fileName: "spacegt",
+      fileName: "index",
     },
     rollupOptions: {
       external: [

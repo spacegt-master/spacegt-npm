@@ -1,20 +1,6 @@
+import type { Authorities, Users } from "types";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
-export interface Users {
-  id: string;
-  username: string;
-  nickname: string;
-  email: string;
-  phone: string;
-  avatar: string;
-}
-
-export interface Authorities {
-  authority: string;
-  key: string;
-  name: string | null;
-}
 
 const account = ref<Users>();
 
@@ -23,14 +9,12 @@ const authorities = ref<Authorities[]>([]);
 export const useAccountsStore = defineStore(
   "data-accounts",
   () => {
-    return { account, authorities };
+    return { account, authorities, matchAuthorities, hasAuthority };
   },
-  {
-    persist: true,
-  }
+  { persist: true }
 );
 
-export function matchAuthorities(
+function matchAuthorities(
   authorities: Authorities[],
   hasAuthority: string[] | undefined
 ) {
@@ -43,6 +27,6 @@ export function matchAuthorities(
   }
 }
 
-export function hasAuthority(authority: string) {
+function hasAuthority(authority: string) {
   return authorities.value.findIndex((item) => item.key == authority) > -1;
 }
