@@ -39,8 +39,8 @@ export interface SpacegtStores {
 
 export interface SpacegtStatic {
   install(app: App): void;
-  locales?: any;
-  stores?: any;
+  locales: any;
+  stores: SpacegtStores;
 }
 
 declare const spacegt: SpacegtStatic;

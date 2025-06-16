@@ -1,18 +1,24 @@
 <template>
-  <!-- <login proxy="http://127.0.0.1:10002" email-proxy="http://127.0.0.1:13004" locale="zhHans" /> -->
-  <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline"
-          @createPPT="handleCreatePPT"></aippt> -->
-  <v-app-bar>
+  <!-- <login proxy="http://127.0.0.1:10002" email-proxy="http://127.0.0.1:13004" locale="zhHans" @login="handleLogin" /> -->
+  <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT"></aippt> -->
+  <!-- <v-app-bar>
     <myaccount :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
       proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">
     </myaccount>
-  </v-app-bar>
+  </v-app-bar> -->
+  <Roles proxy="http://127.0.0.1:10002"></Roles>
+  <Orgs></Orgs>
+  <Users></Users>
+  <Snackbar></Snackbar>
 </template>
 
 <script lang="ts" setup>
 import login from '@/components/login/index.vue'
 import aippt from '@/components/aippt/index.vue'
 import myaccount from '@/components/myaccount/index.vue'
+import { useAuthorizationStore } from '@/stores/authorization'
+
+const authorizationStore = useAuthorizationStore()
 
 const handleExportImages = (data: any) => {
   console.log(data)
@@ -29,11 +35,21 @@ const handleLogout = () => {
   console.log("is logouted")
 }
 
-const handleLogin = () => {
-  console.log("to login")
-}
-
 const handleSettings = () => {
   console.log("to settings")
+}
+
+const handleLogin = (data) => {
+  if (data.code === 0) {
+    authorizationStore.token = data.token
+    accountsStore.account = data.data
+    accountsStore.authorities = data.data.authorities
+    router.push('/')
+  } else {
+    snackbar({
+      title: data.message,
+      type: 'warning',
+    })
+  }
 }
 </script>
