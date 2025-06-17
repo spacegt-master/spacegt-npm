@@ -156,7 +156,6 @@ const selected = defineModel()
 const props = defineProps({
   rids: { type: [String, Number, Array] },
   enableSelection: { type: Boolean, default: false }
-
 })
 const search = reactive({ name: '', role: null, org: null, orgItem: null })
 const options = ref({ page: 1, itemsPerPage: 5 })

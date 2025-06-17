@@ -1,12 +1,12 @@
 <template>
-  <!-- <login proxy="http://127.0.0.1:10002" email-proxy="http://127.0.0.1:13004" locale="zhHans" @login="handleLogin" /> -->
+  <!-- <login locale="zhHans" @login="handleLogin" /> -->
   <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT"></aippt> -->
   <!-- <v-app-bar>
     <myaccount :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
       proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">
     </myaccount>
   </v-app-bar> -->
-  <Roles proxy="http://127.0.0.1:10002"></Roles>
+  <Roles></Roles>
   <Orgs></Orgs>
   <Users></Users>
   <Snackbar></Snackbar>
@@ -17,8 +17,19 @@ import login from '@/components/login/index.vue'
 import aippt from '@/components/aippt/index.vue'
 import myaccount from '@/components/myaccount/index.vue'
 import { useAuthorizationStore } from '@/stores/authorization'
+import { useAccountsStore } from '@/stores/accounts'
+import { useRouter } from 'vue-router'
+import { config as accountsServiceConfig } from '@/axios/accounts-service'
+import { config as emailServiceConfig } from '@/axios/email-service'
+import { snackbar } from '@/stores/snackbar';
 
+const router = useRouter()
 const authorizationStore = useAuthorizationStore()
+const accountsStore = useAccountsStore()
+
+// 更换代理方式
+accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
+emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 
 const handleExportImages = (data: any) => {
   console.log(data)
@@ -39,7 +50,8 @@ const handleSettings = () => {
   console.log("to settings")
 }
 
-const handleLogin = (data) => {
+// 登录成功回调
+const handleLogin = (data: any) => {
   if (data.code === 0) {
     authorizationStore.token = data.token
     accountsStore.account = data.data

@@ -1,4 +1,5 @@
-import type { App } from "vue";
+import { App } from "vue";
+import { AxiosInstance } from "axios";
 
 export interface Users {
   id: string;
@@ -29,20 +30,39 @@ export interface AuthorizationStore {
   head: string;
   prefix: string;
   token: string;
-  getFullToken: strin;
+  getFullToken: StringConstructor;
 }
 
-export interface SpacegtStores {
-  useAccountsStore(): AccountsStore;
-  useAuthorizationStore(): AuthorizationStore;
+export interface AxiosConfig {
+  baseURL: string;
+  withCredentials: boolean;
 }
+
+declare var accountsService: AxiosInstance;
+declare var accountsServiceConfig: AxiosConfig;
+declare var emailService: AxiosInstance;
+declare var emailServiceConfig: AxiosConfig;
+declare var useAccountsStore: () => AccountsStore;
+declare var useAuthorizationStore: () => AuthorizationStore;
+declare var useLoginStore: () => any;
+declare var useSnackbarStore: () => any;
 
 export interface SpacegtStatic {
   install(app: App): void;
   locales: any;
-  stores: SpacegtStores;
 }
 
 declare const spacegt: SpacegtStatic;
 
 export default spacegt;
+
+export {
+  accountsService,
+  accountsServiceConfig,
+  emailService,
+  emailServiceConfig,
+  useAccountsStore,
+  useAuthorizationStore,
+  useLoginStore,
+  useSnackbarStore,
+};

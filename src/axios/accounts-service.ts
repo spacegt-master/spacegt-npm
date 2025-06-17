@@ -33,7 +33,6 @@ service.interceptors.response.use(
       error.status === 403 &&
       error.response.headers["content-type"] === "application/problem+json"
     ) {
-      console.log(error.response.data.detail)
       snackbar({
         title: error.response.data.detail,
         type: "error",

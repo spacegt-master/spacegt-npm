@@ -67,17 +67,6 @@ import { RolesApi } from '@/api/manage/accounts/roles';
 import { useAccountsStore } from '@/stores/accounts';
 import { snackbar } from '@/stores/snackbar';
 import { onMounted, ref } from 'vue';
-import { config as accountsServiceConfig } from '@/axios/accounts-service'
-
-const props = defineProps({
-  proxy: {
-    type: String,
-  },
-})
-
-if (props.proxy) {
-  accountsServiceConfig.baseURL = props.proxy
-}
 
 const accountsStore = useAccountsStore()
 
