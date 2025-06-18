@@ -1,12 +1,17 @@
 <template>
     <v-btn prepend-icon="mdi-account-multiple-outline" class="flex-1-1" min-height="48px" variant="tonal">
-        <div v-if="items.length > 0">{{ names.join(' / ') }} </div>
-        <div v-else> Selection Users </div>
+        <div v-if="items.length > 0">{{ names.join(" / ") }}</div>
+        <div v-else>
+            <slot>
+                Selection Users
+            </slot>
+        </div>
 
-        <SelectionUsers :multiple="multiple" @confirm="handleConfirm"></SelectionUsers>
+        <SelectionUsers :multiple="multiple" :role-key="roleKey" :orgId="orgId" @confirm="handleConfirm">
+        </SelectionUsers>
 
         <v-tooltip v-if="items.length > 0" activator="parent" location="top">
-            {{ names.join(' / ') }}
+            {{ names.join(" / ") }}
         </v-tooltip>
 
         <template #append>
@@ -22,25 +27,19 @@ import { computed } from 'vue';
 const emit = defineEmits(['change', 'clear'])
 
 const props = defineProps({
-    items: {
-        type: Array,
-        default: () => []
-    },
-    multiple: {
-        type: Boolean,
-        default: false
-    }
+    items: { type: Array, default: () => [] },
+    multiple: { type: Boolean, default: false },
+    roleKey: { type: String },
+    orgId: { type: String, default: null }
 })
 
 const names = computed(() => {
     return props.items.map(item => item.nickname);
 })
 
-
 const handleConfirm = async (value) => {
     emit('change', value)
 }
-
 </script>
 
 <style lang="scss" scoped></style>

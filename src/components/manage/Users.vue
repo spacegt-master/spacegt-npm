@@ -1,5 +1,5 @@
 <template>
-  <v-container class="px-6 py-6 mb-6" fluid>
+  <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
       <v-list-subheader v-if="!enableSelection">Users</v-list-subheader>
 
@@ -21,7 +21,7 @@
 
       <div class="pa-3">
         <div class="d-flex">
-          <selection-orgs-btn :org="search.orgItem"
+          <selection-orgs-btn v-if="orgId == null" :org="search.orgItem"
             @change="(value) => { search.orgItem = value; search.org = value.id }"
             @clear="search.orgItem = null; search.org = null"></selection-orgs-btn>
 
@@ -150,15 +150,17 @@
 import { OrgsApi } from '@/api/manage/accounts/orgs';
 import { RolesApi } from '@/api/manage/accounts/roles';
 import { UsersApi } from '@/api/manage/accounts/users';
-import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
+import { computed, nextTick, reactive, ref, watch } from 'vue';
 import { VSpacer } from 'vuetify/components';
 
 const selected = defineModel()
 const props = defineProps({
-  roleKeys: { type: String },
+  roleKey: { type: String },
   enableSelection: { type: Boolean, default: false },
+  orgId: { type: String, default: null }
 })
 const search = reactive({ name: '', role: null, org: null, orgItem: null })
+
 const options = ref({ page: 1, itemsPerPage: 5 })
 const headers = ref([
   { title: 'Username', key: 'username' },
@@ -201,11 +203,6 @@ const defaultItem = ref({
 })
 const formTitle = computed(() => editedIndex.value === -1 ? 'Add User' : 'Update User')
 
-watch(() => [props.roleKeys], () => {
-  options.value.page = 1
-
-  loadRoles()
-})
 
 const handleBatchUsersChange = () => {
   loadItems(options.value)
@@ -322,14 +319,22 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
 }
 
 const loadRoles = async () => {
-  roleItems.value = await RolesApi.list(props.roleKeys)
+  roleItems.value = await RolesApi.list(props.roleKey)
 
   if (roleItems.value.length > 0) search.role = roleItems.value[0].key
 }
 
-onMounted(() => {
+watch(() => [props.roleKey], () => {
+  options.value.page = 1
+
   loadRoles()
-})
+}, { immediate: true })
+
+watch(() => [props.orgId], () => {
+  options.value.page = 1
+
+  search.org = [props.orgId]
+}, { immediate: true })
 
 </script>
 

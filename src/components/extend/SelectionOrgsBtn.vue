@@ -1,7 +1,11 @@
 <template>
     <v-btn prepend-icon="mdi-bank" class="flex-1-1" min-height="48px" variant="tonal">
         <div v-if="org">{{ searchOrgItemNames.at(-1) }} </div>
-        <div v-else> Selection Orgs</div>
+        <div v-else>
+            <slot>
+                Selection Orgs
+            </slot>
+        </div>
 
         <SelectionOrgs @confirm="handleConfirm"></SelectionOrgs>
 

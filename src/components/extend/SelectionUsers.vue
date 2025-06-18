@@ -6,7 +6,7 @@
         <v-divider></v-divider>
 
         <v-card-text class="pa-0">
-          <Users enable-selection :role-keys="roleKeys" v-model="selected"></Users>
+          <Users enable-selection :role-key="roleKey" :orgId="orgId" v-model="selected"></Users>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -34,8 +34,9 @@ import { nextTick, ref } from 'vue';
 
 const emit = defineEmits(['confirm'])
 const props = defineProps({
-  roleKeys: { type: String },
-  multiple: { type: Boolean, default: false }
+  roleKey: { type: String },
+  multiple: { type: Boolean, default: false },
+  orgId: { type: String, default: null }
 })
 
 const dialog = ref(false)
@@ -50,7 +51,7 @@ const close = () => {
 
 const save = async () => {
   const users = await UsersApi.list(selected.value.join(','))
-  
+
   emit('confirm', users)
 
   close()

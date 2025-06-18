@@ -1,5 +1,5 @@
 <template>
-  <v-container class="px-6 py-6 mb-6" fluid>
+  <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
       <v-list-subheader v-if="!enableSelection">Update Orgs</v-list-subheader>
 
