@@ -8,6 +8,15 @@ export const UsersApi = {
       method: "get",
     });
   },
+  list(ids: string) {
+    return axios({
+      url: "/api/users/list",
+      method: "get",
+      params: {
+        ids,
+      },
+    });
+  },
   edit(data: object) {
     return axios({
       url: "/api/users/edit",

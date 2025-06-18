@@ -8,9 +8,11 @@
   </v-app-bar> -->
   <!-- <Roles></Roles>
   <Orgs></Orgs> -->
-  <Users></Users>
+  <!-- <Users></Users> -->
   <Snackbar></Snackbar>
-  <!-- <selection-orgs-btn></selection-orgs-btn> -->
+  <selection-orgs-btn></selection-orgs-btn>
+  <selection-users-btn multiple :items="users" @change="(value: any[]) => users = value"
+    @clear="users = []"></selection-users-btn>
 </template>
 
 <script lang="ts" setup>
@@ -23,6 +25,7 @@ import { useRouter } from 'vue-router'
 import { config as accountsServiceConfig } from '@/axios/accounts-service'
 import { config as emailServiceConfig } from '@/axios/email-service'
 import { snackbar } from '@/stores/snackbar';
+import { ref } from 'vue'
 
 const router = useRouter()
 const authorizationStore = useAuthorizationStore()
@@ -31,6 +34,13 @@ const accountsStore = useAccountsStore()
 // 更换代理方式
 accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
 emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
+
+
+const users = ref([
+  { id: 1, nickname: '王硕' },
+  { id: 2, nickname: '张三' },
+  { id: 3, nickname: '李四' },
+])
 
 const handleExportImages = (data: any) => {
   console.log(data)

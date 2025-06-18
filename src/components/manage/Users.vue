@@ -1,13 +1,13 @@
 <template>
   <v-container class="px-6 py-6 mb-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader>Users</v-list-subheader>
+      <v-list-subheader v-if="!enableSelection">Users</v-list-subheader>
 
-      <div class="text-caption ps-4">
+      <div class="text-caption ps-4" v-if="!enableSelection">
         Ensure the security and privacy of user data.
       </div>
 
-      <div class="text-right">
+      <div class="text-right" v-if="!enableSelection">
         <v-btn variant="text" prepend-icon="mdi-account-multiple-plus-outline" @click="addItem()">
           Add User
         </v-btn>
@@ -17,7 +17,7 @@
         </v-btn>
       </div>
 
-      <v-divider class="mt-6 mb-3" />
+      <v-divider class="mt-6 mb-3" v-if="!enableSelection" />
 
       <div class="pa-3">
         <div class="d-flex">
@@ -42,7 +42,7 @@
             </div>
           </template>
           <!-- eslint-disable-next-line vue/valid-v-slot -->
-          <template v-slot:item.actions="{ item }" v-if="!enableSelection">
+          <template v-slot:item.actions="{ item }">
             <VBtn icon="mdi-rename" variant="text" density="comfortable" size="small" @click="editItem(item)"></VBtn>
             <VBtn icon="mdi-lock-reset" variant="text" density="comfortable" size="small" @click="repwdItem(item)">
             </VBtn>
@@ -155,8 +155,8 @@ import { VSpacer } from 'vuetify/components';
 
 const selected = defineModel()
 const props = defineProps({
-  rids: { type: [String, Number, Array] },
-  enableSelection: { type: Boolean, default: false }
+  roleKeys: { type: String },
+  enableSelection: { type: Boolean, default: false },
 })
 const search = reactive({ name: '', role: null, org: null, orgItem: null })
 const options = ref({ page: 1, itemsPerPage: 5 })
@@ -165,9 +165,7 @@ const headers = ref([
   { title: 'Nickname', key: 'nickname' },
   { title: 'Phone', key: 'phone', },
   { title: 'Email', key: 'email', },
-  // { title: '组织', key: 'orgName', sortable: false, },
-  // { title: '最近登录时间', key: 'lastLoginTime', },
-  { title: 'Actions', key: 'actions', sortable: false, align: 'end' },
+  !props.enableSelection ? { title: 'Actions', key: 'actions', sortable: false, align: 'end' } : {},
 ])
 const roleItems = ref([])
 const items = ref([])
@@ -203,7 +201,7 @@ const defaultItem = ref({
 })
 const formTitle = computed(() => editedIndex.value === -1 ? 'Add User' : 'Update User')
 
-watch(() => [props.rids], () => {
+watch(() => [props.roleKeys], () => {
   options.value.page = 1
 
   loadRoles()
@@ -324,7 +322,7 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
 }
 
 const loadRoles = async () => {
-  roleItems.value = await RolesApi.list(props.rids)
+  roleItems.value = await RolesApi.list(props.roleKeys)
 
   if (roleItems.value.length > 0) search.role = roleItems.value[0].key
 }

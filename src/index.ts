@@ -10,6 +10,8 @@ import manageOrgs from "@/components/manage/Orgs.vue";
 import manageUsers from "@/components/manage/Users.vue";
 import selectionOrgs from "@/components/extend/SelectionOrgs.vue";
 import selectionOrgsBtn from "@/components/extend/SelectionOrgsBtn.vue";
+import selectionUsers from "@/components/extend/SelectionUsers.vue";
+import selectionUsersBtn from "@/components/extend/SelectionUsersBtn.vue";
 import batchUsers from "@/components/extend/BatchUsers.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
@@ -35,6 +37,8 @@ const install = (app: App) => {
   app.component("spacegt-manage-users", manageUsers);
   app.component("spacegt-selection-orgs", selectionOrgs);
   app.component("spacegt-selection-orgs-btn", selectionOrgsBtn);
+  app.component("spacegt-selection-users", selectionUsers);
+  app.component("spacegt-selection-users-btn", selectionUsersBtn);
   app.component("spacegt-batch-users", batchUsers);
 };
 
@@ -65,6 +69,8 @@ declare module "vue" {
     manageUsers: typeof manageUsers;
     selectionOrgs: typeof selectionOrgs;
     selectionOrgsBtn: typeof selectionOrgsBtn;
+    selectionUsers: typeof selectionUsers;
+    selectionUsersBtn: typeof selectionUsers;
     batchUsers: typeof batchUsers;
   }
 }

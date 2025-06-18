@@ -2,10 +2,13 @@
     <v-btn prepend-icon="mdi-bank" class="flex-1-1" min-height="48px" variant="tonal">
         <div v-if="org">{{ searchOrgItemNames.at(-1) }} </div>
         <div v-else> Selection Orgs</div>
+
         <SelectionOrgs @confirm="handleConfirm"></SelectionOrgs>
+
         <v-tooltip v-if="org" activator="parent" location="top">
             {{ searchOrgItemNames.join(' / ') }}
         </v-tooltip>
+
         <template #append>
             <v-btn icon="mdi-close" variant="plain" size="small" density="comfortable" v-if="org"
                 @click.stop="$emit('clear')"></v-btn>
@@ -16,7 +19,7 @@
 <script setup>
 import { computed } from 'vue';
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'clear'])
 
 const props = defineProps({
     org: Object
