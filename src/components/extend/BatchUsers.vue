@@ -29,8 +29,8 @@
           </v-data-table-virtual>
         </v-card-text>
 
-        <orgs-btn v-show="file" :org="org" class="mb-4" width="100%" min-height="50"
-          @change="(value) => { org = value }" @clear="org = null"></orgs-btn>
+        <selection-orgs-btn v-show="file" :org="org" class="mb-4" width="100%" min-height="50"
+          @change="(value) => { org = value }" @clear="org = null"></selection-orgs-btn>
 
         <v-divider></v-divider>
 

@@ -9,7 +9,7 @@ import manageRoles from "@/components/manage/Roles.vue";
 import manageOrgs from "@/components/manage/Orgs.vue";
 import manageUsers from "@/components/manage/Users.vue";
 import selectionOrgs from "@/components/extend/SelectionOrgs.vue";
-import selectionOrgsBtn from "@/components/extend/OrgsBtn.vue";
+import selectionOrgsBtn from "@/components/extend/SelectionOrgsBtn.vue";
 import batchUsers from "@/components/extend/BatchUsers.vue";
 
 import { useAccountsStore } from "@/stores/accounts";

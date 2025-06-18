@@ -21,8 +21,9 @@
 
       <div class="pa-3">
         <div class="d-flex">
-          <orgs-btn :org="search.orgItem" @change="(value) => { search.orgItem = value; search.org = value.id }"
-            @clear="search.orgItem = null; search.org = null"></orgs-btn>
+          <selection-orgs-btn :org="search.orgItem"
+            @change="(value) => { search.orgItem = value; search.org = value.id }"
+            @clear="search.orgItem = null; search.org = null"></selection-orgs-btn>
 
           <v-select v-if="roleItems.length > 1" v-model="search.role" hide-details placeholder="筛选角色..."
             :items="roleItems" item-title="name" item-value="key" density="comfortable" class="ml-2"></v-select>
@@ -66,9 +67,9 @@
                 <v-text-field v-model="editedItem.nickname" label="Nickname"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <orgs-btn class="mb-4" width="100%" min-height="50" :org="editedItem.orgItem"
+                <selection-orgs-btn class="mb-4" width="100%" min-height="50" :org="editedItem.orgItem"
                   @change="(value) => { editedItem.orgItem = value; editedItem.orgs = value.id.join(',') }"
-                  @clear="editedItem.orgItem = null; editedItem.orgs = null"></orgs-btn>
+                  @clear="editedItem.orgItem = null; editedItem.orgs = null"></selection-orgs-btn>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-text-field v-model="editedItem.phone" label="Phone"></v-text-field>

@@ -18,6 +18,8 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SelectionOrgs: typeof import('./src/components/extend/SelectionOrgs.vue')['default']
+    SelectionOrgsBtn: typeof import('./src/components/extend/SelectionOrgsBtn.vue')['default']
+    SelectionUsers: typeof import('./src/components/extend/SelectionUsers.vue')['default']
     SignUp: typeof import('./src/components/login/sign-up.vue')['default']
     Snackbar: typeof import('./src/components/Snackbar.vue')['default']
     Users: typeof import('./src/components/manage/Users.vue')['default']
