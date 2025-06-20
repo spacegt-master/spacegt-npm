@@ -37,7 +37,7 @@
 
 <script setup>
 import { useFileStore } from '@/stores/file';
-import { useTimeAgo } from '@/utils/vueuse';
+import { useTimeAgo } from "@vueuse/core";
 
 const fileStore = useFileStore()
 

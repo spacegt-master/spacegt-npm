@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Aippt: typeof import('./src/components/aippt/index.vue')['default']
     BatchUsers: typeof import('./src/components/extend/BatchUsers.vue')['default']
+    FileList: typeof import('./src/components/FileList.vue')['default']
     ForgotPassword: typeof import('./src/components/login/forgot-password.vue')['default']
     Login: typeof import('./src/components/login/index.vue')['default']
     Myaccount: typeof import('./src/components/myaccount/index.vue')['default']
