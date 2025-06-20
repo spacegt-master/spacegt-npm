@@ -13,16 +13,31 @@ import selectionOrgsBtn from "@/components/extend/SelectionOrgsBtn.vue";
 import selectionUsers from "@/components/extend/SelectionUsers.vue";
 import selectionUsersBtn from "@/components/extend/SelectionUsersBtn.vue";
 import batchUsers from "@/components/extend/BatchUsers.vue";
+import fileList from "@/components/FileList.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
 import { useAuthorizationStore } from "@/stores/authorization";
 import { useLoginStore } from "@/stores/login";
 import { useSnackbarStore } from "@/stores/snackbar";
+import { useFileStore } from "@/stores/file";
 
 import accountsService from "@/axios/accounts-service";
 import { config as accountsServiceConfig } from "@/axios/accounts-service";
 import emailService from "@/axios/email-service";
 import { config as emailServiceConfig } from "@/axios/email-service";
+import fileService from "@/axios/file-service";
+import { config as fileServiceConfig } from "@/axios/file-service";
+
+import { FileApi } from "@/api/file";
+import { EmailApi } from "@/api/email";
+import { ForgotPasswordApi } from "@/api/forgot-password";
+import { LoginApi } from "@/api/login";
+import { SignUpApi } from "@/api/sign-up";
+import { AuthoritiesApi } from "@/api/manage/accounts/authorities";
+import { RolesApi } from "@/api/manage/accounts/roles";
+import { OrgsApi } from "@/api/manage/accounts/orgs";
+import { UsersApi } from "@/api/manage/accounts/users";
+import { TokenApi } from "@/api/manage/accounts/token";
 
 import en from "@/locales/en";
 import zhHans from "@/locales/zhHans";
@@ -40,6 +55,7 @@ const install = (app: App) => {
   app.component("spacegt-selection-users", selectionUsers);
   app.component("spacegt-selection-users-btn", selectionUsersBtn);
   app.component("spacegt-batch-users", batchUsers);
+  app.component("spacegt-file-list", fileList);
 };
 
 export default {
@@ -52,10 +68,23 @@ export {
   accountsServiceConfig,
   emailService,
   emailServiceConfig,
+  fileService,
+  fileServiceConfig,
   useAccountsStore,
   useAuthorizationStore,
   useLoginStore,
   useSnackbarStore,
+  useFileStore,
+  FileApi,
+  EmailApi,
+  ForgotPasswordApi,
+  LoginApi,
+  SignUpApi,
+  AuthoritiesApi,
+  RolesApi,
+  OrgsApi,
+  UsersApi,
+  TokenApi,
 };
 
 declare module "vue" {
@@ -72,5 +101,6 @@ declare module "vue" {
     selectionUsers: typeof selectionUsers;
     selectionUsersBtn: typeof selectionUsers;
     batchUsers: typeof batchUsers;
+    fileList: typeof fileList;
   }
 }

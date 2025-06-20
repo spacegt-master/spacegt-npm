@@ -2,7 +2,7 @@ import axios from "axios";
 import { reactive, ref } from "vue";
 
 const axiosConfig = reactive({
-  baseURL: import.meta.env.VITE_APP_EMAIL_SERVICE,
+  baseURL: import.meta.env.VITE_APP_FILE_SERVICE,
   withCredentials: false,
 });
 
