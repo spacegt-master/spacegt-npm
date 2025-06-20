@@ -4,7 +4,7 @@ import axios from "@/axios/file-service";
 import { snackbar } from "@/stores/snackbar";
 
 export const FileApi = {
-  filePath: import.meta.env.VITE_APP_FILE_RESOURCE + "/",
+  filePath: import.meta.env.VITE_APP_FILE_URL,
 
   async upload(file: any, path: string, hide: boolean = false) {
     let fileStore: any;
