@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" activator="parent" max-width="600px" :fullscreen="$vuetify.display.smAndDown" scrollable>
 
     <template #default>
-      <v-card prepend-icon="mdi-bank" title="Selection Orgs">
+      <v-card prepend-icon="mdi-bank" :title="$vuetify.locale.t('$vuetify.selectionOrgsComponent.title')">
         <v-divider></v-divider>
 
         <v-card-text class="pa-0">
@@ -12,11 +12,11 @@
         <v-divider></v-divider>
 
         <v-card-actions>
-          <v-btn text="Close" @click="close()"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" @click="close()"></v-btn>
 
           <v-spacer></v-spacer>
 
-          <v-btn color="surface-variant" text="Save" variant="flat" :disabled="selected.length == 0"
+          <v-btn color="surface-variant" :text="$vuetify.locale.t('$vuetify.save')" variant="flat" :disabled="selected.length == 0"
             @click="save()"></v-btn>
         </v-card-actions>
       </v-card>
@@ -41,7 +41,7 @@ const close = () => {
 
 const save = async () => {
   const org = await OrgsApi.oneById(selected.value.join(''))
-  
+
   emit('confirm', org)
 
   close()

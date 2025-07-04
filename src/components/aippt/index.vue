@@ -11,13 +11,13 @@
                 <template #prepend>
                     <v-icon icon="mdi-file-powerpoint-box-outline" class="ml-2"></v-icon>
                 </template>
-                <v-toolbar-title> PPT 编辑器 </v-toolbar-title>
+                <v-toolbar-title> {{ $vuetify.locale.t('$vuetify.aippt.title') }} </v-toolbar-title>
 
                 <v-toolbar-items>
                     <v-btn prepend-icon="mdi-file-powerpoint-box-outline" text="AI PPT" variant="text"
                         @click="aippt"></v-btn>
 
-                    <v-btn prepend-icon="mdi-content-save-check-outline" text="提交" variant="text"
+                    <v-btn prepend-icon="mdi-content-save-check-outline" :text="$vuetify.locale.t('$vuetify.submit')" variant="text"
                         @click="exportImages"></v-btn>
 
                     <v-btn :icon="fullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"

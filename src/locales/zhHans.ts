@@ -1,11 +1,11 @@
 export default {
   badge: "徽章",
-  open: "Open",
+  open: "打开",
   close: "关闭",
-  dismiss: "Dismiss",
+  dismiss: "解散",
   confirmEdit: {
-    ok: "OK",
-    cancel: "Cancel",
+    ok: "确定",
+    cancel: "取消",
   },
   dataIterator: {
     noResultsText: "没有符合条件的结果",
@@ -33,18 +33,18 @@ export default {
     pageText: "{0}-{1} 共 {2}",
   },
   dateRangeInput: {
-    divider: "to",
+    divider: "至",
   },
   datePicker: {
-    itemsSelected: "{0} selected",
+    itemsSelected: "{0} 项已选择",
     range: {
-      title: "Select dates",
-      header: "Enter dates",
+      title: "选择日期",
+      header: "输入日期",
     },
-    title: "Select date",
-    header: "Enter date",
+    title: "选择日期",
+    header: "输入日期",
     input: {
-      placeholder: "Enter date",
+      placeholder: "输入日期",
     },
   },
   noDataText: "没有数据",
@@ -52,32 +52,32 @@ export default {
     prev: "上一张",
     next: "下一张",
     ariaLabel: {
-      delimiter: "Carousel slide {0} of {1}",
+      delimiter: "轮播图 {0} / {1}",
     },
   },
   calendar: {
     moreEvents: "还有 {0} 项",
-    today: "Today",
+    today: "今天",
   },
   input: {
-    clear: "Clear {0}",
-    prependAction: "{0} prepended action",
-    appendAction: "{0} appended action",
-    otp: "Please enter OTP character {0}",
+    clear: "清除 {0}",
+    prependAction: "{0} 前置操作",
+    appendAction: "{0} 后置操作",
+    otp: "请输入OTP字符 {0}",
   },
   fileInput: {
     counter: "{0} 个文件",
     counterSize: "{0} 个文件（共 {1}）",
   },
   fileUpload: {
-    title: "Drag and drop files here",
-    divider: "or",
-    browse: "Browse Files",
+    title: "在此处拖放文件",
+    divider: "或",
+    browse: "浏览文件",
   },
   timePicker: {
-    am: "AM",
-    pm: "PM",
-    title: "Select Time",
+    am: "上午",
+    pm: "下午",
+    title: "选择时间",
   },
   pagination: {
     ariaLabel: {
@@ -86,8 +86,8 @@ export default {
       previous: "上一页",
       page: "转到页面 {0}",
       currentPage: "当前页 {0}",
-      first: "First page",
-      last: "Last page",
+      first: "首页",
+      last: "尾页",
     },
   },
   stepper: {
@@ -99,12 +99,25 @@ export default {
       item: "Rating {0} of {1}",
     },
   },
-  loading: "Loading...",
+  loading: "加载中...",
   infiniteScroll: {
-    loadMore: "Load more",
-    empty: "No more",
+    loadMore: "加载更多",
+    empty: "没有更多了",
   },
-  login: {
+  // custom
+  save: "保存",
+  delete: "删除",
+  rename: "重命名",
+  name: "名称",
+  submit: "提交",
+  settings: "设置",
+  login: "登录 ",
+  logout: "退出账户",
+  edit: "编辑",
+  actions: "操作",
+  import: "导入",
+
+  loginComponent: {
     title: "登录你的账户",
     username: "用户名",
     password: "密码",
@@ -127,8 +140,7 @@ export default {
       password: {
         label: "密码",
         title: "请设置高安全系数的密码",
-        subtitle:
-          "设置高安全系数的密码 <br>（使用字母、数字和符号的组合）",
+        subtitle: "设置高安全系数的密码 <br>（使用字母、数字和符号的组合）",
         confirmPassword: "确认密码",
       },
       email: {
@@ -166,5 +178,82 @@ export default {
         submit: "提交",
       },
     },
+  },
+  aippt: {
+    title: "PPT 编辑器",
+  },
+  org: {
+    manage: {
+      title: "修改组织",
+      subtitle: "避免过多的组织架构和层级。",
+      add: "添加根节点",
+      addChild: "添加子节点",
+      orgName: "组织名",
+      deleteTitle: "删除组织",
+      deleteText:
+        "警告：您即将执行不可逆的数据删除操作。所选数据将被永久删除且无法恢复。请仔细查看您要删除的数据，并确认您了解此操作的后果。您确定要继续吗？",
+      addOrg: "添加组织",
+    },
+  },
+
+  roleComponent: {
+    title: "更新角色",
+    subtitle: "通过限制用户的权限，可以降低误操作和恶意行为的风险。",
+    dialogTitle: "设置角色权限",
+    dialogSubheader: "权限",
+    dialogTip: "* 谨慎修改角色权限，以免出现不可预测的错误。",
+  },
+  usersComponent: {
+    title: "用户管理",
+    subtitle: "确保用户数据的安全性和隐私性。",
+    addUser: "添加用户",
+    updateUser: "修改用户",
+    batchUsers: "批量导入用户",
+    selectRole: "选择角色...",
+    searchName: "检索名称...",
+    form: {
+      username: "用户名",
+      password: "密码",
+      nickname: "昵称",
+      phone: "手机号",
+      email: "电子邮箱",
+      avatar: "头像 (Url)",
+    },
+    deleteTitle: "删除用户",
+    deleteSubtitle:
+      "警告：您即将执行不可逆的数据删除操作。所选数据将被永久删除且无法恢复。请仔细检查您要删除的数据，并确认您清楚此操作的后果。你确定要继续吗？",
+    repwdTitle: "重置密码",
+    repwdNewPassword: "新密码",
+    repwdTip: "* 请注意重新设置密码，您将无法使用原密码登录。",
+  },
+  batchUsersComponent: {
+    title: "批量用户导入",
+    downloadTemplate: "下载模板",
+    status: {
+      loading: "加载中",
+      failure: "失败",
+      success: "成功",
+    },
+    headers: {
+      nickname: "昵称",
+      username: "用户名",
+      password: "密码",
+      phone: "手机号",
+      email: "电子邮箱",
+      status: "状态",
+    },
+  },
+  selectionOrgsComponent: {
+    title: "选择组织",
+  },
+  selectionOrgsBtnComponent: {
+    text: "选择组织",
+  },
+  selectionUsersComponent: {
+    title: "选择用户",
+    multipleChoiceTip: "只能选择一人。",
+  },
+  selectionUsersBtnComponent: {
+    text: "选择用户",
   },
 };

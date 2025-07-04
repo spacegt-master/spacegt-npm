@@ -30,7 +30,6 @@
           </div>
         </template>
       </v-list-item>
-
     </v-list>
   </v-container>
 </template>

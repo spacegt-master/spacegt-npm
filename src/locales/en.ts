@@ -104,7 +104,20 @@ export default {
     loadMore: "Load more",
     empty: "No more",
   },
-  login: {
+  // custom
+  save: "Save",
+  delete: "Delete",
+  rename: "Rename",
+  name: "Name",
+  submit: "Submit",
+  settings: "Settings",
+  login: "Login",
+  logout: "Logout",
+  edit: "Edit",
+  actions: "Actions",
+  import: "Import",
+
+  loginComponent: {
     title: "Log into your account",
     username: "Username",
     password: "Password",
@@ -166,5 +179,84 @@ export default {
         submit: "Submit",
       },
     },
+  },
+  aippt: {
+    title: "PPT Editor",
+  },
+  org: {
+    manage: {
+      title: "Update Orgs",
+      subtitle: "Avoid excessive organizational structure and layers.",
+      add: "Add Root",
+      addChild: "Add Child",
+      orgName: "Org Name",
+      deleteTitle: "Delete Org",
+      deleteText:
+        "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",
+      addOrg: "Add Org",
+    },
+  },
+  roleComponent: {
+    title: "Update Roles",
+    subtitle:
+      "By restricting the authorities of users, the risk of misoperation and malicious behavior can be reduced.",
+    dialogTitle: "Setting role authorities",
+    dialogSubheader: "Authorities",
+    dialogTip:
+      "* Modify role authorities carefully to avoid unpredictable errors.",
+  },
+  usersComponent: {
+    title: "Users",
+    subtitle: "Ensure the security and privacy of user data.",
+    addUser: "Add User",
+    updateUser: "Update User",
+    batchUsers: "Batch Users",
+    selectRole: "Select Role...",
+    searchName: "Search Name...",
+    form: {
+      username: "Username",
+      password: "Password",
+      nickname: "Nickname",
+      phone: "Phone",
+      email: "Email",
+      avatar: "Avatar (Url)",
+    },
+    deleteTitle: "Delete User",
+    deleteSubtitle:
+      "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",
+    repwdTitle: "Reset Password",
+    repwdNewPassword: "New Password",
+    repwdTip:
+      "* Be careful to reset the password, you will not be able to login with the original password.",
+  },
+  batchUsersComponent: {
+    title: "Batch Users Import",
+    downloadTemplate: "Download The Template",
+    status: {
+      loading: "Loading",
+      failure: "Failure",
+      success: "Success",
+    },
+    headers: {
+      nickname: "Nickname",
+      username: "Username",
+      password: "Password",
+      phone: "Phone",
+      email: "Email",
+      status: "Status",
+    },
+  },
+  selectionOrgsComponent: {
+    title: "Selection Orgs",
+  },
+  selectionOrgsBtnComponent: {
+    text: "Selection Orgs",
+  },
+  selectionUsersComponent: {
+    title: "Selection Users",
+    multipleChoiceTip: "Only one can be chosen.",
+  },
+  selectionUsersBtnComponent: {
+    text: "Selection Users",
   },
 };

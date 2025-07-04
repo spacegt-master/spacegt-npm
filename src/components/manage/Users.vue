@@ -1,18 +1,22 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader v-if="!enableSelection">Users</v-list-subheader>
+      <v-list-subheader v-if="!enableSelection">
+        {{ $vuetify.locale.t('$vuetify.usersComponent.title') }}
+      </v-list-subheader>
 
       <div class="text-caption ps-4" v-if="!enableSelection">
-        Ensure the security and privacy of user data.
+        {{ $vuetify.locale.t('$vuetify.usersComponent.subtitle') }}
       </div>
 
       <div class="text-right" v-if="!enableSelection">
         <v-btn variant="text" prepend-icon="mdi-account-multiple-plus-outline" @click="addItem()">
-          Add User
+          {{ $vuetify.locale.t('$vuetify.usersComponent.addUser') }}
+
         </v-btn>
         <v-btn variant="text" prepend-icon="mdi-database-import">
-          Batch Users
+          {{ $vuetify.locale.t('$vuetify.usersComponent.batchUsers') }}
+
           <batch-users :role="search.role" @change="handleBatchUsersChange"></batch-users>
         </v-btn>
       </div>
@@ -25,10 +29,12 @@
             @change="(value) => { search.orgItem = value; search.org = value.id }"
             @clear="search.orgItem = null; search.org = null"></selection-orgs-btn>
 
-          <v-select v-if="roleItems.length > 1" v-model="search.role" hide-details placeholder="筛选角色..."
-            :items="roleItems" item-title="name" item-value="key" density="comfortable" class="ml-2"></v-select>
+          <v-select v-if="roleItems.length > 1" v-model="search.role" hide-details
+            :placeholder="$vuetify.locale.t('$vuetify.usersComponent.selectRole')" :items="roleItems" item-title="name"
+            item-value="key" density="comfortable" class="ml-2"></v-select>
 
-          <v-text-field hide-details v-model="search.name" placeholder="Search Name..." append-inner-icon="mdi-magnify"
+          <v-text-field hide-details v-model="search.name"
+            :placeholder="$vuetify.locale.t('$vuetify.usersComponent.searchName')" append-inner-icon="mdi-magnify"
             clearable density="comfortable" class="ml-2"></v-text-field>
         </div>
 
@@ -57,14 +63,18 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="editedItem.username" label="Username" :disabled="!!editedItem.id"></v-text-field>
+                <v-text-field v-model="editedItem.username"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.username')"
+                  :disabled="!!editedItem.id"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="editedItem.password" label="Password" :disabled="!!editedItem.id"
+                <v-text-field v-model="editedItem.password"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.password')" :disabled="!!editedItem.id"
                   type="password"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="editedItem.nickname" label="Nickname"></v-text-field>
+                <v-text-field v-model="editedItem.nickname"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.nickname')"></v-text-field>
               </v-col>
               <v-col cols="12">
                 <selection-orgs-btn class="mb-4" width="100%" min-height="50" :org="editedItem.orgItem"
@@ -72,13 +82,16 @@
                   @clear="editedItem.orgItem = null; editedItem.orgs = null"></selection-orgs-btn>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field v-model="editedItem.phone" label="Phone"></v-text-field>
+                <v-text-field v-model="editedItem.phone"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.phone')"></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                <v-text-field v-model="editedItem.email"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.email')"></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="editedItem.avatar" label="Avatar (Url)"></v-text-field>
+                <v-text-field v-model="editedItem.avatar"
+                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.avatar')"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -86,23 +99,22 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text="Close" variant="plain" @click="close"></v-btn>
-          <v-btn text="Save" color="primary" variant="tonal" @click="save"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="close"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.save')" color="primary" variant="tonal" @click="save"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="dialogDelete" contained max-width="500">
-      <v-card rounded="lg" title="Delete User">
+      <v-card rounded="lg" :title="$vuetify.locale.t('$vuetify.usersComponent.deleteTitle')">
+
         <template #prepend>
           <v-avatar color="error" icon="mdi-alert-outline" variant="tonal" />
         </template>
 
         <template #text>
           <div class="mb-4 text-body-2 text-medium-emphasis">
-            Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and
-            cannot be recovered. Carefully review the data you are deleting and confirm that you understand the
-            consequences of this action. Are you sure you want to continue?
+            {{ $vuetify.locale.t('$vuetify.usersComponent.deleteSubtitle') }}
           </div>
         </template>
 
@@ -111,24 +123,27 @@
         <template #actions>
           <v-spacer />
 
-          <v-btn border class="text-none" color="surface" text="Cancel" variant="flat" @click="closeDelete" />
+          <v-btn border class="text-none" color="surface" :text="$vuetify.locale.t('$vuetify.confirmEdit.cancel')"
+            variant="flat" @click="closeDelete" />
 
-          <v-btn class="text-none" color="error" text="Delete" variant="flat" @click="deleteItemConfirm" />
+          <v-btn class="text-none" color="error" :text="$vuetify.locale.t('$vuetify.delete')" variant="flat"
+            @click="deleteItemConfirm" />
         </template>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="dialogRepwd" max-width="600">
-      <v-card prepend-icon="mdi-lock-reset" title="Reset Password">
+      <v-card prepend-icon="mdi-lock-reset" :title="$vuetify.locale.t('$vuetify.usersComponent.repwdTitle')">
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-text-field v-model="editedItem.password" label="New Password" autofocus></v-text-field>
+              <v-text-field v-model="editedItem.password"
+                :label="$vuetify.locale.t('$vuetify.usersComponent.repwdNewPassword')" autofocus></v-text-field>
             </v-col>
           </v-row>
-          <small class="text-caption text-medium-emphasis">* Be careful to reset the password, you will not be able to
-            login
-            with the original password.</small>
+          <small class="text-caption text-medium-emphasis">
+            {{ $vuetify.locale.t('$vuetify.usersComponent.repwdTip') }}
+          </small>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -136,9 +151,10 @@
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn text="Close" variant="plain" @click="closeRepwd"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="closeRepwd"></v-btn>
 
-          <v-btn text="Save" variant="tonal" color="primary" @click="repwdConfirm"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" color="primary"
+            @click="repwdConfirm"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -152,8 +168,12 @@ import { RolesApi } from '@/api/manage/accounts/roles';
 import { UsersApi } from '@/api/manage/accounts/users';
 import { computed, nextTick, reactive, ref, watch } from 'vue';
 import { VSpacer } from 'vuetify/components';
+import { useLocale } from 'vuetify'
+
+const { t } = useLocale()
 
 const selected = defineModel()
+
 const props = defineProps({
   roleKey: { type: String },
   enableSelection: { type: Boolean, default: false },
@@ -163,11 +183,11 @@ const search = reactive({ name: '', role: null, org: null, orgItem: null })
 
 const options = ref({ page: 1, itemsPerPage: 5 })
 const headers = ref([
-  { title: 'Username', key: 'username' },
-  { title: 'Nickname', key: 'nickname' },
-  { title: 'Phone', key: 'phone', },
-  { title: 'Email', key: 'email', },
-  !props.enableSelection ? { title: 'Actions', key: 'actions', sortable: false, align: 'end' } : {},
+  { title: t("$vuetify.usersComponent.form.username"), key: 'username' },
+  { title: t("$vuetify.usersComponent.form.nickname"), key: 'nickname' },
+  { title: t("$vuetify.usersComponent.form.phone"), key: 'phone', },
+  { title: t("$vuetify.usersComponent.form.email"), key: 'email', },
+  !props.enableSelection ? { title: t("$vuetify.actions"), key: 'actions', sortable: false, align: 'end' } : {},
 ])
 const roleItems = ref([])
 const items = ref([])
@@ -201,7 +221,7 @@ const defaultItem = ref({
   roles: null,
   orgItem: null
 })
-const formTitle = computed(() => editedIndex.value === -1 ? 'Add User' : 'Update User')
+const formTitle = computed(() => editedIndex.value === -1 ? t("$vuetify.usersComponent.addUser") : t("$vuetify.usersComponent.updateUser"))
 
 
 const handleBatchUsersChange = () => {

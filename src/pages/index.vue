@@ -1,18 +1,20 @@
 <template>
-  <!-- <login locale="zhHans" @login="handleLogin" /> -->
-  <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT"></aippt> -->
-  <!-- <v-app-bar>
+  <v-locale-provider locale="zhHans">
+    <!-- <login @login="handleLogin" /> -->
+    <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT"></aippt> -->
+    <!-- <v-app-bar>
     <myaccount :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
       proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">
     </myaccount>
   </v-app-bar> -->
-  <!-- <Roles></Roles>
-  <Orgs></Orgs> -->
-  <!-- <Users></Users> -->
+    <!-- <Roles></Roles> -->
+    <!-- <Orgs></Orgs> -->
+    <!-- <Users></Users> -->
+    <!-- <selection-orgs-btn></selection-orgs-btn>
+    <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"
+      @change="(value: any[]) => users = value" @clear="users = []"></selection-users-btn>  -->
+  </v-locale-provider>
   <Snackbar></Snackbar>
-  <selection-orgs-btn></selection-orgs-btn>
-  <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER" @change="(value: any[]) => users = value"
-    @clear="users = []"></selection-users-btn>
 </template>
 
 <script lang="ts" setup>

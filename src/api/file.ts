@@ -17,7 +17,7 @@ export const FileApi = {
       try {
         return await axios({
           method: "post",
-          url: import.meta.env.VITE_APP_FILE_SERVER + "/upload",
+          url: "/upload",
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -57,7 +57,7 @@ export const FileApi = {
   download(url: string) {
     return axios({
       method: "get",
-      url: import.meta.env.VITE_APP_FILE_SERVER + "/download/" + url,
+      url: "/download/" + url,
       responseType: "blob",
       withCredentials: false,
     });
@@ -65,7 +65,7 @@ export const FileApi = {
   downloadTxt(url: string) {
     return axios({
       method: "get",
-      url: import.meta.env.VITE_APP_FILE_SERVER + "/download/" + url,
+      url: "/download/" + url,
       responseType: "text",
       withCredentials: false,
     });
@@ -73,7 +73,7 @@ export const FileApi = {
   ppt2image(file: any) {
     return axios({
       method: "post",
-      url: import.meta.env.VITE_APP_FILE_SERVER + "/ppt/ppt2image",
+      url: "/ppt/ppt2image",
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -86,7 +86,7 @@ export const FileApi = {
   delete(url: string) {
     return axios({
       method: "post",
-      url: import.meta.env.VITE_APP_FILE_SERVER + "/delete/" + url,
+      url: "/delete/" + url,
       withCredentials: false,
     });
   },

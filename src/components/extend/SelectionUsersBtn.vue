@@ -3,7 +3,7 @@
         <div v-if="items.length > 0">{{ names.join(" / ") }}</div>
         <div v-else>
             <slot>
-                Selection Users
+                {{ $vuetify.locale.t('$vuetify.selectionUsersBtnComponent.text') }}
             </slot>
         </div>
 

@@ -1,11 +1,13 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader>Update Roles</v-list-subheader>
+      <v-list-subheader>
+        {{ $vuetify.locale.t('$vuetify.roleComponent.title') }}
+      </v-list-subheader>
 
       <div class="text-caption ps-4">
-        By restricting the authorities of users, the risk of misoperation and
-        malicious behavior can be reduced.
+        {{ $vuetify.locale.t('$vuetify.roleComponent.subtitle') }}
+
       </div>
 
       <v-divider class="mt-6 mb-3" />
@@ -25,7 +27,7 @@
           </template>
 
           <template #append v-if="accountsStore.hasAuthority('ROLES_EDIT')">
-            <v-btn class="text-none text-disabled" prepend-icon="mdi-shield-edit-outline" text="Edit" variant="tonal"
+            <v-btn class="text-none text-disabled" prepend-icon="mdi-shield-edit-outline" :text="$vuetify.locale.t('$vuetify.edit')" variant="tonal"
               @click="editItem(item)" />
           </template>
         </v-list-item>
@@ -33,9 +35,11 @@
     </v-list>
 
     <v-dialog v-model="dialog" max-width="600" scrollable>
-      <v-card prepend-icon="mdi-shield-account-variant-outline" title="Setting role authorities" :loading="loading">
+      <v-card prepend-icon="mdi-shield-account-variant-outline" :title="$vuetify.locale.t('$vuetify.roleComponent.dialogTitle') " :loading="loading">
         <v-list v-model:selected="selected" lines="three" select-strategy="leaf">
-          <v-list-subheader>Authorities</v-list-subheader>
+          <v-list-subheader>
+            {{ $vuetify.locale.t('$vuetify.roleComponent.dialogSubheader') }}
+          </v-list-subheader>
           <v-list-item v-for="item in authorities" :key="item.id" :subtitle="item.description" :title="item.name"
             :value="item.key">
             <template v-slot:prepend="{ isSelected }">
@@ -49,12 +53,10 @@
         </v-list>
         <v-divider></v-divider>
         <v-card-actions>
-          <small class="text-caption text-medium-emphasis ml-4">* Modify role authorities carefully to avoid
-            unpredictable
-            errors.</small>
+          <small class="text-caption text-medium-emphasis ml-4">{{ $vuetify.locale.t('$vuetify.roleComponent.dialogTip') }}</small>
           <v-spacer></v-spacer>
-          <v-btn text="close" variant="plain" @click="dialog = false"></v-btn>
-          <v-btn color="primary" text="save" variant="tonal" @click="save()"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="dialog = false"></v-btn>
+          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="save()"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

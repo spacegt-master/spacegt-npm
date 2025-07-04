@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" activator="parent" max-width="1600px" :fullscreen="$vuetify.display.smAndDown" scrollable>
 
     <template #default>
-      <v-card prepend-icon="mdi-account-multiple-outline" title="Selection Users">
+      <v-card prepend-icon="mdi-account-multiple-outline" :title="$vuetify.locale.t('$vuetify.selectionUsersComponent.title')">
         <v-divider></v-divider>
 
         <v-card-text class="pa-0">
@@ -12,15 +12,15 @@
         <v-divider></v-divider>
 
         <v-card-actions>
-          <v-btn text="Close" @click="close()"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" @click="close()"></v-btn>
 
           <v-spacer></v-spacer>
 
           <span v-if="multiple == false && selected.length > 1" class="text-caption text-medium-emphasis">
-            Only one can be chosen.
+            {{ $vuetify.locale.t('$vuetify.selectionUsersComponent.multipleChoiceTip') }}
           </span>
 
-          <v-btn color="surface-variant" text="Save" variant="flat"
+          <v-btn color="surface-variant" :text="$vuetify.locale.t('$vuetify.save')" variant="flat"
             :disabled="selected.length == 0 || (multiple == false && selected.length > 1)" @click="save()"></v-btn>
         </v-card-actions>
       </v-card>

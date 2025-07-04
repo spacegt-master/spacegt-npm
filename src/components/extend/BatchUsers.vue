@@ -1,9 +1,10 @@
 <template>
   <v-dialog v-model="dialog" activator="parent" max-width="1000" scrollable>
     <template v-slot:default>
-      <v-card prepend-icon="mdi-import" title="Batch Users Import">
+      <v-card prepend-icon="mdi-import" :title="$vuetify.locale.t('$vuetify.batchUsersComponent.title')">
         <template #append>
-          <v-btn prepend-icon="mdi-download" @click="download">Download The Template</v-btn>
+          <v-btn prepend-icon="mdi-download" @click="download">{{
+            $vuetify.locale.t('$vuetify.batchUsersComponent.downloadTemplate') }}</v-btn>
         </template>
         <v-divider></v-divider>
 
@@ -15,16 +16,22 @@
             show-select height="100%" :loading="saving">
             <!-- eslint-disable-next-line vue/valid-v-slot -->
             <template v-slot:item.status="{ item }">
-              <div v-show="item.status == 0"> - </div>
-              <div v-show="item.status == 1"> Loading </div>
-              <div v-show="item.status == 2" class="text-red"> Failure
+              <div v-if="item.status == 0"> - </div>
+              <div v-if="item.status == 1">
+                {{ $vuetify.locale.t('$vuetify.batchUsersComponent.status.loading') }}
+              </div>
+              <div v-if="item.status == 2" class="text-red d-flex align-center justify-end">
+                {{ $vuetify.locale.t('$vuetify.batchUsersComponent.status.failure') }}
+
                 <v-tooltip v-if="item.message" :text="item.message">
                   <template v-slot:activator="{ props }">
                     <v-icon v-bind="props" icon="mdi-help-circle-outline" size="20px" class="ml-2"></v-icon>
                   </template>
                 </v-tooltip>
               </div>
-              <div v-show="item.status == 3" class="text-teal"> Success </div>
+              <div v-if="item.status == 3" class="text-teal">
+                {{ $vuetify.locale.t('$vuetify.batchUsersComponent.status.success') }}
+              </div>
             </template>
           </v-data-table-virtual>
         </v-card-text>
@@ -38,10 +45,10 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn text="Close" @click="close()"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" @click="close()"></v-btn>
 
-          <v-btn text="Import" color="surface-variant" variant="flat" :disabled="!org || selected.length == 0"
-            :loading="saving" @click="save()"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.import')" color="surface-variant" variant="flat"
+            :disabled="!org || selected.length == 0" :loading="saving" @click="save()"></v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -54,6 +61,9 @@ import { read, utils } from "xlsx";
 import FileSaver from 'file-saver';
 import { nextTick, ref } from 'vue';
 import { UsersApi } from '@/api/manage/accounts/users';
+import { useLocale } from 'vuetify'
+
+const { t } = useLocale()
 
 const props = defineProps({
   role: String
@@ -65,12 +75,12 @@ const file = ref()
 const org = ref()
 
 const headers = ref([
-  { title: 'Nickname', align: 'start', key: 'nickname' },
-  { title: 'Username', align: 'start', key: 'username' },
-  { title: 'Password', align: 'start', key: 'password' },
-  { title: 'Phone', align: 'start', key: 'phone' },
-  { title: 'Email', align: 'start', key: 'email' },
-  { title: 'Status', align: 'end', key: 'status' },
+  { title: t("$vuetify.batchUsersComponent.headers.nickname"), align: 'start', key: 'nickname' },
+  { title: t("$vuetify.batchUsersComponent.headers.username"), align: 'start', key: 'username' },
+  { title: t("$vuetify.batchUsersComponent.headers.password"), align: 'start', key: 'password' },
+  { title: t("$vuetify.batchUsersComponent.headers.phone"), align: 'start', key: 'phone' },
+  { title: t("$vuetify.batchUsersComponent.headers.email"), align: 'start', key: 'email' },
+  { title: t("$vuetify.batchUsersComponent.headers.status"), align: 'end', key: 'status' },
 ])
 const items = ref([])
 const selected = ref([])

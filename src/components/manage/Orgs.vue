@@ -1,14 +1,15 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader v-if="!enableSelection">Update Orgs</v-list-subheader>
+      <v-list-subheader v-if="!enableSelection">{{ $vuetify.locale.t('$vuetify.org.manage.title') }}</v-list-subheader>
 
       <div class="text-caption ps-4" v-if="!enableSelection">
-        Avoid excessive organizational structure and layers.
+        {{ $vuetify.locale.t('$vuetify.org.manage.subtitle') }}
       </div>
 
       <div class="text-right" v-if="!enableSelection">
-        <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">add root</v-btn>
+        <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">{{
+          $vuetify.locale.t('$vuetify.org.manage.add') }}</v-btn>
       </div>
 
       <v-divider class="mt-6 mb-3" v-if="!enableSelection" />
@@ -22,15 +23,21 @@
           <template #append="{ item }" v-if="!enableSelection">
             <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="newItem(item)">
               <v-icon icon="mdi-subdirectory-arrow-right"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">Add Child </span>
+              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                {{ $vuetify.locale.t('$vuetify.org.manage.addChild') }}
+              </span>
             </v-btn>
             <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="updateNameItem(item)">
               <v-icon icon="mdi-rename"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">Rename</span>
+              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                {{ $vuetify.locale.t('$vuetify.rename') }}
+              </span>
             </v-btn>
             <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="deleteItem(item)">
               <v-icon icon="mdi-delete"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">Delete</span>
+              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                {{ $vuetify.locale.t('$vuetify.delete') }}
+              </span>
             </v-btn>
           </template>
         </v-treeview>
@@ -38,16 +45,14 @@
     </v-list>
 
     <v-dialog v-model="dialogDelete" contained max-width="500">
-      <v-card rounded="lg" title="Delete Org">
+      <v-card rounded="lg" :title="$vuetify.locale.t('$vuetify.org.manage.deleteTitle')">
         <template #prepend>
           <v-avatar color="error" icon="mdi-alert-outline" variant="tonal" />
         </template>
 
         <template #text>
           <div class="mb-4 text-body-2 text-medium-emphasis">
-            Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and
-            cannot be recovered. Carefully review the data you are deleting and confirm that you understand the
-            consequences of this action. Are you sure you want to continue?
+            {{ $vuetify.locale.t('$vuetify.org.manage.deleteText') }}
           </div>
         </template>
 
@@ -56,44 +61,45 @@
         <template #actions>
           <v-spacer />
 
-          <v-btn border class="text-none" color="surface" text="Cancel" variant="flat" @click="closeDelete" />
+          <v-btn border class="text-none" color="surface" :text="$vuetify.locale.t('$vuetify.confirmEdit.cancel')" variant="flat" @click="closeDelete" />
 
-          <v-btn class="text-none" color="error" text="Delete" variant="flat" @click="deleteItemConfirm" />
+          <v-btn class="text-none" color="error" :text="$vuetify.locale.t('$vuetify.delete')" variant="flat" @click="deleteItemConfirm" />
         </template>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="dialogUpdateName" max-width="500" scrollable>
-      <v-card prepend-icon="mdi-pencil" title="Rename">
+      <v-card prepend-icon="mdi-pencil" :title="$vuetify.locale.t('$vuetify.rename')">
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-text-field v-model="editedItem.name" label="Org Name" required></v-text-field>
+              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.org.manage.orgName')"
+                required></v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text="Close" variant="plain" @click="closeUpdateName"></v-btn>
-          <v-btn color="primary" text="Save" variant="tonal" @click="updateNameItemConfirm"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="closeUpdateName"></v-btn>
+          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="updateNameItemConfirm"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="dialogNew" max-width="500" scrollable>
-      <v-card prepend-icon="mdi-pencil" title="Add Org">
+      <v-card prepend-icon="mdi-pencil" :title="$vuetify.locale.t('$vuetify.org.manage.addOrg')">
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-text-field v-model="editedItem.name" label="Name" required></v-text-field>
+              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.name')" required></v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text="Close" variant="plain" @click="closeNew"></v-btn>
-          <v-btn color="primary" text="Save" variant="tonal" @click="newItemConfirm"></v-btn>
+          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="closeNew"></v-btn>
+          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="newItemConfirm"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -220,7 +226,7 @@ const load = async () => {
     serverItems.value = []
     return
   }
-  
+
   serverItems.value = res.map(item => wrap(item))
 }
 

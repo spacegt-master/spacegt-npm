@@ -3,7 +3,7 @@
         <div v-if="org">{{ searchOrgItemNames.at(-1) }} </div>
         <div v-else>
             <slot>
-                Selection Orgs
+                {{ $vuetify.locale.t('$vuetify.selectionOrgsBtnComponent.text') }}
             </slot>
         </div>
 
