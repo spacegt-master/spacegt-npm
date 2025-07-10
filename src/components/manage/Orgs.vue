@@ -119,7 +119,6 @@
 <script setup>
 import { OrgsApi } from '@/api/manage/accounts/orgs';
 import { nextTick, onMounted, ref } from 'vue';
-import { VTreeview } from 'vuetify/labs/VTreeview'
 
 defineProps({
   enableSelection: { type: Boolean, default: false }

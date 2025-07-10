@@ -14,6 +14,7 @@ import selectionUsers from "@/components/extend/SelectionUsers.vue";
 import selectionUsersBtn from "@/components/extend/SelectionUsersBtn.vue";
 import batchUsers from "@/components/extend/BatchUsers.vue";
 import fileList from "@/components/FileList.vue";
+import VDateTimeInput from "@/components/VDateTimeInput.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
 import { useAuthorizationStore } from "@/stores/authorization";
@@ -56,6 +57,7 @@ const install = (app: App) => {
   app.component("spacegt-selection-users-btn", selectionUsersBtn);
   app.component("spacegt-batch-users", batchUsers);
   app.component("spacegt-file-list", fileList);
+  app.component("v-date-time-input", VDateTimeInput);
 };
 
 export default {
@@ -70,13 +72,11 @@ export {
   emailServiceConfig,
   fileService,
   fileServiceConfig,
-  
   useAccountsStore,
   useAuthorizationStore,
   useLoginStore,
   useSnackbarStore,
   useFileStore,
-
   FileApi,
   EmailApi,
   ForgotPasswordApi,

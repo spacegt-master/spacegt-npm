@@ -24,5 +24,6 @@ declare module 'vue' {
     SignUp: typeof import('./src/components/login/sign-up.vue')['default']
     Snackbar: typeof import('./src/components/Snackbar.vue')['default']
     Users: typeof import('./src/components/manage/Users.vue')['default']
+    VDateTimeInput: typeof import('./src/components/VDateTimeInput.vue')['default']
   }
 }
