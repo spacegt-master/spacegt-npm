@@ -60,4 +60,4 @@ const handleConfirm = async (value) => {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

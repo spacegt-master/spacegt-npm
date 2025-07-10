@@ -8,11 +8,11 @@
             <v-sheet class="flex-1-1 px-4" color="background" max-width="550">
               <v-img class="mx-auto mb-4" max-width="60" :src="logo" />
 
-              <Login v-if="loginStore.tab == 'login'" @login="$emit('login', $event)"></Login>
+              <login-panel v-if="loginStore.tab == 'login'" @login="$emit('login', $event)"></login-panel>
 
-              <SignUp v-if="loginStore.tab == 'sign-up'"></SignUp>
+              <sign-up-panel v-if="loginStore.tab == 'sign-up'"></sign-up-panel>
 
-              <ForgotPassword v-if="loginStore.tab == 'forgot-password'"></ForgotPassword>
+              <forgot-password-panel v-if="loginStore.tab == 'forgot-password'"></forgot-password-panel>
             </v-sheet>
           </v-row>
         </v-container>
@@ -24,9 +24,6 @@
 
 <script setup>
 import { useLoginStore } from '@/stores/login';
-import Login from './login.vue';
-import SignUp from './sign-up.vue';
-import ForgotPassword from './forgot-password.vue';
 
 const loginStore = useLoginStore()
 
@@ -42,4 +39,4 @@ const props = defineProps({
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

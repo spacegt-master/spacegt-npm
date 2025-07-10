@@ -134,4 +134,4 @@ watch(() => signupStore.steps, () => {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style   scoped></style>

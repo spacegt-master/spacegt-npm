@@ -17,8 +17,8 @@
                     <v-btn prepend-icon="mdi-file-powerpoint-box-outline" text="AI PPT" variant="text"
                         @click="aippt"></v-btn>
 
-                    <v-btn prepend-icon="mdi-content-save-check-outline" :text="$vuetify.locale.t('$vuetify.submit')" variant="text"
-                        @click="exportImages"></v-btn>
+                    <v-btn prepend-icon="mdi-content-save-check-outline" :text="$vuetify.locale.t('$vuetify.submit')"
+                        variant="text" @click="exportImages"></v-btn>
 
                     <v-btn :icon="fullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
                         @click="fullscreen = !fullscreen"></v-btn>
@@ -86,7 +86,7 @@ window.addEventListener(
 );
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 iframe {
     width: 100%;
     height: 100%;

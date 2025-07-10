@@ -145,4 +145,4 @@ const save = async () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style   scoped></style>

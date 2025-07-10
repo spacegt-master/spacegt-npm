@@ -27,4 +27,4 @@ import { useSnackbarStore } from '@/stores/snackbar';
 const snackbarStore = useSnackbarStore()
 </script>
 
-<style lang="scss" scoped></style>
+<style  scoped></style>
