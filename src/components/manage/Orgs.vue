@@ -1,15 +1,21 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader v-if="!enableSelection">{{ $vuetify.locale.t('$vuetify.org.manage.title') }}</v-list-subheader>
 
-      <div class="text-caption ps-4" v-if="!enableSelection">
-        {{ $vuetify.locale.t('$vuetify.org.manage.subtitle') }}
-      </div>
+      <div class="px-4" v-if="!enableSelection">
+        <h3 class="text-subtitle-1 font-weight-bold mb-2 d-flex justify-space-between align-center">
+          {{ $vuetify.locale.t('$vuetify.org.manage.title') }}
 
-      <div class="text-right" v-if="!enableSelection">
-        <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">{{
-          $vuetify.locale.t('$vuetify.org.manage.add') }}</v-btn>
+          <div class="d-flex ga-2">
+            <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">
+              {{ $vuetify.locale.t('$vuetify.org.manage.add') }}
+            </v-btn>
+          </div>
+        </h3>
+
+        <div class="text-body-2 text-medium-emphasis mb-4 w-100 w-md-75">
+          {{ $vuetify.locale.t('$vuetify.org.manage.subtitle') }}
+        </div>
       </div>
 
       <v-divider class="mt-6 mb-3" v-if="!enableSelection" />
@@ -61,9 +67,11 @@
         <template #actions>
           <v-spacer />
 
-          <v-btn border class="text-none" color="surface" :text="$vuetify.locale.t('$vuetify.confirmEdit.cancel')" variant="flat" @click="closeDelete" />
+          <v-btn border class="text-none" color="surface" :text="$vuetify.locale.t('$vuetify.confirmEdit.cancel')"
+            variant="flat" @click="closeDelete" />
 
-          <v-btn class="text-none" color="error" :text="$vuetify.locale.t('$vuetify.delete')" variant="flat" @click="deleteItemConfirm" />
+          <v-btn class="text-none" color="error" :text="$vuetify.locale.t('$vuetify.delete')" variant="flat"
+            @click="deleteItemConfirm" />
         </template>
       </v-card>
     </v-dialog>
@@ -82,7 +90,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="closeUpdateName"></v-btn>
-          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="updateNameItemConfirm"></v-btn>
+          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal"
+            @click="updateNameItemConfirm"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -91,7 +100,8 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.name')" required></v-text-field>
+              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.name')"
+                required></v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
@@ -99,7 +109,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="closeNew"></v-btn>
-          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="newItemConfirm"></v-btn>
+          <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal"
+            @click="newItemConfirm"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

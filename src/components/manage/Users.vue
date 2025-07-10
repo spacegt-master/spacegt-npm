@@ -1,24 +1,27 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader v-if="!enableSelection">
-        {{ $vuetify.locale.t('$vuetify.usersComponent.title') }}
-      </v-list-subheader>
 
-      <div class="text-caption ps-4" v-if="!enableSelection">
-        {{ $vuetify.locale.t('$vuetify.usersComponent.subtitle') }}
-      </div>
+      <div class="px-4" v-if="!enableSelection">
+        <h3 class="text-subtitle-1 font-weight-bold mb-2 d-flex justify-space-between align-center">
+          {{ $vuetify.locale.t('$vuetify.usersComponent.title') }}
 
-      <div class="text-right" v-if="!enableSelection">
-        <v-btn variant="text" prepend-icon="mdi-account-multiple-plus-outline" @click="addItem()">
-          {{ $vuetify.locale.t('$vuetify.usersComponent.addUser') }}
+          <div class="d-flex ga-2">
+            <v-btn variant="text" prepend-icon="mdi-account-multiple-plus-outline" @click="addItem()">
+              {{ $vuetify.locale.t('$vuetify.usersComponent.addUser') }}
 
-        </v-btn>
-        <v-btn variant="text" prepend-icon="mdi-database-import">
-          {{ $vuetify.locale.t('$vuetify.usersComponent.batchUsers') }}
+            </v-btn>
+            <v-btn variant="text" prepend-icon="mdi-database-import">
+              {{ $vuetify.locale.t('$vuetify.usersComponent.batchUsers') }}
 
-          <batch-users :role="search.role" @change="handleBatchUsersChange"></batch-users>
-        </v-btn>
+              <batch-users :role="search.role" @change="handleBatchUsersChange"></batch-users>
+            </v-btn>
+          </div>
+        </h3>
+
+        <div class="text-body-2 text-medium-emphasis mb-4 w-100 w-md-75">
+          {{ $vuetify.locale.t('$vuetify.usersComponent.subtitle') }}
+        </div>
       </div>
 
       <v-divider class="mt-6 mb-3" v-if="!enableSelection" />

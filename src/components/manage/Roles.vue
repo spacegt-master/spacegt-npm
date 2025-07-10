@@ -1,13 +1,14 @@
 <template>
   <v-container class="px-6 py-6" fluid>
     <v-list class="px-2" lines="two" variant="flat">
-      <v-list-subheader>
-        {{ $vuetify.locale.t('$vuetify.roleComponent.title') }}
-      </v-list-subheader>
+      <div class="px-4">
+        <h3 class="text-subtitle-1 font-weight-bold mb-2 d-flex justify-space-between align-center">
+          {{ $vuetify.locale.t('$vuetify.roleComponent.title') }}
+        </h3>
 
-      <div class="text-caption ps-4">
-        {{ $vuetify.locale.t('$vuetify.roleComponent.subtitle') }}
-
+        <div class="text-body-2 text-medium-emphasis mb-4 w-100 w-md-75">
+          {{ $vuetify.locale.t('$vuetify.roleComponent.subtitle') }}
+        </div>
       </div>
 
       <v-divider class="mt-6 mb-3" />
@@ -27,15 +28,16 @@
           </template>
 
           <template #append v-if="accountsStore.hasAuthority('ROLES_EDIT')">
-            <v-btn class="text-none text-disabled" prepend-icon="mdi-shield-edit-outline" :text="$vuetify.locale.t('$vuetify.edit')" variant="tonal"
-              @click="editItem(item)" />
+            <v-btn class="text-none text-disabled" prepend-icon="mdi-shield-edit-outline"
+              :text="$vuetify.locale.t('$vuetify.edit')" variant="tonal" @click="editItem(item)" />
           </template>
         </v-list-item>
       </div>
     </v-list>
 
     <v-dialog v-model="dialog" max-width="600" scrollable>
-      <v-card prepend-icon="mdi-shield-account-variant-outline" :title="$vuetify.locale.t('$vuetify.roleComponent.dialogTitle') " :loading="loading">
+      <v-card prepend-icon="mdi-shield-account-variant-outline"
+        :title="$vuetify.locale.t('$vuetify.roleComponent.dialogTitle')" :loading="loading">
         <v-list v-model:selected="selected" lines="three" select-strategy="leaf">
           <v-list-subheader>
             {{ $vuetify.locale.t('$vuetify.roleComponent.dialogSubheader') }}
@@ -53,7 +55,8 @@
         </v-list>
         <v-divider></v-divider>
         <v-card-actions>
-          <small class="text-caption text-medium-emphasis ml-4">{{ $vuetify.locale.t('$vuetify.roleComponent.dialogTip') }}</small>
+          <small class="text-caption text-medium-emphasis ml-4">{{ $vuetify.locale.t('$vuetify.roleComponent.dialogTip')
+          }}</small>
           <v-spacer></v-spacer>
           <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="dialog = false"></v-btn>
           <v-btn color="primary" :text="$vuetify.locale.t('$vuetify.save')" variant="tonal" @click="save()"></v-btn>

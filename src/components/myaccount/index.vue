@@ -18,8 +18,10 @@
                 </div>
                 <VDivider></VDivider>
                 <v-list density="compact" nav>
-                    <v-list-item prepend-icon="mdi-account-cog" link :title="$vuetify.locale.t('$vuetify.settings')" @click="toSettings" />
-                    <v-list-item prepend-icon="mdi-logout" link :title="$vuetify.locale.t('$vuetify.logout')" to="/" @click="logout" />
+                    <v-list-item v-if="enabledSettings" prepend-icon="mdi-account-cog" link
+                        :title="$vuetify.locale.t('$vuetify.settings')" @click="toSettings" />
+                    <v-list-item prepend-icon="mdi-logout" link :title="$vuetify.locale.t('$vuetify.logout')" to="/"
+                        @click="logout" />
                 </v-list>
             </v-card>
         </v-menu>
@@ -32,6 +34,10 @@
 const props = defineProps({
     account: Object,
     proxy: String,
+    enabledSettings: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const emit = defineEmits(['logout', 'settings', 'login'])
