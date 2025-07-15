@@ -17,7 +17,7 @@ export interface Authorities {
 }
 
 export interface AccountsStore {
-  account: Users;
+  account?: Users;
   authorities: Authorities[];
   matchAuthorities(
     authorities: Authorities[],

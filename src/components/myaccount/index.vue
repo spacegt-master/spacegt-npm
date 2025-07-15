@@ -20,16 +20,19 @@
                 <v-list density="compact" nav>
                     <v-list-item v-if="enabledSettings" prepend-icon="mdi-account-cog" link
                         :title="$vuetify.locale.t('$vuetify.settings')" @click="toSettings" />
-                    <v-list-item prepend-icon="mdi-logout" link :title="$vuetify.locale.t('$vuetify.logout')" to="/"
+                    <v-list-item prepend-icon="mdi-logout" link :title="$vuetify.locale.t('$vuetify.logout')"
                         @click="logout" />
                 </v-list>
             </v-card>
         </v-menu>
     </v-btn>
     <v-btn v-else class="me-2" append-icon="mdi-login" text="Login" @click="toLogin"> </v-btn>
+
+    <SSO v-if="sso" :service="sso" ref="ssoRef"></SSO>
 </template>
 
 <script setup>
+import { nextTick, ref } from 'vue'
 
 const props = defineProps({
     account: Object,
@@ -37,13 +40,24 @@ const props = defineProps({
     enabledSettings: {
         type: Boolean,
         default: true
+    },
+    sso: {
+        type: String,
+        default: ''
     }
 })
 
 const emit = defineEmits(['logout', 'settings', 'login'])
 
+const ssoRef = ref()
+
 const logout = () => {
-    emit('logout')
+    if (ssoRef.value)
+        ssoRef.value.setToken('remove')
+
+    setTimeout(() => {
+        emit('logout')
+    }, 200)
 }
 
 const toLogin = () => {
