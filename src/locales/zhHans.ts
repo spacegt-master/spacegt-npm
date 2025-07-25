@@ -116,6 +116,8 @@ export default {
   edit: "编辑",
   actions: "操作",
   import: "导入",
+  enabled: "启用",
+  disabled: "禁用",
 
   loginComponent: {
     title: "登录你的账户",
@@ -189,6 +191,7 @@ export default {
       add: "添加根节点",
       addChild: "添加子节点",
       orgName: "组织名",
+      organizationCode: "组织代码",
       deleteTitle: "删除组织",
       deleteText:
         "警告：您即将执行不可逆的数据删除操作。所选数据将被永久删除且无法恢复。请仔细查看您要删除的数据，并确认您了解此操作的后果。您确定要继续吗？",

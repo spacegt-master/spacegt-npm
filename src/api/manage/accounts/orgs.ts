@@ -34,7 +34,7 @@ export const OrgsApi = {
       },
     });
   },
-  edit(data: { id: string; pid: string; name: string; maxUser: number }) {
+  edit(data: { id?: string; pid?: string; name: string; maxUser?: number }) {
     return axios({
       url: "/api/orgs/edit",
       method: "post",
@@ -42,6 +42,31 @@ export const OrgsApi = {
         "Content-Type": "multipart/form-data",
       },
       data,
+    });
+  },
+  ordering(ids: string) {
+    return axios({
+      url: "/api/orgs/ordering",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: {
+        ids,
+      },
+    });
+  },
+  switchStatus(id: string, status: boolean) {
+    return axios({
+      url: "/api/orgs/switchStatus",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: {
+        id,
+        status,
+      },
     });
   },
 };

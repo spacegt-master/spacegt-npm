@@ -116,6 +116,9 @@ export default {
   edit: "Edit",
   actions: "Actions",
   import: "Import",
+  enabled: "Enabled",
+  disabled: "Disabled",
+
 
   loginComponent: {
     title: "Log into your account",
@@ -190,6 +193,7 @@ export default {
       add: "Add Root",
       addChild: "Add Child",
       orgName: "Org Name",
+      organizationCode: "Organization Code",
       deleteTitle: "Delete Org",
       deleteText:
         "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",

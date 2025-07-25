@@ -1,5 +1,5 @@
 <template>
-  <v-container class="px-6 py-6" fluid>
+  <v-container class="px-6 py-6 orgs-manage" fluid>
     <v-list class="px-2" lines="two" variant="flat">
 
       <div class="px-4" v-if="!enableSelection">
@@ -10,6 +10,9 @@
             <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">
               {{ $vuetify.locale.t('$vuetify.org.manage.add') }}
             </v-btn>
+
+            <export-orgs></export-orgs>
+            <import-orgs @imported="load"></import-orgs>
           </div>
         </h3>
 
@@ -22,12 +25,22 @@
 
       <div class="pa-3">
         <v-treeview v-model:activated="selected" :items="serverItems" item-value="id" :load-children="fetchOrgs"
-          color="primary" density="compact" :activatable="enableSelection" :open-on-click="!enableSelection" transition>
+          color="primary" density="compact" :activatable="enableSelection" :open-on-click="!enableSelection" transition
+          item-props>
           <template #title="{ item }">
-            {{ item.name }} {{ item.childrenCount > 0 ? ` ( ${item.childrenCount} ) ` : `` }}
+            <v-chip class="mr-2">组织代码 : {{ item.code ? item.code : '暂无' }} </v-chip>
+
+            {{ item.name }}
+
+            <v-badge v-if="item.childrenCount > 0" class="ml-2" color="info" :content="item.childrenCount"
+              inline></v-badge>
           </template>
-          <template #append="{ item }" v-if="!enableSelection">
-            <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="newItem(item)">
+          <template #append="{ item, isFirst, isLast }" v-if="!enableSelection">
+            <v-btn variant="text" density="comfortable" :disabled="isFirst" icon="mdi-arrow-up-thick" @click.stop="move(item, 'up')"></v-btn>
+            <v-btn variant="text" density="comfortable" :disabled="isLast" icon="mdi-arrow-down-thick"
+              @click.stop="move(item, 'down')"></v-btn>
+
+            <v-btn variant="text" min-width="30px" class="pa-2 ml-4" @click.stop="newItem(item)">
               <v-icon icon="mdi-subdirectory-arrow-right"></v-icon>
               <span class="ml-1" v-show="!$vuetify.display.smAndDown">
                 {{ $vuetify.locale.t('$vuetify.org.manage.addChild') }}
@@ -36,9 +49,19 @@
             <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="updateNameItem(item)">
               <v-icon icon="mdi-rename"></v-icon>
               <span class="ml-1" v-show="!$vuetify.display.smAndDown">
-                {{ $vuetify.locale.t('$vuetify.rename') }}
+                {{ $vuetify.locale.t('$vuetify.edit') }}
               </span>
             </v-btn>
+
+            <v-btn style="pointer-events: all; opacity: 1;" variant="text" min-width="30px" class="pa-2"
+              @click.stop="switchStatus(item)">
+              <v-icon v-if="item.enabled" icon="mdi-toggle-switch-outline"></v-icon>
+              <v-icon v-else icon="mdi-toggle-switch-off-outline"></v-icon>
+              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                {{ item.enabled ? $vuetify.locale.t('$vuetify.disabled') : $vuetify.locale.t('$vuetify.enabled') }}
+              </span>
+            </v-btn>
+
             <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="deleteItem(item)">
               <v-icon icon="mdi-delete"></v-icon>
               <span class="ml-1" v-show="!$vuetify.display.smAndDown">
@@ -83,6 +106,8 @@
             <v-col cols="12">
               <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.org.manage.orgName')"
                 required></v-text-field>
+              <v-text-field v-model="editedItem.code" :label="$vuetify.locale.t('$vuetify.org.manage.organizationCode')"
+                required></v-text-field>
             </v-col>
           </v-row>
         </v-card-text>
@@ -100,7 +125,9 @@
         <v-card-text>
           <v-row dense>
             <v-col cols="12">
-              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.name')"
+              <v-text-field v-model="editedItem.name" :label="$vuetify.locale.t('$vuetify.org.manage.orgName')"
+                required></v-text-field>
+              <v-text-field v-model="editedItem.code" :label="$vuetify.locale.t('$vuetify.org.manage.organizationCode')"
                 required></v-text-field>
             </v-col>
           </v-row>
@@ -135,6 +162,7 @@ const editedItem = ref({
   id: null,
   pid: null,
   name: '',
+  code: '',
   admin: '',
   parent: null
 })
@@ -142,9 +170,64 @@ const defaultItem = ref({
   id: null,
   pid: null,
   name: '',
+  code: '',
   admin: '',
   parent: null
 })
+
+function findItemBefore(item) {
+  if (item.parent) {
+    return item.parent.children
+      .find((_, i, all) => all[i + 1]?.id === item.id)
+  } else {
+    return serverItems.value
+      .find((_, i, all) => all[i + 1]?.id === item.id)
+  }
+}
+function findItemAfter(item) {
+  if (item.parent) {
+    return item.parent.children
+      .find((_, i, all) => all[i - 1]?.id === item.id)
+  } else {
+    return serverItems.value
+      .find((_, i, all) => all[i - 1]?.id === item.id)
+  }
+}
+function detach(item) {
+  if (item.parent) {
+    const parent = item.parent
+    parent.children.splice(parent.children.indexOf(item), 1)
+    if (parent.children.length === 0) parent.children = undefined
+  } else {
+    serverItems.value.splice(serverItems.value.indexOf(item), 1)
+  }
+}
+function injectNextTo(item, target, after = true) {
+  detach(item)
+
+  if (item.parent) {
+    const targetParent = item.parent
+    targetParent.children.splice(targetParent.children.indexOf(target) + (after ? 1 : 0), 0, item)
+  } else {
+    serverItems.value.splice(serverItems.value.indexOf(target) + (after ? 1 : 0), 0, item)
+  }
+}
+function move(item, direction) {
+  switch (direction) {
+    case 'up':
+      injectNextTo(item, findItemBefore(item), false)
+      break
+    case 'down':
+      injectNextTo(item, findItemAfter(item))
+      break
+  }
+
+  if (item.parent) {
+    ordering(item.parent.children)
+  } else {
+    ordering(serverItems.value)
+  }
+}
 
 const deleteItem = (item) => {
   editedIndex.value = serverItems.value.indexOf(item);
@@ -195,7 +278,7 @@ const deleteItemConfirm = async () => {
   closeDelete()
 }
 const updateNameItemConfirm = async () => {
-  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name })
+  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code })
   if (editedItem.value.parent) {
     fetchOrgs(editedItem.value.parent)
   } else
@@ -203,30 +286,43 @@ const updateNameItemConfirm = async () => {
   closeUpdateName()
 }
 const newItemConfirm = async () => {
-  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name })
+  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code })
   if (editedItem.value.parent.id) {
     fetchOrgs(editedItem.value.parent)
   } else
     load()
   closeNew()
 }
+async function switchStatus(item) {
+  item.enabled = !item.enabled
+
+  item.disabled = !item.enabled
+
+  await OrgsApi.switchStatus(item.id, item.enabled)
+}
 
 const fetchOrgs = async (item) => {
   const res = await OrgsApi.listByPid(item.id, true)
   item.childrenCount = res.length
   if (res.length > 0) {
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
     return item.children = res.map(child => {
       child.parent = item
       return wrap(child)
     })
   }
-  // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
   return item.children = null
 }
 
 const wrap = (item) => {
-  return { ...item, children: (item.childrenCount > 0 ? [] : null) }
+  return {
+    ...item,
+    children: (item.childrenCount > 0 ? [] : null),
+    disabled: !item.enabled
+  }
+}
+
+const ordering = async (items) => {
+  await OrgsApi.ordering(items.map(item => item.id).join(','))
 }
 
 const load = async () => {
@@ -245,7 +341,16 @@ onMounted(() => {
 })
 
 </script>
-<script>
+<style>
+.orgs-manage .v-list-item--disabled {
+  opacity: 1 !important;
+}
 
+.orgs-manage .v-list-item--disabled .v-list-item__content {
+  opacity: 0.6;
+}
 
-</script>
+.orgs-manage .v-list-item--disabled .v-btn {
+  opacity: 0.6;
+}
+</style>

@@ -7,6 +7,7 @@
 // Styles
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
+import { VFileUpload } from "vuetify/labs/VFileUpload";
 
 // Composables
 import { createVuetify } from "vuetify";
@@ -23,5 +24,8 @@ export default createVuetify({
   locale: {
     locale: "en",
     messages: { en, zhHans },
+  },
+  components: {
+    VFileUpload,
   },
 });
