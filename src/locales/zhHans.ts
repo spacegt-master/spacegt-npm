@@ -137,7 +137,7 @@ export default {
         label: "账号",
         title: "输入用户名",
         username: "用户名",
-        nickname: "昵称",
+        nickname: "姓名",
       },
       password: {
         label: "密码",
@@ -217,10 +217,16 @@ export default {
     form: {
       username: "用户名",
       password: "密码",
-      nickname: "昵称",
+      nickname: "姓名",
       phone: "手机号",
       email: "电子邮箱",
       avatar: "头像 (Url)",
+    },
+    rules: {
+      usernameIsRequired: "用户名是必填项",
+      passwordIsRequired: "需要输入密码",
+      passwordLength: "密码长度应在 8 到 20 个字符之间",
+      nicknameIsRequired: "姓名是必填项",
     },
     deleteTitle: "删除用户",
     deleteSubtitle:
@@ -238,7 +244,7 @@ export default {
       success: "成功",
     },
     headers: {
-      nickname: "昵称",
+      nickname: "姓名",
       username: "用户名",
       password: "密码",
       phone: "手机号",

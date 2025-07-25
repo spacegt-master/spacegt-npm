@@ -119,7 +119,6 @@ export default {
   enabled: "Enabled",
   disabled: "Disabled",
 
-
   loginComponent: {
     title: "Log into your account",
     username: "Username",
@@ -224,6 +223,12 @@ export default {
       phone: "Phone",
       email: "Email",
       avatar: "Avatar (Url)",
+    },
+    rules: {
+      usernameIsRequired: "Username is required",
+      passwordIsRequired: "Password is required",
+      passwordLength: "Keep the password length between 8 and 20 characters.",
+      nicknameIsRequired: "Nickname is required",
     },
     deleteTitle: "Delete User",
     deleteSubtitle:

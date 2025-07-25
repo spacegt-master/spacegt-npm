@@ -50,7 +50,6 @@
 
             </div>
           </template>
-          <!-- eslint-disable-next-line vue/valid-v-slot -->
           <template v-slot:item.actions="{ item }">
             <VBtn icon="mdi-rename" variant="text" density="comfortable" size="small" @click="editItem(item)"></VBtn>
             <VBtn icon="mdi-lock-reset" variant="text" density="comfortable" size="small" @click="repwdItem(item)">
@@ -61,51 +60,57 @@
       </div>
     </v-list>
     <v-dialog v-model="dialog" max-width="600px" :fullscreen="$vuetify.display.smAndDown" scrollable>
-      <v-card prepend-icon="mdi-pencil" :title="formTitle">
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field v-model="editedItem.username"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.username')"
-                  :disabled="!!editedItem.id"></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field v-model="editedItem.password"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.password')" :disabled="!!editedItem.id"
-                  type="password"></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field v-model="editedItem.nickname"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.nickname')"></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <selection-orgs-btn class="mb-4" width="100%" min-height="50" :org="editedItem.orgItem"
-                  @change="(value) => { editedItem.orgItem = value; editedItem.orgs = value.id.join(',') }"
-                  @clear="editedItem.orgItem = null; editedItem.orgs = null"></selection-orgs-btn>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field v-model="editedItem.phone"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.phone')"></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field v-model="editedItem.email"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.email')"></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field v-model="editedItem.avatar"
-                  :label="$vuetify.locale.t('$vuetify.usersComponent.form.avatar')"></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="close"></v-btn>
-          <v-btn :text="$vuetify.locale.t('$vuetify.save')" color="primary" variant="tonal" @click="save"></v-btn>
-        </v-card-actions>
-      </v-card>
+      <v-form @submit.prevent="save">
+        <v-card prepend-icon="mdi-pencil" :title="formTitle">
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field v-model="editedItem.username"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.username')" :disabled="!!editedItem.id"
+                    :rules="rules.username"></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field v-model="editedItem.password"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.password')" :disabled="!!editedItem.id"
+                    type="password" :rules="editedItem.id ? [] : rules.password"></v-text-field>
+
+                  <small class="text-caption text-medium-emphasis">* 密码长度保持在8到20位之间,（字母/数字/符号的任意组合）至少包括两种</small>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field v-model="editedItem.nickname"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.nickname')"
+                    :rules="rules.nickname"></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <selection-orgs-btn class="mb-4" width="100%" min-height="50" :org="editedItem.orgItem"
+                    @change="(value) => { editedItem.orgItem = value; editedItem.orgs = value.id.join(',') }"
+                    @clear="editedItem.orgItem = null; editedItem.orgs = null"></selection-orgs-btn>
+                  <small class="text-caption text-medium-emphasis">* 请选择组织, 必选项</small>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field v-model="editedItem.phone"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.phone')"></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-text-field v-model="editedItem.email"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.email')"></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field v-model="editedItem.avatar"
+                    :label="$vuetify.locale.t('$vuetify.usersComponent.form.avatar')"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn :text="$vuetify.locale.t('$vuetify.close')" variant="plain" @click="close"></v-btn>
+            <v-btn :text="$vuetify.locale.t('$vuetify.save')" color="primary" variant="tonal" type="submit"></v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-form>
     </v-dialog>
 
     <v-dialog v-model="dialogDelete" contained max-width="500">
@@ -172,6 +177,7 @@ import { UsersApi } from '@/api/manage/accounts/users';
 import { computed, nextTick, reactive, ref, watch } from 'vue';
 import { VSpacer } from 'vuetify/components';
 import { useLocale } from 'vuetify'
+import { snackbar } from '@/stores/snackbar';
 
 const { t } = useLocale()
 
@@ -224,6 +230,19 @@ const defaultItem = ref({
   roles: null,
   orgItem: null
 })
+const rules = {
+  username: [
+    v => !!v || t("$vuetify.usersComponent.rules.usernameIsRequired"),
+  ],
+  password: [
+    v => !!v || t("$vuetify.usersComponent.rules.passwordIsRequired"),
+    v => (v && v.length >= 8 && v.length <= 20) || t("$vuetify.usersComponent.rules.passwordLength"),
+  ],
+  nickname: [
+    v => !!v || t("$vuetify.usersComponent.rules.nicknameIsRequired"),
+  ]
+}
+
 const formTitle = computed(() => editedIndex.value === -1 ? t("$vuetify.usersComponent.addUser") : t("$vuetify.usersComponent.updateUser"))
 
 
@@ -311,16 +330,31 @@ const repwdConfirm = async () => {
   closeRepwd()
 }
 
-const save = async () => {
-  editedItem.value.roles = search.role
+const save = async (event) => {
+  const results = await event
 
-  editedItem.value.orgItem = null
+  if (results.valid) {
 
-  await UsersApi.edit(editedItem.value)
+    if (editedItem.value.orgs == null) {
+      snackbar({
+        title: '请选择组织, 必选项',
+        type: "error",
+        text: undefined,
+        timeout: undefined,
+      });
+      return;
+    }
 
-  loadItems(options.value)
+    editedItem.value.roles = search.role
 
-  close()
+    await UsersApi.edit(editedItem.value)
+
+    editedItem.value.orgItem = null
+
+    loadItems(options.value)
+
+    close()
+  }
 }
 
 const loadItems = async ({ page, itemsPerPage, sortBy }) => {
