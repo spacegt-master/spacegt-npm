@@ -1,6 +1,7 @@
 <template>
   <v-snackbar v-model="snackbarStore.snackbar" color="surface" contained location="top end" rounded="lg"
-    :text="snackbarStore.text" :title="snackbarStore.title" :timeout="snackbarStore.timeout" class="mt-16 pt-2">
+    :text="snackbarStore.text" :title="snackbarStore.title" :timeout="snackbarStore.timeout"
+    class="mt-16 pt-2 position-fixed" style="z-index: 3000;">
     <template #text>
       <div class="d-flex align-start">
         <v-icon v-if="snackbarStore.type" :color="snackbarStore.type" :icon="`$${snackbarStore.type}`" start />
@@ -27,4 +28,4 @@ import { useSnackbarStore } from '@/stores/snackbar';
 const snackbarStore = useSnackbarStore()
 </script>
 
-<style  scoped></style>
+<style scoped></style>

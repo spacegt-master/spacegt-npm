@@ -1,3 +1,4 @@
+import type { SnackbarOptions } from "@/types/snackbar";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -13,12 +14,7 @@ export const useSnackbarStore = defineStore("snackbar", () => {
 
   const timeout = ref();
 
-  const start = (options: {
-    title: string;
-    type: string;
-    text?: string | null;
-    timeout?: number | null;
-  }) => {
+  const start = (options: SnackbarOptions) => {
     type.value = options.type;
     title.value = options.title;
     text.value = options.text;
@@ -37,12 +33,7 @@ export const useSnackbarStore = defineStore("snackbar", () => {
   };
 });
 
-export const snackbar = (options: {
-  title: string;
-  type: "error" | "info" | "success" | "warning";
-  text?: string | null;
-  timeout?: number | null;
-}) => {
+export const snackbar = (options: SnackbarOptions) => {
   const snackbarStore = useSnackbarStore();
   return snackbarStore.start(options);
 };

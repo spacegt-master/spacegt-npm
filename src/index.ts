@@ -4,7 +4,7 @@ import type { App } from "vue";
 import login from "@/components/login/index.vue";
 import aippt from "@/components/aippt/index.vue";
 import myaccount from "@/components/myaccount/index.vue";
-import snackbar from "@/components/Snackbar.vue";
+import snackbarComponents from "@/components/Snackbar.vue";
 import manageRoles from "@/components/manage/Roles.vue";
 import manageOrgs from "@/components/manage/Orgs.vue";
 import manageUsers from "@/components/manage/Users.vue";
@@ -19,7 +19,7 @@ import VDateTimeInput from "@/components/VDateTimeInput.vue";
 import { useAccountsStore } from "@/stores/accounts";
 import { useAuthorizationStore } from "@/stores/authorization";
 import { useLoginStore } from "@/stores/login";
-import { useSnackbarStore } from "@/stores/snackbar";
+import { useSnackbarStore, snackbar } from "@/stores/snackbar";
 import { useFileStore } from "@/stores/file";
 
 import accountsService from "@/axios/accounts-service";
@@ -47,7 +47,7 @@ const install = (app: App) => {
   app.component("spacegt-login", login);
   app.component("spacegt-aippt", aippt);
   app.component("spacegt-myaccount", myaccount);
-  app.component("spacegt-snackbar", snackbar);
+  app.component("spacegt-snackbar", snackbarComponents);
   app.component("spacegt-manage-roles", manageRoles);
   app.component("spacegt-manage-orgs", manageOrgs);
   app.component("spacegt-manage-users", manageUsers);
@@ -87,6 +87,8 @@ export {
   OrgsApi,
   UsersApi,
   TokenApi,
+  // fn
+  snackbar
 };
 
 declare module "vue" {
@@ -94,7 +96,7 @@ declare module "vue" {
     login: typeof login;
     aippt: typeof aippt;
     myaccount: typeof myaccount;
-    snackbar: typeof snackbar;
+    snackbarComponents: typeof snackbarComponents;
     manageRoles: typeof manageRoles;
     manageOrgs: typeof manageOrgs;
     manageUsers: typeof manageUsers;

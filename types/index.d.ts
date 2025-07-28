@@ -1,5 +1,6 @@
 import { App } from "vue";
 import { AxiosInstance } from "axios";
+import type { SnackbarOptions } from "@/types/snackbar";
 
 export interface Users {
   id: string;
@@ -125,6 +126,8 @@ declare var TokenApi: {
   validate(token: string): Promise<any>;
 };
 
+declare var snackbar: (options: SnackbarOptions) => void;
+
 export interface SpacegtStatic {
   install(app: App): void;
   locales: any;
@@ -156,4 +159,6 @@ export {
   OrgsApi,
   UsersApi,
   TokenApi,
+  //fn
+  snackbar,
 };
