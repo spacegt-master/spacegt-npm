@@ -2,8 +2,10 @@
     <v-dialog v-model="dialog" transition="dialog-bottom-transition" :fullscreen="fullscreen" width="1280px"
         height="800px" max-height="90vh">
         <template v-slot:activator="{ props: activatorProps }">
-            <v-btn prepend-icon="mdi-file-powerpoint-box-outline" size="small" text="AI PPT"
-                v-bind="activatorProps"></v-btn>
+            <slot :props="activatorProps">
+                <v-btn prepend-icon="mdi-file-powerpoint-box-outline" size="small" text="AI PPT"
+                    v-bind="activatorProps"></v-btn>
+            </slot>
         </template>
 
         <v-card width="100%">
