@@ -14,7 +14,7 @@ export const LoginApi = {
       },
     });
   },
-  uniqueVerification(username: string) {
+  uniqueVerification(username?: string) {
     return axios({
       url: "/api/users/uniqueVerification",
       method: "post",

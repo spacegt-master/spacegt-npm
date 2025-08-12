@@ -1,5 +1,6 @@
 import axios from "@/axios/accounts-service";
 import { usePagingProcessor } from "@/composables/usePagingProcessor";
+import type { Users } from "types";
 
 export const UsersApi = {
   info() {
@@ -17,7 +18,7 @@ export const UsersApi = {
       },
     });
   },
-  edit(data: object) {
+  edit(data: Users) {
     return axios({
       url: "/api/users/edit",
       method: "post",

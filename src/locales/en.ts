@@ -130,32 +130,23 @@ export default {
     signUp: "Sign up",
   },
   signUp: {
-    title: "Register your account",
+    title: "Let's get you signed up",
     back: "Back to login",
-    steps: {
-      account: {
-        label: "Account",
-        title: "Enter a username",
-        username: "Username",
-        nickname: "Nickname",
-      },
-      password: {
-        label: "Password",
-        title: "Set a password with a high security factor",
-        subtitle:
-          "Set a password with a high security factor <br> (using a combination of letters, numbers and symbols)",
-        confirmPassword: "Confirm Password",
-      },
-      email: {
-        label: "Email",
-        title: "Add an auxiliary email address",
-      },
-      verification: {
-        label: "Verification",
-        title: "Verify the mailbox",
-        submit: "Submit",
-        sendCode: "Send Code",
-      },
+    signUp: "Sign Up",
+    form: {
+      nickname: "Full Name",
+      phone: "Phone",
+      password: "Password",
+      email: "Email",
+    },
+    phoneVerify: {
+      verify: "Verify",
+      verified: "Verified",
+      title: "Verify Your Account",
+      subtitleBefore: "We sent a verification code to",
+      subtitleAfter: "Please check your message and paste the code below.",
+      tip: "Didn't receive the code?",
+      resend: "Resend",
     },
   },
   forgotPassword: {

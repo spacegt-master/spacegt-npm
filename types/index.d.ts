@@ -3,12 +3,13 @@ import { AxiosInstance } from "axios";
 import type { SnackbarOptions } from "@/types/snackbar";
 
 export interface Users {
-  id: string;
+  id?: string;
   username: string;
   nickname: string;
-  email: string;
-  phone: string;
-  avatar: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
+  password?: string;
 }
 
 export interface Authorities {
@@ -106,7 +107,7 @@ declare var OrgsApi: {
 declare var UsersApi: {
   info(): Promise<any>;
   list(ids: string): Promise<any>;
-  edit(data: object): Promise<any>;
+  edit(data: Users): Promise<any>;
   del(id: string): Promise<any>;
   repwd(id: string, newPwd: string): Promise<any>;
   changePwd(newPwd: string, oldPwd: string): Promise<any>;

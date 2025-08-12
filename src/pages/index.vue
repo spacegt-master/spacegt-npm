@@ -1,11 +1,11 @@
 <template>
   <v-locale-provider locale="zhHans">
-    <!-- <login sso="http://127.0.0.1:3003" @login="handleLogin" /> -->
-    <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
+    <login sso="http://127.0.0.1:3003" @login="handleLogin" />
+    <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
       <template #default="{ props: activatorProps }">
         <v-btn v-bind="activatorProps">你好</v-btn>
       </template>
-    </aippt>
+    </aippt> -->
     <!-- <v-app-bar>
       <myaccount sso="http://127.0.0.1:3003" :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
         proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">

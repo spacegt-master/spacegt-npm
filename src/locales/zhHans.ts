@@ -130,31 +130,23 @@ export default {
     signUp: "注册",
   },
   signUp: {
-    title: "注册您的帐户",
+    title: "让我们开始注册",
     back: "返回登录",
-    steps: {
-      account: {
-        label: "账号",
-        title: "输入用户名",
-        username: "用户名",
-        nickname: "姓名",
-      },
-      password: {
-        label: "密码",
-        title: "请设置高安全系数的密码",
-        subtitle: "设置高安全系数的密码 <br>（使用字母、数字和符号的组合）",
-        confirmPassword: "确认密码",
-      },
-      email: {
-        label: "邮箱",
-        title: "添加辅助电子邮件地址",
-      },
-      verification: {
-        label: "验证",
-        title: "验证邮箱",
-        submit: "提交",
-        sendCode: "发送验证码",
-      },
+    signUp: "注册",
+    form: {
+      nickname: "姓名",
+      phone: "手机号",
+      password: "密码",
+      email: "电子邮箱",
+    },
+    phoneVerify: {
+      verify: "验证",
+      verified: "已验证",
+      title: "验证您的账户",
+      subtitleBefore: "我们已发送验证码到",
+      subtitleAfter: "请检查您的短信并将验证码输入下方。",
+      tip: "没有收到验证码？",
+      resend: "重新发送",
     },
   },
   forgotPassword: {
