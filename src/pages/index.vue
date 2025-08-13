@@ -1,6 +1,6 @@
 <template>
   <v-locale-provider locale="zhHans">
-    <login sso="http://127.0.0.1:3003" @login="handleLogin" />
+    <!-- <login sso="http://127.0.0.1:3003" @login="handleLogin" /> -->
     <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
       <template #default="{ props: activatorProps }">
         <v-btn v-bind="activatorProps">你好</v-btn>
@@ -12,7 +12,7 @@
       </myaccount>
     </v-app-bar> -->
     <!-- <Roles></Roles>-->
-    <!-- <Orgs></Orgs> -->
+    <Orgs></Orgs>
     <!-- <Users></Users>  -->
     <!-- <selection-orgs-btn></selection-orgs-btn> -->
     <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"
@@ -39,8 +39,8 @@ const authorizationStore = useAuthorizationStore()
 const accountsStore = useAccountsStore()
 
 // 更换代理方式
-accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
-emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
+// accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
+// emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 
 
 const users = ref([

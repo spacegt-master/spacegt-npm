@@ -34,7 +34,14 @@ export const OrgsApi = {
       },
     });
   },
-  edit(data: { id?: string; pid?: string; name: string; maxUser?: number }) {
+  edit(data: {
+    id?: string;
+    pid?: string;
+    name: string;
+    maxUser?: number;
+    code?: string;
+    enabled?: boolean;
+  }) {
     return axios({
       url: "/api/orgs/edit",
       method: "post",

@@ -36,7 +36,8 @@
               inline></v-badge>
           </template>
           <template #append="{ item, isFirst, isLast }" v-if="!enableSelection">
-            <v-btn variant="text" density="comfortable" :disabled="isFirst" icon="mdi-arrow-up-thick" @click.stop="move(item, 'up')"></v-btn>
+            <v-btn variant="text" density="comfortable" :disabled="isFirst" icon="mdi-arrow-up-thick"
+              @click.stop="move(item, 'up')"></v-btn>
             <v-btn variant="text" density="comfortable" :disabled="isLast" icon="mdi-arrow-down-thick"
               @click.stop="move(item, 'down')"></v-btn>
 
@@ -278,7 +279,8 @@ const deleteItemConfirm = async () => {
   closeDelete()
 }
 const updateNameItemConfirm = async () => {
-  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code })
+  console.log(editedItem.value)
+  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code, enabled: editedItem.value.enabled })
   if (editedItem.value.parent) {
     fetchOrgs(editedItem.value.parent)
   } else

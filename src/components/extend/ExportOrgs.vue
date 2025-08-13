@@ -37,13 +37,13 @@ function toRows(items: any[]) {
     const rows: any[] = []
 
     items.forEach(item => {
-        rows.push([item.name])
+        rows.push([`${item.name}${item.code ? '|' + item.code : ''}`])
 
         if (item.childrenCount > 0) {
             const children = toRows(item.children)
 
             children.forEach(child => {
-                rows.push([item.name, ...child])
+                rows.push([`${item.name}${item.code ? '|' + item.code : ''}`, ...child])
             })
         }
     })
@@ -53,6 +53,8 @@ function toRows(items: any[]) {
 
 async function exportXlsx() {
     const items = await OrgsApi.list(true) as any
+
+    console.log(items)
 
     for (let index = 0; index < items.length; index++) {
         const item = items[index];
