@@ -188,6 +188,7 @@ export default {
       deleteText:
         "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",
       addOrg: "Add Org",
+      reivew: "Contact Info",
     },
   },
   roleComponent: {

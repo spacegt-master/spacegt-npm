@@ -13,6 +13,7 @@
     </v-app-bar> -->
     <!-- <Roles></Roles>-->
     <Orgs></Orgs>
+     <!-- <orgs-details></orgs-details> -->
     <!-- <Users></Users>  -->
     <!-- <selection-orgs-btn></selection-orgs-btn> -->
     <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"
@@ -39,7 +40,7 @@ const authorizationStore = useAuthorizationStore()
 const accountsStore = useAccountsStore()
 
 // 更换代理方式
-// accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
+accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
 // emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 
 

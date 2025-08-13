@@ -10,6 +10,7 @@ export interface Users {
   phone?: string;
   avatar?: string;
   password?: string;
+  orgs?: string;
 }
 
 export interface Authorities {

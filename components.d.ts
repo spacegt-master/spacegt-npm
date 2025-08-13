@@ -17,6 +17,8 @@ declare module 'vue' {
     LoginPanel: typeof import('./src/components/login/login-panel.vue')['default']
     Myaccount: typeof import('./src/components/myaccount/index.vue')['default']
     Orgs: typeof import('./src/components/manage/Orgs.vue')['default']
+    OrgsDetails: typeof import('./src/components/manage/OrgsDetails.vue')['default']
+    ReviewOrgsBtn: typeof import('./src/components/extend/ReviewOrgsBtn.vue')['default']
     Roles: typeof import('./src/components/manage/Roles.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

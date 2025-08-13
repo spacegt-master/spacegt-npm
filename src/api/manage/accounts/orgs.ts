@@ -76,4 +76,29 @@ export const OrgsApi = {
       },
     });
   },
+  detailsInfo(id: string) {
+    return axios({
+      url: `/api/orgs/details/${id}`,
+      method: "get",
+    });
+  },
+  detailsSave(data: {
+    id: string;
+    shortName: string;
+    website: string;
+    contact: string;
+    contactNumber: string;
+    email: string;
+    comment: string;
+    address: string;
+  }) {
+    return axios({
+      url: "/api/orgs/details/save",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data,
+    });
+  },
 };

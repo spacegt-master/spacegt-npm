@@ -24,53 +24,68 @@
       <v-divider class="mt-6 mb-3" v-if="!enableSelection" />
 
       <div class="pa-3">
-        <v-treeview v-model:activated="selected" :items="serverItems" item-value="id" :load-children="fetchOrgs"
-          color="primary" density="compact" :activatable="enableSelection" :open-on-click="!enableSelection" transition
-          item-props>
-          <template #title="{ item }">
-            <v-chip class="mr-2">组织代码 : {{ item.code ? item.code : '暂无' }} </v-chip>
+        <v-skeleton-loader :loading="loading" type="table">
+          <v-responsive>
+            <v-treeview v-model:activated="selected" :items="serverItems" item-value="id" :load-children="fetchOrgs"
+              color="primary" density="compact" :activatable="enableSelection" :open-on-click="!enableSelection"
+              transition item-props>
+              <template #title="{ item }">
+                <v-chip class="mr-2">组织代码 : {{ item.code ? item.code : '暂无' }} </v-chip>
 
-            {{ item.name }}
+                {{ item.name }}
 
-            <v-badge v-if="item.childrenCount > 0" class="ml-2" color="info" :content="item.childrenCount"
-              inline></v-badge>
-          </template>
-          <template #append="{ item, isFirst, isLast }" v-if="!enableSelection">
-            <v-btn variant="text" density="comfortable" :disabled="isFirst" icon="mdi-arrow-up-thick"
-              @click.stop="move(item, 'up')"></v-btn>
-            <v-btn variant="text" density="comfortable" :disabled="isLast" icon="mdi-arrow-down-thick"
-              @click.stop="move(item, 'down')"></v-btn>
+                <v-badge v-if="item.childrenCount > 0" class="ml-2" color="info" :content="item.childrenCount"
+                  inline></v-badge>
+              </template>
+              <template #append="{ item, isFirst, isLast }" v-if="!enableSelection">
+                <v-btn variant="text" density="comfortable" :disabled="isFirst" icon="mdi-arrow-up-thick"
+                  @click.stop="move(item, 'up')"></v-btn>
+                <v-btn variant="text" density="comfortable" :disabled="isLast" icon="mdi-arrow-down-thick"
+                  @click.stop="move(item, 'down')"></v-btn>
 
-            <v-btn variant="text" min-width="30px" class="pa-2 ml-4" @click.stop="newItem(item)">
-              <v-icon icon="mdi-subdirectory-arrow-right"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
-                {{ $vuetify.locale.t('$vuetify.org.manage.addChild') }}
-              </span>
-            </v-btn>
-            <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="updateNameItem(item)">
-              <v-icon icon="mdi-rename"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
-                {{ $vuetify.locale.t('$vuetify.edit') }}
-              </span>
-            </v-btn>
+                <v-btn variant="text" min-width="30px" class="pa-2 ml-4" @click.stop="newItem(item)">
+                  <v-icon icon="mdi-subdirectory-arrow-right"></v-icon>
+                  <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                    {{ $vuetify.locale.t('$vuetify.org.manage.addChild') }}
+                  </span>
+                </v-btn>
+                <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="updateNameItem(item)">
+                  <v-icon icon="mdi-rename"></v-icon>
+                  <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                    {{ $vuetify.locale.t('$vuetify.edit') }}
+                  </span>
+                </v-btn>
 
-            <v-btn style="pointer-events: all; opacity: 1;" variant="text" min-width="30px" class="pa-2"
-              @click.stop="switchStatus(item)">
-              <v-icon v-if="item.enabled" icon="mdi-toggle-switch-outline"></v-icon>
-              <v-icon v-else icon="mdi-toggle-switch-off-outline"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
-                {{ item.enabled ? $vuetify.locale.t('$vuetify.disabled') : $vuetify.locale.t('$vuetify.enabled') }}
-              </span>
-            </v-btn>
+                <review-orgs-btn :orgId="item.id">
+                  <template #default="{ activatorProps }">
+                    <v-btn v-bind="activatorProps" variant="text" min-width="30px" class="pa-2">
+                      <v-icon icon="mdi-card-account-mail-outline"></v-icon>
+                      <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                        {{ $vuetify.locale.t('$vuetify.org.manage.reivew') }}
+                      </span>
+                    </v-btn>
+                  </template>
+                </review-orgs-btn>
 
-            <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="deleteItem(item)">
-              <v-icon icon="mdi-delete"></v-icon>
-              <span class="ml-1" v-show="!$vuetify.display.smAndDown">
-                {{ $vuetify.locale.t('$vuetify.delete') }}
-              </span>
-            </v-btn>
-          </template>
-        </v-treeview>
+                <v-btn style="pointer-events: all; opacity: 1;" variant="text" min-width="30px" class="pa-2"
+                  @click.stop="switchStatus(item)">
+                  <v-icon v-if="item.enabled" icon="mdi-toggle-switch-outline"></v-icon>
+                  <v-icon v-else icon="mdi-toggle-switch-off-outline"></v-icon>
+                  <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                    {{ item.enabled ? $vuetify.locale.t('$vuetify.disabled') : $vuetify.locale.t('$vuetify.enabled') }}
+                  </span>
+                </v-btn>
+
+                <v-btn variant="text" min-width="30px" class="pa-2" @click.stop="deleteItem(item)">
+                  <v-icon icon="mdi-delete"></v-icon>
+                  <span class="ml-1" v-show="!$vuetify.display.smAndDown">
+                    {{ $vuetify.locale.t('$vuetify.delete') }}
+                  </span>
+                </v-btn>
+              </template>
+            </v-treeview>
+          </v-responsive>
+        </v-skeleton-loader>
       </div>
     </v-list>
 
@@ -153,6 +168,7 @@ defineProps({
 })
 
 const selected = defineModel()
+const loading = ref(false)
 
 const serverItems = ref([])
 const dialogDelete = ref(false)
@@ -328,6 +344,8 @@ const ordering = async (items) => {
 }
 
 const load = async () => {
+  loading.value = true
+
   const res = await OrgsApi.list(true)
 
   if (res.length === 0) {
@@ -336,6 +354,8 @@ const load = async () => {
   }
 
   serverItems.value = res.map(item => wrap(item))
+
+  loading.value = false
 }
 
 onMounted(() => {
