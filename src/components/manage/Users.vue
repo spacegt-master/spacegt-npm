@@ -253,6 +253,11 @@ const handleBatchUsersChange = () => {
 const addItem = () => {
   editedItem.value = Object.assign({}, defaultItem.value)
 
+  if (search.orgItem) {
+    editedItem.value.orgItem = search.orgItem
+    editedItem.value.orgs = search.orgItem.id.join(',')
+  }
+
   editedIndex.value = -1;
 
   dialog.value = true

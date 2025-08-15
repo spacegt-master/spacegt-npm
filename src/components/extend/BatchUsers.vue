@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" activator="parent" max-width="1000" scrollable>
+  <v-dialog v-model="dialog" activator="parent" max-width="1100" scrollable>
     <template v-slot:default>
       <v-card prepend-icon="mdi-import" :title="$vuetify.locale.t('$vuetify.batchUsersComponent.title')">
         <template #append>
@@ -14,7 +14,10 @@
         <v-card-text v-if="file" class="px-4 d-flex">
           <v-data-table-virtual v-model="selected" :headers="headers" :items="items" fixed-header item-value="index"
             show-select height="100%" :loading="saving">
-            <!-- eslint-disable-next-line vue/valid-v-slot -->
+            <template v-slot:item.orgs="{ item }">
+              {{ item.orgs?.name ?? "<无组织或组织代码错误>" }}
+            </template>
+
             <template v-slot:item.status="{ item }">
               <div v-if="item.status == 0"> - </div>
               <div v-if="item.status == 1">
@@ -36,6 +39,9 @@
           </v-data-table-virtual>
         </v-card-text>
 
+        <div v-show="file" class="text-subtitle-2 font-weight-light mb-3 ml-6">
+          tip: 导入数据没有填写组织代码的将会添加至选择的组织中
+        </div>
         <selection-orgs-btn v-show="file" :org="org" class="mb-4" width="100%" min-height="50"
           @change="(value) => { org = value }" @clear="org = null"></selection-orgs-btn>
 
@@ -62,6 +68,7 @@ import FileSaver from 'file-saver';
 import { nextTick, ref } from 'vue';
 import { UsersApi } from '@/api/manage/accounts/users';
 import { useLocale } from 'vuetify'
+import { OrgsApi } from '@/api/manage/accounts/orgs';
 
 const { t } = useLocale()
 
@@ -80,6 +87,7 @@ const headers = ref([
   { title: t("$vuetify.batchUsersComponent.headers.password"), align: 'start', key: 'password' },
   { title: t("$vuetify.batchUsersComponent.headers.phone"), align: 'start', key: 'phone' },
   { title: t("$vuetify.batchUsersComponent.headers.email"), align: 'start', key: 'email' },
+  { title: t("$vuetify.batchUsersComponent.headers.org"), align: 'start', key: 'orgs' },
   { title: t("$vuetify.batchUsersComponent.headers.status"), align: 'end', key: 'status' },
 ])
 const items = ref([])
@@ -98,14 +106,21 @@ const handleFileUpdate = async (file) => {
 
     var data = utils.sheet_to_json(worksheet);
 
+    // 获取所有的组织代码
+    const codes = data.map(item => item['组织代码']).filter(item => item)
+    const uniqueCodes = [...new Set(codes)];
+
+    const orgs = await OrgsApi.listByCodes(uniqueCodes.join(','))
+
     data.forEach((item, index) => {
       items.value.push({
         index,
-        nickname: item['姓名'],
-        username: item['账号'],
-        password: item['密码'],
+        nickname: item['*姓名'],
+        username: item['*账号'],
+        password: item['*密码'],
         phone: item['手机号'],
         email: item['邮箱'],
+        orgs: orgs ? orgs.find(org => org.code == item['组织代码']) : null,
         status: 0,
         message: null
       })
@@ -129,10 +144,19 @@ const close = () => {
 
 const save = async () => {
   saving.value = true
+
+  const users = selected.value.map(index => items.value[index])
+    .map(user => {
+      return {
+        ...user,
+        orgs: getOrgCompleteID(user.orgs)
+      }
+    })
+
   const results = await UsersApi.batch({
     orgs: org.value.id?.join(','),
     roles: props.role,
-    users: selected.value.map(index => items.value[index])
+    users
   })
   if (results) {
     results.forEach(result => {
@@ -143,6 +167,16 @@ const save = async () => {
   setTimeout(() => saving.value = false, 200)
   emit('change')
 }
+
+
+function getOrgCompleteID(orgs) {
+  if (!orgs || !orgs.id) return null;
+
+  if (orgs.parent) {
+    return [getOrgCompleteID(orgs.parent), orgs.id].join(',')
+  }
+  return orgs.id
+}
 </script>
 
-<style   scoped></style>
+<style scoped></style>

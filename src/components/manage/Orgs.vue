@@ -7,12 +7,13 @@
           {{ $vuetify.locale.t('$vuetify.org.manage.title') }}
 
           <div class="d-flex ga-2">
-            <v-btn variant="text" prepend-icon="mdi-bank-plus" @click="newItem(defaultItem)">
+            <v-btn v-if="hasAuthority('ORGS_ADD_ROOT')" variant="text" prepend-icon="mdi-bank-plus"
+              @click="newItem(defaultItem)">
               {{ $vuetify.locale.t('$vuetify.org.manage.add') }}
             </v-btn>
 
-            <export-orgs></export-orgs>
-            <import-orgs @imported="load"></import-orgs>
+            <export-orgs v-if="hasAuthority('ORGS_EXPORT')"></export-orgs>
+            <import-orgs v-if="hasAuthority('ORGS_IMPORT')" @imported="load"></import-orgs>
           </div>
         </h3>
 
@@ -89,7 +90,7 @@
       </div>
     </v-list>
 
-    <v-dialog v-model="dialogDelete" contained max-width="500">
+    <v-dialog v-model="dialogDelete" max-width="500">
       <v-card rounded="lg" :title="$vuetify.locale.t('$vuetify.org.manage.deleteTitle')">
         <template #prepend>
           <v-avatar color="error" icon="mdi-alert-outline" variant="tonal" />
@@ -161,11 +162,14 @@
 </template>
 <script setup>
 import { OrgsApi } from '@/api/manage/accounts/orgs';
+import { useAccountsStore } from '@/stores/accounts';
 import { nextTick, onMounted, ref } from 'vue';
 
 defineProps({
   enableSelection: { type: Boolean, default: false }
 })
+
+const { hasAuthority } = useAccountsStore()
 
 const selected = defineModel()
 const loading = ref(false)
@@ -350,6 +354,7 @@ const load = async () => {
 
   if (res.length === 0) {
     serverItems.value = []
+    loading.value = false
     return
   }
 

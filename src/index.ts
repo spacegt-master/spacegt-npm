@@ -7,6 +7,7 @@ import myaccount from "@/components/myaccount/index.vue";
 import snackbarComponents from "@/components/Snackbar.vue";
 import manageRoles from "@/components/manage/Roles.vue";
 import manageOrgs from "@/components/manage/Orgs.vue";
+import manageOrgsDetails from "@/components/manage/OrgsDetails.vue";
 import manageUsers from "@/components/manage/Users.vue";
 import selectionOrgs from "@/components/extend/SelectionOrgs.vue";
 import selectionOrgsBtn from "@/components/extend/SelectionOrgsBtn.vue";
@@ -28,6 +29,8 @@ import emailService from "@/axios/email-service";
 import { config as emailServiceConfig } from "@/axios/email-service";
 import fileService from "@/axios/file-service";
 import { config as fileServiceConfig } from "@/axios/file-service";
+import smsService from "@/axios/sms-service";
+import { config as smsServiceConfig } from "@/axios/sms-service";
 
 import { FileApi } from "@/api/file";
 import { EmailApi } from "@/api/email";
@@ -39,6 +42,7 @@ import { RolesApi } from "@/api/manage/accounts/roles";
 import { OrgsApi } from "@/api/manage/accounts/orgs";
 import { UsersApi } from "@/api/manage/accounts/users";
 import { TokenApi } from "@/api/manage/accounts/token";
+import { SMSApi } from "@/api/sms";
 
 import en from "@/locales/en";
 import zhHans from "@/locales/zhHans";
@@ -50,6 +54,7 @@ const install = (app: App) => {
   app.component("spacegt-snackbar", snackbarComponents);
   app.component("spacegt-manage-roles", manageRoles);
   app.component("spacegt-manage-orgs", manageOrgs);
+  app.component("spacegt-manage-orgs-details", manageOrgsDetails);
   app.component("spacegt-manage-users", manageUsers);
   app.component("spacegt-selection-orgs", selectionOrgs);
   app.component("spacegt-selection-orgs-btn", selectionOrgsBtn);
@@ -66,17 +71,22 @@ export default {
 };
 
 export {
+  // Service
   accountsService,
   accountsServiceConfig,
   emailService,
   emailServiceConfig,
   fileService,
   fileServiceConfig,
+  smsService,
+  smsServiceConfig,
+  // Store
   useAccountsStore,
   useAuthorizationStore,
   useLoginStore,
   useSnackbarStore,
   useFileStore,
+  // API
   FileApi,
   EmailApi,
   ForgotPasswordApi,
@@ -87,8 +97,9 @@ export {
   OrgsApi,
   UsersApi,
   TokenApi,
+  SMSApi,
   // fn
-  snackbar
+  snackbar,
 };
 
 declare module "vue" {
@@ -99,6 +110,7 @@ declare module "vue" {
     snackbarComponents: typeof snackbarComponents;
     manageRoles: typeof manageRoles;
     manageOrgs: typeof manageOrgs;
+    manageOrgsDetails: typeof manageOrgsDetails;
     manageUsers: typeof manageUsers;
     selectionOrgs: typeof selectionOrgs;
     selectionOrgsBtn: typeof selectionOrgsBtn;

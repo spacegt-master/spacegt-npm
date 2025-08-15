@@ -237,6 +237,7 @@ export default {
       success: "成功",
     },
     headers: {
+      org:"组织",
       nickname: "姓名",
       username: "用户名",
       password: "密码",

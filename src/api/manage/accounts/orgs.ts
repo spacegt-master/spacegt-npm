@@ -19,6 +19,12 @@ export const OrgsApi = {
       },
     });
   },
+  listByCodes(codes: string) {
+    return axios({
+      url: `/api/orgs/list/codes/${codes}`,
+      method: "get",
+    });
+  },
   oneById(id: string) {
     return axios({
       url: `/api/orgs/one/${id}`,

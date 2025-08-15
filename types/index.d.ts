@@ -47,6 +47,8 @@ declare var emailService: AxiosInstance;
 declare var emailServiceConfig: AxiosConfig;
 declare var fileService: AxiosInstance;
 declare var fileServiceConfig: AxiosInstance;
+declare var smsService: AxiosInstance;
+declare var smsServiceConfig: AxiosInstance;
 
 declare var useAccountsStore: () => AccountsStore;
 declare var useAuthorizationStore: () => AuthorizationStore;
@@ -95,6 +97,7 @@ declare var RolesApi: {
 declare var OrgsApi: {
   list(childrenCount?: boolean): Promise<any>;
   listByPid(pid: string, childrenCount?: boolean): Promise<any>;
+  listByCodes(codes: string): Promise<any>;
   oneById(id: string): Promise<any>;
   del(id: string): Promise<any>;
   edit(data: {
@@ -128,6 +131,11 @@ declare var TokenApi: {
   validate(token: string): Promise<any>;
 };
 
+declare var SMSApi: {
+  sendUserRegistrationVerificationCode(phoneNumber: string): Promise<any>;
+  verifyCode(phoneNumber: string, userCode: string): Promise<any>;
+};
+
 declare var snackbar: (options: SnackbarOptions) => void;
 
 export interface SpacegtStatic {
@@ -140,17 +148,22 @@ declare const spacegt: SpacegtStatic;
 export default spacegt;
 
 export {
+  // Service
   accountsService,
   accountsServiceConfig,
   emailService,
   emailServiceConfig,
   fileService,
   fileServiceConfig,
+  smsService,
+  smsServiceConfig,
+  // Store
   useAccountsStore,
   useAuthorizationStore,
   useLoginStore,
   useSnackbarStore,
   useFileStore,
+  // API
   FileApi,
   EmailApi,
   ForgotPasswordApi,
@@ -161,6 +174,7 @@ export {
   OrgsApi,
   UsersApi,
   TokenApi,
+  SMSApi,
   //fn
   snackbar,
 };

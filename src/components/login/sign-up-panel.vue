@@ -55,7 +55,7 @@
       :label="`*${$vuetify.locale.t('$vuetify.signUp.form.password')}`" type="password" />
 
     <v-text-field v-model="form.email" :rules="rules.email" color="primary" variant="outlined"
-      :label="`*${$vuetify.locale.t('$vuetify.signUp.form.email')}`" />
+      :label="`${$vuetify.locale.t('$vuetify.signUp.form.email')}`" />
 
     <v-btn block class="text-none mt-2" color="blue-grey-darken-4" flat rounded="lg"
       :text="$vuetify.locale.t('$vuetify.signUp.signUp')" size="large" type="submit" />

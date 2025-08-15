@@ -13,7 +13,7 @@
 
             <v-divider class="mt-6 mb-3" />
 
-            <v-form class="pa-3" v-if="accountsStore.account?.orgs">
+            <v-form class="pa-3" v-if="org">
                 <v-row dense>
 
                     <v-col cols="12" md="6">
@@ -87,7 +87,7 @@
 
                 <template v-slot:text>
                     <div class="text-caption">
-                        请检查用户是否在组织内
+                        请检查组织是否存在
                     </div>
                 </template>
             </v-empty-state>
@@ -151,8 +151,9 @@ async function save() {
 }
 
 async function load() {
-    const orgData = await OrgsApi.oneById(props.component ? props.orgId : accountsStore.account.orgs) as any
-
+    console.log(props.orgId)
+    const orgData = await OrgsApi.oneById(props.component ? props.orgId : accountsStore.account?.orgs) as any
+    console.log(orgData)
     if (!orgData) return;
 
     org.value.id = orgData.id
@@ -173,9 +174,7 @@ async function load() {
 }
 
 onMounted(() => {
-    if (accountsStore.account?.orgs) {
-        load()
-    }
+    load()
 })
 </script>
 
