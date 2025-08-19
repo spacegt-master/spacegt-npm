@@ -43,7 +43,6 @@ const accountsStore = useAccountsStore()
 accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
 // emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 
-
 const users = ref([
   { id: 1, nickname: '王硕' },
   { id: 2, nickname: '张三' },

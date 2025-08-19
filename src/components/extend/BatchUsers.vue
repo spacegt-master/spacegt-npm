@@ -110,7 +110,7 @@ const handleFileUpdate = async (file) => {
     const codes = data.map(item => item['组织代码']).filter(item => item)
     const uniqueCodes = [...new Set(codes)];
 
-    const orgs = await OrgsApi.listByCodes(uniqueCodes.join(','))
+    const orgs = uniqueCodes.length > 0 ? await OrgsApi.listByCodes(uniqueCodes.join(',')) : null
 
     data.forEach((item, index) => {
       items.value.push({

@@ -174,13 +174,14 @@
 import { OrgsApi } from '@/api/manage/accounts/orgs';
 import { RolesApi } from '@/api/manage/accounts/roles';
 import { UsersApi } from '@/api/manage/accounts/users';
-import { computed, nextTick, reactive, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, reactive, ref, watch } from 'vue';
 import { VSpacer } from 'vuetify/components';
 import { useLocale } from 'vuetify'
 import { snackbar } from '@/stores/snackbar';
+import { useAccountsStore } from '@/stores/accounts';
 
 const { t } = useLocale()
-
+const accountsStore = useAccountsStore()
 const selected = defineModel()
 
 const props = defineProps({
@@ -245,7 +246,6 @@ const rules = {
 
 const formTitle = computed(() => editedIndex.value === -1 ? t("$vuetify.usersComponent.addUser") : t("$vuetify.usersComponent.updateUser"))
 
-
 const handleBatchUsersChange = () => {
   loadItems(options.value)
 }
@@ -253,9 +253,9 @@ const handleBatchUsersChange = () => {
 const addItem = () => {
   editedItem.value = Object.assign({}, defaultItem.value)
 
-  if (search.orgItem) {
+  if (search.org && search.orgItem) {
     editedItem.value.orgItem = search.orgItem
-    editedItem.value.orgs = search.orgItem.id.join(',')
+    editedItem.value.orgs = search.org
   }
 
   editedIndex.value = -1;
@@ -268,7 +268,10 @@ const editItem = async (item) => {
 
   editedItem.value = Object.assign({}, item)
 
-  editedItem.value.orgItem = await OrgsApi.oneById(item.orgs)
+  const res = await OrgsApi.oneById(item.orgs)
+
+  editedItem.value.orgItem = res
+  editedItem.value.orgs = [res.id]
 
   dialog.value = true
 }
@@ -355,6 +358,7 @@ const save = async (event) => {
     await UsersApi.edit(editedItem.value)
 
     editedItem.value.orgItem = null
+    editedItem.value.orgs = null
 
     loadItems(options.value)
 
@@ -398,6 +402,13 @@ watch(() => [props.orgId], () => {
   search.org = [props.orgId]
 }, { immediate: true })
 
+onMounted(async () => {
+  const res = await OrgsApi.oneById(accountsStore.account.orgs)
+  if (res) {
+    search.org = [res.id]
+    search.orgItem = res
+  }
+})
 </script>
 
 
