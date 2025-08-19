@@ -179,6 +179,7 @@ import { VSpacer } from 'vuetify/components';
 import { useLocale } from 'vuetify'
 import { snackbar } from '@/stores/snackbar';
 import { useAccountsStore } from '@/stores/accounts';
+import { useOrgsExtractIds } from '@/composables/useOrgsExtractIds';
 
 const { t } = useLocale()
 const accountsStore = useAccountsStore()
@@ -271,7 +272,7 @@ const editItem = async (item) => {
   const res = await OrgsApi.oneById(item.orgs)
 
   editedItem.value.orgItem = res
-  editedItem.value.orgs = [res.id]
+  editedItem.value.orgs = useOrgsExtractIds(res)
 
   dialog.value = true
 }
@@ -392,20 +393,18 @@ const loadRoles = async () => {
 
 watch(() => [props.roleKey], () => {
   options.value.page = 1
-
   loadRoles()
 }, { immediate: true })
 
 watch(() => [props.orgId], () => {
   options.value.page = 1
-
   search.org = [props.orgId]
 }, { immediate: true })
 
 onMounted(async () => {
   const res = await OrgsApi.oneById(accountsStore.account.orgs)
   if (res) {
-    search.org = [res.id]
+    search.org = useOrgsExtractIds(res)
     search.orgItem = res
   }
 })

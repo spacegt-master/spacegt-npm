@@ -21,6 +21,7 @@
 </template>
 
 <script setup>
+import { useOrgsExtractIds } from '@/composables/useOrgsExtractIds';
 import { computed } from 'vue';
 
 const emit = defineEmits(['change', 'clear'])
@@ -42,16 +43,7 @@ const orgNames = (org) => {
 }
 
 const handleConfirm = async (value) => {
-    const extractIds = (org) => {
-        let ids = []
-        if (org?.id)
-            ids.push(org.id)
-        if (org?.parent)
-            ids.push(...extractIds(org.parent))
-        return ids
-    }
-
-    const ids = extractIds(value).reverse()
+    const ids = useOrgsExtractIds(value)  
 
     value.id = ids
 
