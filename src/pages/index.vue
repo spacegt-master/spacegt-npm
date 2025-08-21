@@ -1,11 +1,11 @@
 <template>
   <v-locale-provider locale="zhHans">
-    <!-- <login sso="http://127.0.0.1:3003" @login="handleLogin" /> -->
+    <login sso="http://127.0.0.1:3003" title="自定义标题" :sign-up="false" @login="handleLogin" />
     <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
       <template #default="{ props: activatorProps }">
         <v-btn v-bind="activatorProps">你好</v-btn>
       </template>
-    </aippt> -->
+</aippt> -->
     <!-- <v-app-bar>
       <myaccount sso="http://127.0.0.1:3003" :account="{ nickname: '王硕', avatar: 'https://cdn.vuetifyjs.com/images/john.png' }"
         proxy="https://myaccount.spacegt.com" @logout="handleLogout" @login="handleLogin" @settings="handleSettings">
@@ -13,8 +13,8 @@
     </v-app-bar> -->
     <!-- <Roles></Roles> -->
     <!-- <Orgs></Orgs> -->
-     <!-- <orgs-details></orgs-details> -->
-    <Users></Users> 
+    <!-- <orgs-details></orgs-details> -->
+    <Users></Users>
     <!-- <selection-orgs-btn></selection-orgs-btn> -->
     <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"
       @change="(value: any[]) => users = value" @clear="users = []"></selection-users-btn> -->

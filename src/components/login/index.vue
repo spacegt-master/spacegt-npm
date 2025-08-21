@@ -8,11 +8,12 @@
             <v-sheet class="flex-1-1 px-4" color="background" max-width="550">
               <v-img class="mx-auto mb-4" max-width="60" :src="logo" />
 
-              <login-panel v-if="loginStore.tab == 'login'" @login="handleLogin"></login-panel>
+              <login-panel v-if="loginStore.tab == 'login'" :title="title" :sign-up="signUp"
+                @login="handleLogin"></login-panel>
 
-              <sign-up-panel v-if="loginStore.tab == 'sign-up'"></sign-up-panel>
+              <sign-up-panel v-if="loginStore.tab == 'sign-up'" :title="title"></sign-up-panel>
 
-              <forgot-password-panel v-if="loginStore.tab == 'forgot-password'"></forgot-password-panel>
+              <forgot-password-panel v-if="loginStore.tab == 'forgot-password'" :title="title"></forgot-password-panel>
             </v-sheet>
           </v-row>
         </v-container>
@@ -48,6 +49,13 @@ const props = defineProps({
   sso: {
     type: [String, Boolean],
     default: false
+  },
+  title: {
+    type: String
+  },
+  signUp: {
+    type: Boolean,
+    default: true
   }
 })
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-h5 text-center mb-8 font-weight-medium">
-      {{ $vuetify.locale.t('$vuetify.loginComponent.title') }}
+      {{ title || $vuetify.locale.t('$vuetify.loginComponent.title') }}
     </div>
     <v-text-field v-model="loginStore.form.username" color="primary"
       :label="$vuetify.locale.t('$vuetify.loginComponent.username')" variant="outlined" @keyup.enter="login" />
@@ -33,7 +33,7 @@
       :text="$vuetify.locale.t('$vuetify.loginComponent.logIn')"
       :disabled="!(loginStore.form.username && loginStore.form.password)" @click="login" />
 
-    <div class="text-center text-body-2 d-flex justify-center align-center ga-2">
+    <div v-if="signUp" class="text-center text-body-2 d-flex justify-center align-center ga-2">
       {{ $vuetify.locale.t('$vuetify.loginComponent.donHaveAccount') }}
       <v-btn class="text-body-2 text-caption text-decoration-none text-primary font-weight-medium" variant="text"
         @click="loginStore.tab = 'sign-up'">
@@ -47,6 +47,15 @@
 import { LoginApi } from '@/api/login';
 import { useLoginStore } from '../../stores/login';
 
+defineProps({
+  title: {
+    type: String
+  },
+  signUp: {
+    type: Boolean,
+    default: true
+  }
+})
 const loginStore = useLoginStore()
 const emit = defineEmits(['login'])
 
