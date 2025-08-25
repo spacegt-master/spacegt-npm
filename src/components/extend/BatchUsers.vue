@@ -39,22 +39,20 @@
           </v-data-table-virtual>
         </v-card-text>
 
-        <div v-show="file" class="text-subtitle-2 font-weight-light mb-3 ml-6">
-          tip: 导入数据没有填写组织代码的将会添加至选择的组织中
+        <div v-show="file && optionOrg" class="text-subtitle-2 font-weight-light mb-3 ml-6">
+          tip: 导入的用户以表格中填入的代码为准，若表格中未填写组织代码，则需要手动选择组织添加至系统。
         </div>
-        <selection-orgs-btn v-show="file" :org="org" class="mb-4" width="100%" min-height="50"
+        <selection-orgs-btn v-show="file && optionOrg" :org="org" class="mb-4" width="100%" min-height="50"
           @change="(value) => { org = value }" @clear="org = null"></selection-orgs-btn>
 
         <v-divider></v-divider>
-
         <v-card-actions>
-
           <v-spacer></v-spacer>
 
           <v-btn :text="$vuetify.locale.t('$vuetify.close')" @click="close()"></v-btn>
 
           <v-btn :text="$vuetify.locale.t('$vuetify.import')" color="surface-variant" variant="flat"
-            :disabled="!org || selected.length == 0" :loading="saving" @click="save()"></v-btn>
+            :disabled="(optionOrg && !org) || selected.length == 0" :loading="saving" @click="save()"></v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -80,6 +78,7 @@ const emit = defineEmits(['change'])
 const dialog = ref(false)
 const file = ref()
 const org = ref()
+const optionOrg = ref(false)
 
 const headers = ref([
   { title: t("$vuetify.batchUsersComponent.headers.nickname"), align: 'start', key: 'nickname' },
@@ -126,6 +125,8 @@ const handleFileUpdate = async (file) => {
       })
       selected.value.push(index)
     })
+
+    optionOrg.value = items.value.some(item => item.orgs == null)
   }
 }
 
@@ -154,7 +155,7 @@ const save = async () => {
     })
 
   const results = await UsersApi.batch({
-    orgs: org.value.id?.join(','),
+    orgs: org.value?.id?.join(','),
     roles: props.role,
     users
   })

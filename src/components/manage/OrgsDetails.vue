@@ -4,7 +4,7 @@
 
             <div class="px-4">
                 <h3 class="text-subtitle-1 font-weight-bold mb-2 d-flex justify-space-between align-center">
-                    组织联系方式
+                    {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.title') }}
                 </h3>
 
                 <div class="text-body-2 text-medium-emphasis mb-4 w-100 w-md-75">
@@ -17,62 +17,90 @@
                 <v-row dense>
 
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">单位代码</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.code') }}
+                        </label>
 
-                        <v-text-field v-model="org.code" density="comfortable" placeholder="Enter your code" disabled
+                        <v-text-field v-model="org.code" density="comfortable"
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.codePlaceholder')" disabled
                             variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">单位名称</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.name') }}
+                        </label>
 
-                        <v-text-field v-model="org.name" density="comfortable" placeholder="Enter your name" disabled
+                        <v-text-field v-model="org.name" density="comfortable"
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.namePlaceholder')" disabled
                             variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">简称</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.shortName') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.shortName" density="comfortable"
-                            placeholder="Enter your short name" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.shortNamePlaceholder')"
+                            variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">网址</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.website') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.website" density="comfortable" persistent-placeholder
-                            placeholder="www.example.com" prefix="https://" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.websitePlaceholder')"
+                            prefix="https://" variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">联系人</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.contact') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.contact" density="comfortable"
-                            placeholder="Enter your contact" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.contactPlaceholder')"
+                            variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">联系电话</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.contactNumber') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.contactNumber" density="comfortable"
-                            placeholder="Enter your contact number" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.contactNumberPlaceholder')"
+                            variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">电子邮箱</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.email') }}
+                        </label>
 
-                        <v-text-field v-model="orgDetails.email" density="comfortable" placeholder="Enter your email"
+                        <v-text-field v-model="orgDetails.email" density="comfortable"
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.emailPlaceholder')"
                             type="email" variant="outlined" />
                     </v-col>
                     <v-col cols="12" md="6">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">备注</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.comment') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.comment" density="comfortable"
-                            placeholder="Enter your comment" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.commentPlaceholder')"
+                            variant="outlined" />
                     </v-col>
                     <v-col cols="12">
-                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">地址</label>
+                        <label class="text-subtitle-1 font-weight-medium mb-2 d-block">
+                            {{ $vuetify.locale.t('$vuetify.orgDetailsComponent.address') }}
+                        </label>
 
                         <v-text-field v-model="orgDetails.address" density="comfortable"
-                            placeholder="Enter your address" variant="outlined" />
+                            :placeholder="$vuetify.locale.t('$vuetify.orgDetailsComponent.addressPlaceholder')"
+                            variant="outlined" />
                     </v-col>
                     <v-col cols="12">
-                        <v-btn class="ma-auto d-flex" color="primary" size="large" text="保存更改"
-                            prepend-icon="mdi-content-save-check-outline" @click="save" />
+                        <v-btn class="ma-auto d-flex" color="primary" size="large"
+                            :text="$vuetify.locale.t('$vuetify.save')" prepend-icon="mdi-content-save-check-outline"
+                            @click="save" />
                     </v-col>
                 </v-row>
             </v-form>

@@ -299,7 +299,6 @@ const deleteItemConfirm = async () => {
   closeDelete()
 }
 const updateNameItemConfirm = async () => {
-  console.log(editedItem.value)
   await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code, enabled: editedItem.value.enabled })
   if (editedItem.value.parent) {
     fetchOrgs(editedItem.value.parent)
@@ -308,7 +307,7 @@ const updateNameItemConfirm = async () => {
   closeUpdateName()
 }
 const newItemConfirm = async () => {
-  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code })
+  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code, orderIndex: editedItem.value.parent.childrenCount + 1 })
   if (editedItem.value.parent.id) {
     fetchOrgs(editedItem.value.parent)
   } else
