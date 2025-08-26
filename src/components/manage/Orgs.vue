@@ -307,7 +307,7 @@ const updateNameItemConfirm = async () => {
   closeUpdateName()
 }
 const newItemConfirm = async () => {
-  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code, orderIndex: editedItem.value.parent.childrenCount + 1 })
+  await OrgsApi.edit({ id: editedItem.value.id, pid: editedItem.value.pid, name: editedItem.value.name, code: editedItem.value.code, orderIndex: (editedItem.value.parent.childrenCount ? editedItem.value.parent.childrenCount + 1 : serverItems.value.length + 1) })
   if (editedItem.value.parent.id) {
     fetchOrgs(editedItem.value.parent)
   } else

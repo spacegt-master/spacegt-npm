@@ -72,10 +72,11 @@ async function importXlsx() {
         const item = raw_data[index];
         await OrgsApi.edit({
             name: item[1],
-            code: item[0]
+            code: item[0],
+            orderIndex: index
         })
     }
-    
+
     importXlsxLoading.value = false
     importXlsxDialog.value = false
     emit('imported')

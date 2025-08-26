@@ -41,7 +41,7 @@
             clearable density="comfortable" class="ml-2"></v-text-field>
         </div>
 
-        <v-data-table-server v-model:options="options" v-model="selected" item-value="id" :show-select="enableSelection"
+        <v-data-table-server v-model:options="options" v-model="selected" item-value="id" :show-select="true"
           :headers="headers" :items="items" :items-length="totalItems" :loading="loading"
           :search="`${search.name},${search.role},${search.org}`" :mobile="$vuetify.display.smAndDown"
           @update:options="loadItems">
@@ -55,6 +55,14 @@
             <VBtn icon="mdi-lock-reset" variant="text" density="comfortable" size="small" @click="repwdItem(item)">
             </VBtn>
             <VBtn icon="mdi-delete" variant="text" density="comfortable" size="small" @click="deleteItem(item)"></VBtn>
+          </template>
+
+          <template #footer.prepend>
+            <div v-show="selected && selected.length > 0">
+              <DeleteConfirmationDialogBtn prepend-icon="mdi-delete" color="error" @delete="batchDelUser">批量删除
+              </DeleteConfirmationDialogBtn>
+            </div>
+            <v-spacer></v-spacer>
           </template>
         </v-data-table-server>
       </div>
@@ -166,6 +174,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
   </v-container>
 
 </template>
@@ -365,6 +374,14 @@ const save = async (event) => {
 
     close()
   }
+}
+
+async function batchDelUser() {
+  for (let index = 0; index < selected.value.length; index++) {
+    await UsersApi.del(selected.value[index])
+  }
+  loadItems(options.value)
+  selected.value = []
 }
 
 const loadItems = async ({ page, itemsPerPage, sortBy }) => {

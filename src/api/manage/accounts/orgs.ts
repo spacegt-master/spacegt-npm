@@ -47,6 +47,7 @@ export const OrgsApi = {
     maxUser?: number;
     code?: string;
     enabled?: boolean;
+    orderIndex?: number;
   }) {
     return axios({
       url: "/api/orgs/edit",
