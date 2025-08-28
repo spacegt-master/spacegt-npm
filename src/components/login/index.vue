@@ -19,24 +19,23 @@
         </v-container>
       </v-locale-provider>
     </v-main>
-
-    <SSO v-if="sso" :service="sso" ref="ssoRef"></SSO>
   </v-layout>
 </template>
 
 <script setup>
-import { UsersApi } from '@/api/manage/accounts/users';
+import { useAccountsStore } from '@/stores/accounts';
 import { useAuthorizationStore } from '@/stores/authorization';
 import { useLoginStore } from '@/stores/login';
-import { nextTick, ref } from 'vue';
+import { useSSOStore } from '@/stores/sso';
+import { onMounted } from 'vue';
 
 const emit = defineEmits(['login'])
 
 const loginStore = useLoginStore()
 
 const authorizationStore = useAuthorizationStore()
-
-const ssoRef = ref()
+const accountsStore = useAccountsStore()
+const SSOStore = useSSOStore()
 
 const props = defineProps({
   logo: {
@@ -45,10 +44,6 @@ const props = defineProps({
   },
   locale: {
     type: String,
-  },
-  sso: {
-    type: [String, Boolean],
-    default: false
   },
   title: {
     type: String
@@ -60,32 +55,25 @@ const props = defineProps({
 })
 
 function handleLogin(event) {
-  if (ssoRef.value)
-    ssoRef.value.setToken(event.token)
-
-  setTimeout(() => {
+  if (event.code === 0) {
+    authorizationStore.token = event.token
+    accountsStore.account = event.data
+    accountsStore.authorities = event.data.authorities
+    SSOStore.setToken(event.token)
     emit('login', event)
-  }, 200)
+  } else {
+    snackbar({
+      title: event.message,
+      type: 'warning',
+    })
+  }
 }
 
-window.addEventListener("message", async (event) => {
-  const receivedData = event.data;
-
-  if (receivedData && receivedData.type === "token") {
-    authorizationStore.token = receivedData.payload
-
-    const Principal = await UsersApi.info()
-
-    if (Principal) {
-      emit('login', {
-        code: 0,
-        message: 'SSO Login Success',
-        data: Principal,
-        token: authorizationStore.token
-      })
-    }
-  }
-});
+onMounted(() => {
+  authorizationStore.token = ""
+  accountsStore.account = undefined
+  accountsStore.authorities = []
+})
 </script>
 
 <style scoped></style>

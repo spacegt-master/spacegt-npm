@@ -1,10 +1,11 @@
 <template>
-    <iframe :src="`${service}?token=${token}`"></iframe>
+    <iframe :src="`${service}?token=${SSOStore.token}`"></iframe>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useSSOStore } from '@/stores/sso'
 
+const SSOStore = useSSOStore();
 
 defineProps({
     service: {
@@ -13,15 +14,7 @@ defineProps({
     }
 })
 
-const token = ref('')
-
-const setToken = (value: any) => {
-    token.value = value
-}
-
-defineExpose({
-    setToken
-})
+window.addEventListener("message", SSOStore.handleMessage);
 </script>
 
 <style scoped>

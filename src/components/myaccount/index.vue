@@ -26,13 +26,23 @@
             </v-card>
         </v-menu>
     </v-btn>
-    <v-btn v-else class="me-2" append-icon="mdi-login" text="Login" @click="toLogin"> </v-btn>
-
-    <SSO v-if="sso" :service="sso" ref="ssoRef"></SSO>
+    <v-btn v-else class="me-2" append-icon="mdi-login" text="Login" @click="toLogin"></v-btn>
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue'
+import { TokenApi } from '@/api/manage/accounts/token'
+import { useAccountsStore } from '@/stores/accounts'
+import { useAuthorizationStore } from '@/stores/authorization'
+import { snackbar } from '@/stores/snackbar'
+import { useSSOStore } from '@/stores/sso'
+import { useWindowFocus } from '@vueuse/core'
+import { watch } from 'vue'
+
+const authorizationStore = useAuthorizationStore()
+const accountsStore = useAccountsStore()
+const SSOStore = useSSOStore()
+
+const focused = useWindowFocus()
 
 const props = defineProps({
     account: Object,
@@ -40,20 +50,31 @@ const props = defineProps({
     enabledSettings: {
         type: Boolean,
         default: true
-    },
-    sso: {
-        type: String,
-        default: ''
     }
 })
 
-const emit = defineEmits(['logout', 'settings', 'login'])
+const emit = defineEmits(['logout', 'settings', 'toLogin'])
 
-const ssoRef = ref()
+watch(focused, async () => {
+    if (focused.value) {
+        const check = await TokenApi.validate(authorizationStore.token)
+
+        if (!check) {
+            snackbar({
+                title: "凭证过期，请重新登录。",
+                type: "warning",
+            })
+            logout()
+        }
+    }
+})
 
 const logout = () => {
-    if (ssoRef.value)
-        ssoRef.value.setToken('remove')
+    // 清除 token 以及用户信息
+    authorizationStore.token = ""
+    accountsStore.account = undefined
+    accountsStore.authorities = []
+    SSOStore.setToken('remove')
 
     setTimeout(() => {
         emit('logout')
@@ -61,7 +82,7 @@ const logout = () => {
 }
 
 const toLogin = () => {
-    emit('login')
+    emit('toLogin')
 }
 
 const toSettings = () => {
