@@ -7,4 +7,10 @@ export const TokenApi = {
       method: "get",
     });
   },
+  logout() {
+    return axios({
+      url: `/api/token/logout`,
+      method: "post",
+    });
+  },
 };

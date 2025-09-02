@@ -21,7 +21,7 @@
   </v-locale-provider>
   <!-- <v-date-time-input></v-date-time-input> -->
   <Snackbar></Snackbar>
-  <SSO service="http://192.168.124.10:3003" ref="ssoRef"></SSO>
+  <SSO service="http://192.168.124.10:3003"></SSO>
 </template>
 
 <script lang="ts" setup>
@@ -35,13 +35,14 @@ import { config as accountsServiceConfig } from '@/axios/accounts-service'
 import { config as emailServiceConfig } from '@/axios/email-service'
 import { snackbar } from '@/stores/snackbar';
 import { ref } from 'vue'
+import { FileApi } from '@/api/file'
 
 const router = useRouter()
 const authorizationStore = useAuthorizationStore()
 const accountsStore = useAccountsStore()
 
 // 更换代理方式
-accountsServiceConfig.baseURL = 'http://192.168.124.10:10002'
+accountsServiceConfig.baseURL = 'http://8.156.67.247:10003'
 // emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 
 const users = ref([

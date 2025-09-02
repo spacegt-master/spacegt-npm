@@ -69,11 +69,16 @@ watch(focused, async () => {
     }
 })
 
-const logout = () => {
+const logout = async () => {
+    // 将这个token加入黑名单
+    await TokenApi.logout()
+
     // 清除 token 以及用户信息
     authorizationStore.token = ""
     accountsStore.account = undefined
     accountsStore.authorities = []
+
+    // 移除 sso token
     SSOStore.setToken('remove')
 
     setTimeout(() => {

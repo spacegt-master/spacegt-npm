@@ -55,6 +55,7 @@ declare var useAuthorizationStore: () => AuthorizationStore;
 declare var useLoginStore: () => any;
 declare var useSnackbarStore: () => any;
 declare var useFileStore: () => any;
+declare var useSSOStore: () => any;
 
 declare var FileApi: {
   filePath: string;
@@ -129,6 +130,7 @@ declare var UsersApi: {
 
 declare var TokenApi: {
   validate(token: string): Promise<any>;
+  logout(): Promise<any>;
 };
 
 declare var SMSApi: {
@@ -163,6 +165,7 @@ export {
   useLoginStore,
   useSnackbarStore,
   useFileStore,
+  useSSOStore,
   // API
   FileApi,
   EmailApi,

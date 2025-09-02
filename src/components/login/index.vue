@@ -26,6 +26,7 @@
 import { useAccountsStore } from '@/stores/accounts';
 import { useAuthorizationStore } from '@/stores/authorization';
 import { useLoginStore } from '@/stores/login';
+import { snackbar } from '@/stores/snackbar';
 import { useSSOStore } from '@/stores/sso';
 import { onMounted } from 'vue';
 

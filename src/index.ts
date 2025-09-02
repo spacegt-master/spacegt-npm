@@ -16,12 +16,14 @@ import selectionUsersBtn from "@/components/extend/SelectionUsersBtn.vue";
 import batchUsers from "@/components/extend/BatchUsers.vue";
 import fileList from "@/components/FileList.vue";
 import VDateTimeInput from "@/components/VDateTimeInput.vue";
+import SSO from "@/components/SSO.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
 import { useAuthorizationStore } from "@/stores/authorization";
 import { useLoginStore } from "@/stores/login";
 import { useSnackbarStore, snackbar } from "@/stores/snackbar";
 import { useFileStore } from "@/stores/file";
+import { useSSOStore } from "@/stores/sso";
 
 import accountsService from "@/axios/accounts-service";
 import { config as accountsServiceConfig } from "@/axios/accounts-service";
@@ -63,6 +65,7 @@ const install = (app: App) => {
   app.component("spacegt-batch-users", batchUsers);
   app.component("spacegt-file-list", fileList);
   app.component("v-date-time-input", VDateTimeInput);
+  app.component("spacegt-sso", SSO);
 };
 
 export default {
@@ -86,6 +89,7 @@ export {
   useLoginStore,
   useSnackbarStore,
   useFileStore,
+  useSSOStore,
   // API
   FileApi,
   EmailApi,
@@ -118,5 +122,6 @@ declare module "vue" {
     selectionUsersBtn: typeof selectionUsers;
     batchUsers: typeof batchUsers;
     fileList: typeof fileList;
+    SSO: typeof SSO;
   }
 }
