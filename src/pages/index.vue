@@ -14,7 +14,7 @@
     <!-- <Roles></Roles> -->
     <!-- <Orgs></Orgs> -->
     <!-- <orgs-details></orgs-details> -->
-    <Users exclude="a301596eb131c54cd964c8dbbdab0841"></Users>
+    <Users tags="empty"></Users>
     <!-- <selection-orgs-btn></selection-orgs-btn> -->
     <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"
       @change="(value: any[]) => users = value" @clear="users = []"></selection-users-btn> -->
@@ -34,12 +34,11 @@ import { useRouter } from 'vue-router'
 import { snackbar } from '@/stores/snackbar';
 import { ref } from 'vue'
 import { FileApi } from '@/api/file'
+import { UsersApi } from '@/api/manage/accounts/users'
 
 const router = useRouter()
 const authorizationStore = useAuthorizationStore()
 const accountsStore = useAccountsStore()
-
-
 
 const users = ref([
   { id: 1, nickname: '王硕' },
@@ -66,4 +65,5 @@ const handleSettings = () => {
   console.log("to settings")
 }
 
+ 
 </script>

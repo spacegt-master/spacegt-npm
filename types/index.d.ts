@@ -126,6 +126,8 @@ declare var UsersApi: {
     org: string;
   }): Promise<any>;
   batch(data: object): Promise<any>;
+  setTags(ids: string, tags: string): Promise<boolean>;
+  delTags(ids: string): Promise<boolean>;
 };
 
 declare var TokenApi: {

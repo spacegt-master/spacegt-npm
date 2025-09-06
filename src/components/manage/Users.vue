@@ -198,7 +198,8 @@ const props = defineProps({
   roleKey: { type: String },
   enableSelection: { type: Boolean, default: false },
   orgId: { type: String, default: null },
-  exclude: { type: String, default: null }
+  exclude: { type: String, default: null },
+  tags: { type: String, default: null }
 })
 const search = reactive({ name: '', role: null, org: null, orgItem: null })
 
@@ -396,7 +397,8 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
       name: search.name,
       role: search.role,
       org: search.org?.join(','),
-      exclude: props.exclude
+      exclude: props.exclude,
+      tags: props.tags
     })
     items.value = res.records
     totalItems.value = res.total

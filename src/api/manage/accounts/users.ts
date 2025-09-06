@@ -72,6 +72,7 @@ export const UsersApi = {
     role: string;
     org: string;
     exclude?: string;
+    tags?: string;
   }) {
     usePagingProcessor(params);
 
@@ -89,6 +90,31 @@ export const UsersApi = {
         "Content-Type": "application/json",
       },
       data,
+    });
+  },
+  setTags(ids: string, tags: string) {
+    return axios({
+      url: "/api/users/setTags",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: {
+        ids,
+        tags,
+      },
+    });
+  },
+  delTags(ids: string) {
+    return axios({
+      url: "/api/users/delTags",
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      data: {
+        ids,
+      },
     });
   },
 };
