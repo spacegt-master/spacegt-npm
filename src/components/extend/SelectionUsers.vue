@@ -2,11 +2,13 @@
   <v-dialog v-model="dialog" activator="parent" max-width="1600px" :fullscreen="$vuetify.display.smAndDown" scrollable>
 
     <template #default>
-      <v-card prepend-icon="mdi-account-multiple-outline" :title="$vuetify.locale.t('$vuetify.selectionUsersComponent.title')">
+      <v-card prepend-icon="mdi-account-multiple-outline"
+        :title="$vuetify.locale.t('$vuetify.selectionUsersComponent.title')">
         <v-divider></v-divider>
 
         <v-card-text class="pa-0">
-          <Users enable-selection :role-key="roleKey" :orgId="orgId" v-model="selected"></Users>
+          <Users enable-selection :role-key="roleKey" :orgId="orgId" :exclude="exclude" :tags="tags" v-model="selected">
+          </Users>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -36,7 +38,9 @@ const emit = defineEmits(['confirm'])
 const props = defineProps({
   roleKey: { type: String },
   multiple: { type: Boolean, default: false },
-  orgId: { type: String, default: null }
+  orgId: { type: String, default: null },
+  exclude: { type: String, default: null },
+  tags: { type: String, default: null }
 })
 
 const dialog = ref(false)
@@ -58,4 +62,4 @@ const save = async () => {
 }
 </script>
 
-<style  scoped></style>
+<style scoped></style>

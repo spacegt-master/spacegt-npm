@@ -7,7 +7,8 @@
             </slot>
         </div>
 
-        <SelectionUsers :multiple="multiple" :role-key="roleKey" :orgId="orgId" @confirm="handleConfirm">
+        <SelectionUsers :multiple="multiple" :role-key="roleKey" :orgId="orgId" :exclude="exclude" :tags="tags"
+            @confirm="handleConfirm">
         </SelectionUsers>
 
         <v-tooltip v-if="items.length > 0" activator="parent" location="top">
@@ -29,8 +30,9 @@ const emit = defineEmits(['change', 'clear'])
 const props = defineProps({
     items: { type: Array, default: () => [] },
     multiple: { type: Boolean, default: false },
-    roleKey: { type: String },
-    orgId: { type: String, default: null }
+    orgId: { type: String, default: null },
+    exclude: { type: String, default: null },
+    tags: { type: String, default: null }
 })
 
 const names = computed(() => {
@@ -42,4 +44,4 @@ const handleConfirm = async (value) => {
 }
 </script>
 
-<style  scoped></style>
+<style scoped></style>
