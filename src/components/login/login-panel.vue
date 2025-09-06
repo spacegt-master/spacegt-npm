@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="text-h5 text-center mb-8 font-weight-medium">
-      {{ title || $vuetify.locale.t('$vuetify.loginComponent.title') }}
+    <div class="text-h5 text-center mb-8 font-weight-medium " style="position: relative; height: 40px;">
+      <div
+        style=" flex-flow: nowrap; width:800px; position: absolute; transform: translate(-50%, 0); left: 50%;">
+        {{ title || $vuetify.locale.t('$vuetify.loginComponent.title') }}</div>
     </div>
     <v-text-field v-model="loginStore.form.username" color="primary"
       :label="$vuetify.locale.t('$vuetify.loginComponent.username')" variant="outlined" @keyup.enter="login" />

@@ -90,4 +90,11 @@ export const FileApi = {
       withCredentials: false,
     });
   },
+  html2docx(html: string) {
+    return axios({
+      method: "post",
+      url: "/pandoc/html2docx",
+      data: html,
+    });
+  },
 };

@@ -7,5 +7,10 @@
 </template>
 
 <script lang="ts" setup>
-  //
+import { config as accountsServiceConfig } from '@/axios/accounts-service'
+import { config as emailServiceConfig } from '@/axios/email-service'
+
+// 更换代理方式
+accountsServiceConfig.baseURL = 'http://127.0.0.1:10002'
+// emailServiceConfig.baseURL = 'http://127.0.0.1:13004'
 </script>

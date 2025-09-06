@@ -71,6 +71,7 @@ export const UsersApi = {
     name: string;
     role: string;
     org: string;
+    exclude?: string;
   }) {
     usePagingProcessor(params);
 

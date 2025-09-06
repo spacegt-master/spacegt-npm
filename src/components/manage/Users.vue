@@ -197,7 +197,8 @@ const selected = defineModel()
 const props = defineProps({
   roleKey: { type: String },
   enableSelection: { type: Boolean, default: false },
-  orgId: { type: String, default: null }
+  orgId: { type: String, default: null },
+  exclude: { type: String, default: null }
 })
 const search = reactive({ name: '', role: null, org: null, orgItem: null })
 
@@ -394,7 +395,8 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
       sortOrder: sortBy[0] ? sortBy[0].order : '',
       name: search.name,
       role: search.role,
-      org: search.org?.join(',')
+      org: search.org?.join(','),
+      exclude: props.exclude
     })
     items.value = res.records
     totalItems.value = res.total
