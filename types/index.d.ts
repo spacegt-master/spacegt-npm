@@ -107,6 +107,20 @@ declare var OrgsApi: {
     name: string;
     maxUser: number;
   }): Promise<any>;
+  ordering(ids: string): Promise<any>;
+  switchStatus(id: string, status: boolean): Promise<any>;
+  detailsInfo(id: string): Promise<any>;
+  detailsSave(data: {
+    id: string;
+    shortName: string;
+    website: string;
+    contact: string;
+    contactNumber: string;
+    email: string;
+    comment: string;
+    address: string;
+  }): Promise<any>;
+  AutocompleteList(): Promise<any>;
 };
 
 declare var UsersApi: {

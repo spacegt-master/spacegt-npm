@@ -17,6 +17,7 @@ import batchUsers from "@/components/extend/BatchUsers.vue";
 import fileList from "@/components/FileList.vue";
 import VDateTimeInput from "@/components/VDateTimeInput.vue";
 import SSO from "@/components/SSO.vue";
+import AutocompleteOrgs from "@/components/extend/AutocompleteOrgs.vue";
 
 import { useAccountsStore } from "@/stores/accounts";
 import { useAuthorizationStore } from "@/stores/authorization";
@@ -66,6 +67,7 @@ const install = (app: App) => {
   app.component("spacegt-file-list", fileList);
   app.component("v-date-time-input", VDateTimeInput);
   app.component("spacegt-sso", SSO);
+  app.component("spacegt-autocomplete-orgs", AutocompleteOrgs);
 };
 
 export default {
@@ -123,5 +125,6 @@ declare module "vue" {
     batchUsers: typeof batchUsers;
     fileList: typeof fileList;
     SSO: typeof SSO;
+    AutocompleteOrgs: typeof AutocompleteOrgs;
   }
 }

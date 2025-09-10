@@ -18,9 +18,7 @@
     <!-- <selection-orgs-btn></selection-orgs-btn> -->
     <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"  
       @change="(value: any[]) => users = value" @clear="users = []"></selection-users-btn> -->
-
-    <selection-users-btn multiple :items="users" tags="empty" @change="(value: any[]) => users = value"
-      @clear="users = []"></selection-users-btn>
+    <AutocompleteOrgs title="组织单位"></AutocompleteOrgs>
   </v-locale-provider>
   <!-- <v-date-time-input></v-date-time-input> -->
   <Snackbar></Snackbar>
@@ -38,6 +36,7 @@ import { snackbar } from '@/stores/snackbar';
 import { ref } from 'vue'
 import { FileApi } from '@/api/file'
 import { UsersApi } from '@/api/manage/accounts/users'
+import AutocompleteOrgs from '@/components/extend/AutocompleteOrgs.vue'
 
 const router = useRouter()
 const authorizationStore = useAuthorizationStore()

@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Aippt: typeof import('./src/components/aippt/index.vue')['default']
+    AutocompleteOrgs: typeof import('./src/components/extend/AutocompleteOrgs.vue')['default']
     BatchUsers: typeof import('./src/components/extend/BatchUsers.vue')['default']
     DeleteConfirmationDialog: typeof import('./src/components/extend/DeleteConfirmationDialog.vue')['default']
     DeleteConfirmationDialogBtn: typeof import('./src/components/extend/DeleteConfirmationDialogBtn.vue')['default']

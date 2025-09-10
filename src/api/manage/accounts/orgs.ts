@@ -108,4 +108,10 @@ export const OrgsApi = {
       data,
     });
   },
+  AutocompleteList() {
+    return axios({
+      url: `/api/orgs/AutocompleteList`,
+      method: "get",
+    });
+  },
 };
