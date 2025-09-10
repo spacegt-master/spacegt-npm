@@ -29,6 +29,7 @@ const emit = defineEmits(['change', 'clear'])
 
 const props = defineProps({
     items: { type: Array, default: () => [] },
+    roleKey: { type: String },
     multiple: { type: Boolean, default: false },
     orgId: { type: String, default: null },
     exclude: { type: String, default: null },
