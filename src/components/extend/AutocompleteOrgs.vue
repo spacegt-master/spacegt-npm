@@ -1,6 +1,6 @@
 <template>
-    {{ model }}
-    <v-autocomplete v-model="model" :label="title" :items="items" item-value="id" item-title="name"></v-autocomplete>
+    <v-autocomplete v-model="model" :label="title" :items="items" item-value="id" item-title="name"
+        clearable></v-autocomplete>
 </template>
 
 <script setup lang="ts">
