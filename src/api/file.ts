@@ -169,6 +169,7 @@ function ossWebUpload(
     method: "post",
     url: host,
     headers: { "Content-Type": "multipart/form-data" },
+    timeout: 1000 * 60 * 10,
     data: {
       ...options,
       file,

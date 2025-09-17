@@ -12,7 +12,7 @@
 </aippt> -->
 
   <!-- <Roles></Roles> -->
-  <!-- <Orgs></Orgs> -->
+  <Orgs></Orgs>
   <!-- <orgs-details></orgs-details> -->
   <!-- <Users tags="empty"></Users> -->
   <!-- <selection-orgs-btn></selection-orgs-btn> -->
@@ -23,7 +23,7 @@
   <!-- <v-date-time-input></v-date-time-input> -->
   <!-- <Snackbar></Snackbar> -->
   <!-- <SSO service="http://192.168.124.10:3003"></SSO> -->
-
+  <input type="file" @change="handleFileUploadChange"></input>
 </template>
 
 <script lang="ts" setup>
@@ -68,12 +68,12 @@ const handleSettings = () => {
   console.log("to settings")
 }
 
-onMounted(() => {
-  const file = new File([new Blob(['你好啊'], { type: 'text/plain' })], 'test.txt', {
-    type: 'text/plain',
-    lastModified: new Date().getTime()
-  })
-  FileApi.upload(file, "test")
-})
+
+
+function handleFileUploadChange(value: any) {
+  console.log(value.target.files[0])
+
+  FileApi.upload(value.target.files[0], 'test')
+}
 
 </script>

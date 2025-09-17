@@ -7,6 +7,9 @@
             <template #title>
                 导入组织数据
             </template>
+            <template #append>
+                <v-btn prepend-icon="mdi-download" @click="download"> 下载模板 </v-btn>
+            </template>
             <template #text>
                 <section>
                     <h3 class="text-subtitle-1 font-weight-bold mb-4">
@@ -51,6 +54,7 @@
 import { OrgsApi } from '@/api/manage/accounts/orgs';
 import { ref } from 'vue';
 import * as XLSX from 'xlsx';
+import FileSaver from 'file-saver';
 
 const emit = defineEmits(['imported'])
 
@@ -82,57 +86,9 @@ async function importXlsx() {
     emit('imported')
 }
 
-
-// async function importXlsx() {
-//     importXlsxLoading.value = true
-
-//     const buffer = await importXlsxFile.value.arrayBuffer()
-//     /* parse workbook */
-//     const workbook = XLSX.read(buffer);
-
-//     /* get first worksheet */
-//     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-//     const raw_data = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any;
-
-//     raw_data.shift()
-
-//     const columnSize = raw_data.reduce((previousValue: number, currentValue: any[]) => Math.max(previousValue, currentValue.length), 1)
-
-//     const levelItems = Array.from({ length: columnSize }, () => []) as any[]
-
-//     levelItems.forEach((item, index) => {
-//         raw_data.forEach((row: any) => {
-//             if (row.length == index + 1) item.push(row)
-//         })
-//     })
-
-//     for (let a = 0; a < levelItems.length; a++) {
-//         const items = levelItems[a];
-
-//         for (let b = 0; b < items.length; b++) {
-//             const item = items[b];
-
-//             const pid = a > 0 ? levelItems[a - 1].find((c: any) => c.name == item[a - 1]).id : undefined
-
-//             const res = await OrgsApi.edit({
-//                 name: item[a],
-//                 pid
-//             })
-
-//             items[b] = {
-//                 id: res,
-//                 name: item[a],
-//                 pid
-//             }
-//         }
-//     }
-
-//     importXlsxLoading.value = false
-//     importXlsxDialog.value = false
-
-//     emit('imported')
-// }
+const download = () => {
+    FileSaver.saveAs('/template/template-orgs.xlsx', 'template-orgs.xlsx')
+}
 </script>
 
 <style scoped></style>
