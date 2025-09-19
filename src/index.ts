@@ -46,6 +46,7 @@ import { OrgsApi } from "@/api/manage/accounts/orgs";
 import { UsersApi } from "@/api/manage/accounts/users";
 import { TokenApi } from "@/api/manage/accounts/token";
 import { SMSApi } from "@/api/sms";
+import { AIImageApi } from "@/api/ai-image";
 
 import en from "@/locales/en";
 import zhHans from "@/locales/zhHans";
@@ -104,6 +105,7 @@ export {
   UsersApi,
   TokenApi,
   SMSApi,
+  AIImageApi,
   // fn
   snackbar,
 };

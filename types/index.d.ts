@@ -1,6 +1,7 @@
 import { App } from "vue";
 import { AxiosInstance } from "axios";
 import type { SnackbarOptions } from "@/types/snackbar";
+import type { Image2imageResponse, Text2imageResponse } from "@/types/ai-image";
 
 export interface Users {
   id?: string;
@@ -154,6 +155,22 @@ declare var SMSApi: {
   verifyCode(phoneNumber: string, userCode: string): Promise<any>;
 };
 
+declare var AIImageApi: {
+  text2image(options: {
+    prompt: string;
+    n: number;
+    size: string;
+    seed: number;
+    negative_prompt: string;
+  }): Promise<Text2imageResponse>;
+  image2image(options: {
+    imageBase64: string;
+    prompt: string;
+    seed: number;
+    negative_prompt: string;
+  }): Promise<Image2imageResponse>;
+};
+
 declare var snackbar: (options: SnackbarOptions) => void;
 
 export interface SpacegtStatic {
@@ -194,6 +211,7 @@ export {
   UsersApi,
   TokenApi,
   SMSApi,
+  AIImageApi,
   //fn
   snackbar,
 };
