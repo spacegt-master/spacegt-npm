@@ -1,11 +1,11 @@
 <template>
-    <v-btn class="text-none" prepend-icon="mdi-database-import-outline" rounded="lg" slim text="导入组织数据" variant="flat"
+    <v-btn class="text-none" prepend-icon="mdi-database-import-outline" rounded="lg" slim :text="$vuetify.locale.t('$vuetify.org.manage.importOrgs')" variant="flat"
         @click="importXlsxDialog = true" />
 
     <v-dialog v-model="importXlsxDialog" max-width="600">
         <v-card rounded="lg" prepend-icon="mdi-database-import-outline" :loading="importXlsxLoading">
             <template #title>
-                导入组织数据
+                {{ $vuetify.locale.t('$vuetify.org.manage.importOrgs') }}
             </template>
             <template #append>
                 <v-btn prepend-icon="mdi-download" @click="download"> 下载模板 </v-btn>
@@ -20,10 +20,10 @@
                     <thead>
                         <tr>
                             <th class="text-left">
-                                组织代码
+                                单位代码
                             </th>
                             <th class="text-left">
-                                学校名称
+                                单位名称
                             </th>
                         </tr>
                     </thead>
@@ -43,7 +43,7 @@
             <template #actions>
                 <v-spacer />
 
-                <v-btn class="text-none" prepend-icon="mdi-check-all" color="surface-variant" text="确定导入组织数据"
+                <v-btn class="text-none" prepend-icon="mdi-check-all" color="surface-variant" text="确定导入"
                     variant="flat" :loading="importXlsxLoading" @click="importXlsx" />
             </template>
         </v-card>

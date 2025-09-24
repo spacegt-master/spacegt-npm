@@ -1,6 +1,6 @@
 <template>
-    <v-btn class="text-none" prepend-icon="mdi-database-export-outline" rounded="lg" slim text="导出组织数据" variant="flat"
-        @click="exportXlsx" />
+    <v-btn class="text-none" prepend-icon="mdi-database-export-outline" rounded="lg" slim
+        :text="$vuetify.locale.t('$vuetify.org.manage.exportOrgs')" variant="flat" @click="exportXlsx" />
 </template>
 
 <script setup lang="ts">
@@ -77,7 +77,7 @@ async function exportXlsx() {
     worksheet["!cols"] = Array.from({ length: columnSize }, () => ({ wch: 25 }))
 
     /* create an XLSX file and try to save to Presidents.xlsx */
-    XLSX.writeFile(workbook, "组织结构数据.xlsx", { compression: true });
+    XLSX.writeFile(workbook, "Export Orgs Data.xlsx", { compression: true });
 }
 </script>
 

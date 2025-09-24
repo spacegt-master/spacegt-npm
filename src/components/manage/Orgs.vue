@@ -31,7 +31,7 @@
               color="primary" density="compact" :activatable="enableSelection" :open-on-click="!enableSelection"
               transition item-props>
               <template #title="{ item }">
-                <v-chip class="mr-2">组织代码 : {{ item.code ? item.code : '暂无' }} </v-chip>
+                <v-chip class="mr-2">{{ $vuetify.locale.t('$vuetify.org.manage.organizationCode') }} : {{ item.code ? item.code : '暂无' }} </v-chip>
 
                 {{ item.name }}
 

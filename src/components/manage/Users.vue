@@ -7,13 +7,19 @@
           {{ $vuetify.locale.t('$vuetify.usersComponent.title') }}
 
           <div class="d-flex ga-2">
+            <div v-show="selected && selected.length > 0">
+              <DeleteConfirmationDialogBtn variant="text" prepend-icon="mdi-delete" color="error"
+                @delete="batchDelUser">
+                {{ $vuetify.locale.t('$vuetify.usersComponent.batchDelete') }}
+              </DeleteConfirmationDialogBtn>
+            </div>
+
             <v-btn variant="text" prepend-icon="mdi-account-multiple-plus-outline" @click="addItem()">
               {{ $vuetify.locale.t('$vuetify.usersComponent.addUser') }}
-
             </v-btn>
+
             <v-btn variant="text" prepend-icon="mdi-database-import">
               {{ $vuetify.locale.t('$vuetify.usersComponent.batchUsers') }}
-
               <batch-users :role="search.role" @change="handleBatchUsersChange"></batch-users>
             </v-btn>
           </div>
@@ -55,14 +61,6 @@
             <VBtn icon="mdi-lock-reset" variant="text" density="comfortable" size="small" @click="repwdItem(item)">
             </VBtn>
             <VBtn icon="mdi-delete" variant="text" density="comfortable" size="small" @click="deleteItem(item)"></VBtn>
-          </template>
-
-          <template #footer.prepend>
-            <div v-show="selected && selected.length > 0">
-              <DeleteConfirmationDialogBtn prepend-icon="mdi-delete" color="error" @delete="batchDelUser">批量删除
-              </DeleteConfirmationDialogBtn>
-            </div>
-            <v-spacer></v-spacer>
           </template>
         </v-data-table-server>
       </div>
@@ -207,6 +205,7 @@ const options = ref({ page: 1, itemsPerPage: 5 })
 const headers = ref([
   { title: t("$vuetify.usersComponent.form.username"), key: 'username' },
   { title: t("$vuetify.usersComponent.form.nickname"), key: 'nickname' },
+  { title: t("$vuetify.usersComponent.form.orgName"), key: 'orgName' },
   { title: t("$vuetify.usersComponent.form.phone"), key: 'phone', },
   { title: t("$vuetify.usersComponent.form.email"), key: 'email', },
   !props.enableSelection ? { title: t("$vuetify.actions"), key: 'actions', sortable: false, align: 'end' } : {},

@@ -2,10 +2,12 @@ import { useAuthorizationStore } from "@/stores/authorization";
 import axios from "axios";
 import { reactive, ref } from "vue";
 import { snackbar } from "@/stores/snackbar";
+import router from "@/router";
 
 const axiosConfig = reactive({
   baseURL: import.meta.env.VITE_APP_ACCOUNTS_SERVICE,
   withCredentials: false,
+  tokenExpiredRouter: "/login",
 });
 
 const service = axios.create(axiosConfig);
@@ -33,12 +35,19 @@ service.interceptors.response.use(
       error.status === 403 &&
       error.response.headers["content-type"] === "application/problem+json"
     ) {
-      snackbar({
-        title: error.response.data.detail,
-        type: "error",
-        text: undefined,
-        timeout: undefined,
-      });
+      if (
+        "Token validation failed due to invalid signature or expiration" ==
+        error.response.data.detail
+      ) {
+        router.push(axiosConfig.tokenExpiredRouter);
+      } else {
+        snackbar({
+          title: error.response.data.detail,
+          type: "error",
+          text: undefined,
+          timeout: undefined,
+        });
+      }
     }
     return Promise.reject(error);
   }

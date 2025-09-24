@@ -178,7 +178,7 @@ export default {
   },
   org: {
     manage: {
-      title: "Update Orgs",
+      title: "Orgs Manage",
       subtitle: "Avoid excessive organizational structure and layers.",
       add: "Add Root",
       addChild: "Add Child",
@@ -189,6 +189,8 @@ export default {
         "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",
       addOrg: "Add Org",
       reivew: "Contact Info",
+      exportOrgs: "Export Orgs Data",
+      importOrgs: "Import Orgs Data",
     },
   },
   orgDetailsComponent: {
@@ -233,6 +235,7 @@ export default {
       username: "Username",
       password: "Password",
       nickname: "Nickname",
+      orgName: "Org Name",
       phone: "Phone",
       email: "Email",
       avatar: "Avatar (Url)",
@@ -243,6 +246,7 @@ export default {
       passwordLength: "Keep the password length between 8 and 20 characters.",
       nicknameIsRequired: "Nickname is required",
     },
+    batchDelete: "Batch Delete",
     deleteTitle: "Delete User",
     deleteSubtitle:
       "Warning: You are about to perform irreversible data deletion. The selected data is permanently deleted and cannot be recovered. Carefully review the data you are deleting and confirm that you understand the consequences of this action. Are you sure you want to continue?",
