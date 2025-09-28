@@ -8,6 +8,7 @@ const axiosConfig = reactive({
   baseURL: import.meta.env.VITE_APP_ACCOUNTS_SERVICE,
   withCredentials: false,
   tokenExpiredRouter: "/login",
+  tokenExpiredFunction: () => {},
 });
 
 const service = axios.create(axiosConfig);
@@ -39,6 +40,7 @@ service.interceptors.response.use(
         "Token validation failed due to invalid signature or expiration" ==
         error.response.data.detail
       ) {
+        axiosConfig.tokenExpiredFunction()
         router.push(axiosConfig.tokenExpiredRouter);
       } else {
         snackbar({

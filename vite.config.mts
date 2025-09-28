@@ -66,7 +66,6 @@ export default defineConfig({
         "@mdi/font",
         "@vueuse/core",
         "@vueuse/integrations",
-        "axios",
         "change-case",
         "core-js",
         "file-saver",
