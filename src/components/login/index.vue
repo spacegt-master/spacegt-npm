@@ -9,7 +9,7 @@
               <v-img class="mx-auto mb-4" max-width="60" :src="logo" />
 
               <login-panel v-if="loginStore.tab == 'login'" :title="title" :sign-up="signUp"
-                @login="handleLogin"></login-panel>
+                :sliderCaptcha="sliderCaptcha" @login="handleLogin"></login-panel>
 
               <sign-up-panel v-if="loginStore.tab == 'sign-up'" :title="title"></sign-up-panel>
 
@@ -52,6 +52,10 @@ const props = defineProps({
   signUp: {
     type: Boolean,
     default: true
+  },
+  sliderCaptcha: {
+    type: Boolean,
+    default: false
   }
 })
 

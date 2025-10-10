@@ -42,6 +42,7 @@
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "roboto-fontface": "*",
+    "slider-captcha-js": "^1.0.7",
     "uuid": "^11.1.0",
     "vee-validate": "^4.15.0",
     "vue": "^3.4.31",

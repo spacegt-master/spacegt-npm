@@ -128,6 +128,8 @@ export default {
     donHaveAccount: "Don't have an account?",
     logIn: "Log In",
     signUp: "Sign up",
+    startVerification: "Start Verification",
+    authenticated: "Authenticated",
   },
   signUp: {
     title: "Let's get you signed up",

@@ -128,6 +128,8 @@ export default {
     donHaveAccount: "没有账号?",
     logIn: "登录",
     signUp: "注册",
+    startVerification: "开始验证",
+    authenticated: "已验证",
   },
   signUp: {
     title: "让我们开始注册",

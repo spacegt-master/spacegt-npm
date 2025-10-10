@@ -1,5 +1,5 @@
 <template>
-    <login title="易格登录" :sign-up="false" @login="handleLogin" />
+    <login title="易格登录" :sign-up="false" :sliderCaptcha="true" @login="handleLogin" />
 </template>
 
 <script setup lang="ts">

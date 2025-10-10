@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="text-h5 text-center mb-8 font-weight-medium " style="position: relative; height: 40px;">
-      <div
-        style=" flex-flow: nowrap; width:800px; position: absolute; transform: translate(-50%, 0); left: 50%;">
+      <div style=" flex-flow: nowrap; width:800px; position: absolute; transform: translate(-50%, 0); left: 50%;">
         {{ title || $vuetify.locale.t('$vuetify.loginComponent.title') }}</div>
     </div>
     <v-text-field v-model="loginStore.form.username" color="primary"
@@ -13,6 +12,23 @@
       :type="loginStore.showPassword ? 'text' : 'password'"
       :append-inner-icon="loginStore.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
       @click:append-inner="loginStore.showPassword = !loginStore.showPassword" @keyup.enter="login" />
+
+    <v-btn v-if="sliderCaptcha" width="100%" prepend-icon="mdi-shield-check" variants="tonal" size="large"
+      :disabled="sliderCaptchaSuccess" :color="sliderCaptchaSuccess ? 'success' : ''">
+      {{ sliderCaptchaSuccess ? $vuetify.locale.t('$vuetify.loginComponent.authenticated') :
+        $vuetify.locale.t('$vuetify.loginComponent.startVerification') }}
+
+      <v-dialog v-model="sliderCaptchaDialog" activator="parent" max-width="400" @after-enter="createCaptcha">
+        <template v-slot:default="{ isActive }">
+          <v-card prepend-icon="mdi-shield-check"
+            :title="$vuetify.locale.t('$vuetify.loginComponent.startVerification')">
+            <template #text>
+              <div id="stage"></div>
+            </template>
+          </v-card>
+        </template>
+      </v-dialog>
+    </v-btn>
 
     <div class="py-4">
       <div class="d-flex justify-space-between align-center">
@@ -33,7 +49,7 @@
 
     <v-btn block class="text-none mb-8" color="blue-grey-darken-4" flat rounded="lg" size="large"
       :text="$vuetify.locale.t('$vuetify.loginComponent.logIn')"
-      :disabled="!(loginStore.form.username && loginStore.form.password)" @click="login" />
+      :disabled="!(loginStore.form.username && loginStore.form.password) || !sliderCaptchaSuccess" @click="login" />
 
     <div v-if="signUp" class="text-center text-body-2 d-flex justify-center align-center ga-2">
       {{ $vuetify.locale.t('$vuetify.loginComponent.donHaveAccount') }}
@@ -48,23 +64,49 @@
 <script setup>
 import { LoginApi } from '@/api/login';
 import { useLoginStore } from '../../stores/login';
+import SliderCaptcha from "slider-captcha-js";
+import "slider-captcha-js/slider-captcha.css";
+import { ref } from 'vue';
 
-defineProps({
+const props = defineProps({
   title: {
     type: String
   },
   signUp: {
     type: Boolean,
     default: true
+  },
+  sliderCaptcha: {
+    type: Boolean,
+    default: false
   }
 })
 const loginStore = useLoginStore()
 const emit = defineEmits(['login'])
 
+const sliderCaptchaDialog = ref(false)
+const sliderCaptchaSuccess = ref(!props.sliderCaptcha)
+
 const login = async () => {
   const res = await LoginApi.login(loginStore.form.username, loginStore.form.password);
   emit('login', res)
 };
+
+function createCaptcha(event) {
+
+  const captcha = new SliderCaptcha({
+    root: "#stage",
+    width: 350,
+    height: 160,
+    theme: "dark",
+    onSuccess: () => {
+      sliderCaptchaDialog.value = false
+      sliderCaptchaSuccess.value = true
+    },
+  });
+
+  captcha.refresh();
+}
 
 </script>
 
