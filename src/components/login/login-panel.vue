@@ -67,7 +67,9 @@ import { useLoginStore } from '../../stores/login';
 import SliderCaptcha from "slider-captcha-js";
 import "slider-captcha-js/slider-captcha.css";
 import { ref } from 'vue';
+import { useTheme } from 'vuetify';
 
+const emit = defineEmits(['login'])
 const props = defineProps({
   title: {
     type: String
@@ -81,8 +83,9 @@ const props = defineProps({
     default: false
   }
 })
+
+const theme = useTheme()
 const loginStore = useLoginStore()
-const emit = defineEmits(['login'])
 
 const sliderCaptchaDialog = ref(false)
 const sliderCaptchaSuccess = ref(!props.sliderCaptcha)
@@ -93,12 +96,13 @@ const login = async () => {
 };
 
 function createCaptcha(event) {
+  console.log(theme.current.value.dark)
 
   const captcha = new SliderCaptcha({
     root: "#stage",
     width: 350,
     height: 160,
-    theme: "dark",
+    theme: theme.current.value.dark ? 'dark' : "light", // dark light
     onSuccess: () => {
       sliderCaptchaDialog.value = false
       sliderCaptchaSuccess.value = true
