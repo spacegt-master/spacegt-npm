@@ -96,20 +96,24 @@ const login = async () => {
 };
 
 function createCaptcha(event) {
-  console.log(theme.current.value.dark)
-
   const captcha = new SliderCaptcha({
     root: "#stage",
     width: 350,
     height: 160,
     theme: theme.current.value.dark ? 'dark' : "light", // dark light
     onSuccess: () => {
+      console.log('onSuccess')
       sliderCaptchaDialog.value = false
       sliderCaptchaSuccess.value = true
     },
+    onRefresh: () => {
+      captcha.status.innerText = "滑动验证";
+    },
+    
   });
-
-  captcha.refresh();
+  captcha.opt.failText = '❌ 再试一次!'
+  captcha.opt.successText = '✅ 已验证!'
+  captcha.status.innerText = "滑动验证";
 }
 
 </script>
