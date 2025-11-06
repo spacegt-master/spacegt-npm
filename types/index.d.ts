@@ -143,6 +143,7 @@ declare var UsersApi: {
   batch(data: object): Promise<any>;
   setTags(ids: string, tags: string): Promise<boolean>;
   delTags(ids: string): Promise<boolean>;
+  listByRole(role: string): Promise<any>;
 };
 
 declare var TokenApi: {

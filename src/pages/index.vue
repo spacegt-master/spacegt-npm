@@ -1,28 +1,28 @@
 <template>
-  <!-- <v-locale-provider locale="zhHans"> -->
-  <!-- <v-app-bar>
+  <v-locale-provider locale="zhHans">
+    <!-- <v-app-bar>
       <myaccount :account="accountsStore.account" proxy="https://myaccount.spacegt.com" @logout="handleLogout"
         @toLogin="router.push('/login')" @settings="handleSettings">
       </myaccount>
     </v-app-bar> -->
-  <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
+    <!-- <aippt @export-images="handleExportImages" @create-outline="handleCreateOutline" @createPPT="handleCreatePPT">
       <template #default="{ props: activatorProps }">
         <v-btn v-bind="activatorProps">你好</v-btn>
       </template>
 </aippt> -->
 
-  <!-- <Roles></Roles> -->
-  <!-- <Orgs></Orgs> -->
-  <!-- <orgs-details></orgs-details> -->
-  <Users tags="empty"></Users>
-  <!-- <selection-orgs-btn></selection-orgs-btn> -->
-  <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"  
+    <!-- <Roles></Roles> -->
+    <!-- <Orgs></Orgs> -->
+    <!-- <orgs-details></orgs-details> -->
+    <!-- <Users tags="empty"></Users> -->
+    <!-- <selection-orgs-btn></selection-orgs-btn> -->
+    <!-- <selection-users-btn multiple :items="users" org-id="a6f7d3eef2986db22ae0456786dd46f2" role-key="USER"  
       @change="(value: any[]) => users = value" @clear="users = []"></selection-users-btn> -->
-  <!-- <AutocompleteOrgs title="组织单位"></AutocompleteOrgs> -->
-  <!-- </v-locale-provider> -->
+    <!-- <AutocompleteOrgs title="组织单位"></AutocompleteOrgs> -->
+  </v-locale-provider>
   <!-- <v-date-time-input></v-date-time-input> -->
   <!-- <Snackbar></Snackbar> -->
-  <!-- <SSO service="http://192.168.124.10:3003"></SSO> --> 
+  <!-- <SSO service="http://192.168.124.10:3003"></SSO> -->
 </template>
 
 <script lang="ts" setup>
@@ -67,5 +67,4 @@ const handleSettings = () => {
   console.log("to settings")
 }
 
- 
 </script>

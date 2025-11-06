@@ -117,4 +117,10 @@ export const UsersApi = {
       },
     });
   },
+  listByRole(role: string) {
+    return axios({
+      url: `/api/users/listByRole/${role}`,
+      method: "get",
+    });
+  },
 };
